@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "../lib/game.h"
 
 /**
@@ -65,4 +66,6 @@ int crash(){
       return 1;
     }
   }
+  return 0;
+
 }
