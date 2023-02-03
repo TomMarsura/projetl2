@@ -18,8 +18,31 @@ void initGame(){
 }
 
 void readProfiles(){
+    /* Format du fichier : numeroProfil;score;pseudo;nombreDeParties */
+    /* numeroProfils -> numProfils; score -> pointsProfils; pseudo -> nomProfils; */
     FILE * fichier = fopen("../save/save.csv", "r");
-    
+    if(fichier != NULL){
+        char ligne[100];
+        int i = 0;
+        while(fgets(ligne, 100, fichier) != NULL){
+            char * pch;
+            pch = strtok(ligne, ";");
+            while(pch != NULL){
+                if(i == 0){
+                    numProfils[i] = atoi(pch);
+                }else if(i == 1){
+                    pointsProfils[i] = atoi(pch);
+                }else if(i == 2){
+                    strcpy(nomProfils[i], pch);
+                }else if(i == 3){
+                    nbPartiesProfils[i] = atoi(pch);
+                }
+                pch = strtok(NULL, ";");
+            }
+            i++;
+        }
+        fclose(fichier);
+    }
 }
 
 int main(){
