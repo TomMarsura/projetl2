@@ -133,3 +133,8 @@ void deplacement(){
     }
   }
 }
+
+int main(){
+
+  return 0;
+}
