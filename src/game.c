@@ -66,6 +66,7 @@ int crash(){
       return 1;
     }
   }
+  /*on retourne 0 quand il n'y a pas de crash*/
   return 0;
 
 }
