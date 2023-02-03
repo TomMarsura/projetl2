@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-c -Wall
-OBJECTS=game.o menu.o
+OBJECTS=src/game.o src/menu.o
 EXECUTABLE=game
 
 all: $(EXECUTABLE)
@@ -8,11 +8,11 @@ all: $(EXECUTABLE)
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
 
-game.o: game.c game.h
-	$(CC) $(CFLAGS) game.c
+src/game.o: src/game.c lib/game.h
+	$(CC) $(CFLAGS) src/game.c
 
-menu.o: menu.c menu.h
-	$(CC) $(CFLAGS) menu.c
+src/menu.o: src/menu.c lib/menu.h
+	$(CC) $(CFLAGS) src/menu.c
 
 clean:
 	rm -rf $(EXECUTABLE) $(OBJECTS)
