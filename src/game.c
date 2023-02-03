@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "../lib/game.h"
 
-/*include pour la fonction deplacement*/
+/*Include pour la fonction deplacement*/
 #include <termios.h>
 #include <unistd.h>
 
@@ -79,10 +79,9 @@ int crash(){
 
 
 /**
- * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gaudhe ou sur la flèche de droite de son clavier
+ * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier
  * @return void
 */
-
 void deplacement(){
 
   /*La fonction clavier retourne le code ASCII de la touche du clavier sur la laquelle appuie le joueur */
@@ -105,16 +104,16 @@ void deplacement(){
   c = clavier();
 
   for (i=0;i<LARGEUR-1;i++){
-    /*trouver la postion de la voiture sur la ligne*/
+    /*Trouver la postion de la voiture sur la ligne*/
     if (route[HAUTEUR-1][i] == 1){
-      /*x est la ligne de la position de la voiture*/
+      /*La variable x correspond à la ligne de la position de la voiture*/
       x = HAUTEUR-1;
-      /*y est la colonne de la position de la voiture*/
+      /*La variable y correspond à la colonne de la position de la voiture*/
       y = i;
     }
   }
 
-  /*si le joueur appuie sur la flèche de droite code ASCII=67*/
+  /*Si le joueur appuie sur la flèche de droite code ASCII=67*/
   if (c == 67){
     /*Verifier si la limite de la route sur la droite est dépassée*/
     if (!(y == LARGEUR)){
@@ -124,7 +123,7 @@ void deplacement(){
     }
   }
 
-  /*si le joueur appuie sur la flèche de gauche code ASCII=68*/
+  /*Si le joueur appuie sur la flèche de gauche code ASCII=68*/
   if (c == 68){
     /*Verifier si la limite de la route sur la gauche est dépassée*/
     if (!(y == 0)){
