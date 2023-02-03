@@ -14,6 +14,8 @@
 #include <unistd.h>
 
 
+
+
 /**
 *@brief Affiche le contenu d'une matrice
 *@param[in] mat matrice de type int
@@ -135,6 +137,12 @@ void deplacement(){
 }
 
 int main(){
+  int i = 0;
 
+  while(i != 5){
+    printf("test %d\n",i);
+    obstacle(route);
+    i++;
+  }
   return 0;
 }
