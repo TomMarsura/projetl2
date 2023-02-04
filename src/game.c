@@ -32,6 +32,9 @@ void affichae_mat(int mat[HAUTEUR][LARGEUR]){
         }
         printf("\n");
     }
+    printf("\n");
+    printf("\n");
+
 }
 
 /**
@@ -67,14 +70,15 @@ void obstacle(int mat[HAUTEUR][LARGEUR]){
 int crash(){
 
   int i;
+
   for (i=0;i<LARGEUR-1;i++){
-    /*verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
-    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 2)){
-      /*on retourne 1 pour signnfier le crash*/
+    /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
+    if ((route[0][i] == 1) && (route[1][i] == 2)){
+      /* On retourne 1 pour signnfier le crash */
       return 1;
     }
   }
-  /*on retourne 0 quand il n'y a pas de crash*/
+  /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 
 }
@@ -86,7 +90,7 @@ int crash(){
 */
 void deplacement(){
 
-  /*La fonction clavier retourne le code ASCII de la touche du clavier sur la laquelle appuie le joueur */
+  /* La fonction clavier retourne le code ASCII de la touche du clavier sur la laquelle appuie le joueur */
   int clavier(){
       struct termios oldattr, newattr;
       int ch;
@@ -103,46 +107,43 @@ void deplacement(){
   int i;
   int x;
   int y;
-  c = clavier();
 
-  for (i=0;i<LARGEUR-1;i++){
-    /*Trouver la postion de la voiture sur la ligne*/
-    if (route[HAUTEUR-1][i] == 1){
-      /*La variable x correspond à la ligne de la position de la voiture*/
-      x = HAUTEUR-1;
-      /*La variable y correspond à la colonne de la position de la voiture*/
-      y = i;
+  while (1){
+
+    for (i=0;i<LARGEUR;i++){
+      /* Trouver la postion de la voiture sur la ligne */
+      if (route[0][i] == 1){
+        /* La variable x correspond à la ligne de la position de la voiture */
+        x = 0;
+        /* La variable y correspond à la colonne de la position de la voiture */
+        y = i;
+        break;
+      }
     }
-  }
 
-  /*Si le joueur appuie sur la flèche de droite code ASCII=67*/
-  if (c == 67){
-    /*Verifier si la limite de la route sur la droite est dépassée*/
-    if (!(y == LARGEUR)){
-      /*On modifie la position de la voiture dans la matrice*/
+    /* Si le joueur appuie sur la flèche de droite code ASCII=67 et verifier si la limite de la route sur la droite est dépassée */
+    c = clavier();
+    if ((c == 67) && (!(y == LARGEUR-1))){
+      /* On modifie la position de la voiture dans la matrice */
       route[x][y] = 0;
       route[x][y+1] = 1;
+      affichae_mat(route);
     }
-  }
 
-  /*Si le joueur appuie sur la flèche de gauche code ASCII=68*/
-  if (c == 68){
-    /*Verifier si la limite de la route sur la gauche est dépassée*/
-    if (!(y == 0)){
-      /*On modifie la position de la voiture dans la matrice*/
+    /* Si le joueur appuie sur la flèche de gauche code ASCII=68 et verifier si la limite de la route sur la gauche est dépassée */
+    else if ((c == 68) && (!(y == 0))) {
+      /* On modifie la position de la voiture dans la matrice */
       route[x][y] = 0;
       route[x][y-1] = 1;
+      affichae_mat(route);
     }
   }
 }
 
 int main(){
-  int i = 0;
 
-  while(i != 5){
-    printf("test %d\n",i);
-    obstacle(route);
-    i++;
-  }
+  affichae_mat(route);
+  deplacement(route);
+
   return 0;
 }
