@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include "../lib/game.h"
 
-
+/**
+ * @brief Fonction initGame : fonction qui initialise la partie
+ * @return void
+*/
 
 void initGame(){
     int i, j;
@@ -17,6 +20,10 @@ void initGame(){
     score = 0;
 }
 
+/**
+ * @brief Fonction readProfiles : Lecture des profiles
+ * @return void
+*/
 void readProfiles(){
     /* Format du fichier : numeroProfil;score;pseudo;nombreDeParties */
     /* numeroProfils -> numProfils; score -> pointsProfils; pseudo -> nomProfils; */
@@ -75,7 +82,7 @@ int main(){
     int i, j;
     for(i = 0; i < 5; i++){
         for(j = 0; j < 3; j++){
-            printf("%d ", mat[i][j]);
+            printf("%d ", route[i][j]);
         }
         printf("\n");
     }
