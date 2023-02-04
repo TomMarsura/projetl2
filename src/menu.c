@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../lib/game.h"
+#include "../lib/menu.h"
 
 /**
  * @brief Fonction initGame : fonction qui initialise la partie
