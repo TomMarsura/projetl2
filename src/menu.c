@@ -45,6 +45,29 @@ void readProfiles(){
     }
 }
 
+/**
+* @brief Fonction addScore : Change le score du profil
+* @param[in] profile int
+* @return void
+*/
+void addScore(int profil){
+    /*Ouverture du fichier*/
+    FILE * fichier = fopen("../save/save.csv","r");
+    char ligne[100];
+    char * pch;
+    /*Recherche du profil a modifier*/
+    pch = strtok(ligne,";");
+    while(fgets(100,ligne,fichier) != NULL){
+    /*Si l'element est egal a l'id du profile alors c'est le bon,on peut donc le modifier*/
+        if(atoi(pch) == profil){
+        /*modif point*/
+        }else{
+        /*Passage a la ligne suivante*/
+        }
+    }
+    fclose(fichier);
+    /*Recherche du score et modif*/
+}
 int main(){
     initGame();
     /* Affichage de la matrice */
