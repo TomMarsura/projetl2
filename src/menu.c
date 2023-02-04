@@ -63,6 +63,7 @@ void addScore(int profil){
         /*modif point*/
         }else{
         /*Passage a la ligne suivante*/
+            while(fgetc(fichier) != '\n'); //passage a la ligne suivante
         }
     }
     fclose(fichier);
