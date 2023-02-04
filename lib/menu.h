@@ -12,4 +12,4 @@ int nbPartiesProfils[] = {}; //nombre de partie joué
 /*PROTOTYPE FONCTIONS*/
 void initGame();
 void readProfiles();
-void addScore(int profil):
+void addScore(int profil);
