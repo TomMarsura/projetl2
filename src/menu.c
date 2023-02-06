@@ -107,7 +107,7 @@ void cleanupGame(){
         }
 
     /*Modification du score*/
-        add(id_profil);
+        addScore(id_profil);
     }
 
 
