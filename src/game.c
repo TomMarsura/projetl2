@@ -70,6 +70,7 @@ void obstacle(int mat[HAUTEUR][LARGEUR]){
 
 /**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
+ * @author Thibaut Gasnier
  * @return int
 */
 int crash(){
@@ -90,6 +91,7 @@ int crash(){
 
 /**
  * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier
+ * @author Thibaut Gasnier
  * @return void
 */
 void deplacement(){
@@ -146,6 +148,7 @@ void deplacement(){
 
 /**
  * @brief Fonction decalage : Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas
+ * @author Thibaut Gasnier
  * @return void
 */
 void decalage(){
