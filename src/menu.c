@@ -4,14 +4,14 @@
 
 /**
  * @brief Fonction initGame : fonction qui initialise la partie
+ * @author Tom Marsura
  * @return void
 */
-
 void initGame(){
     int i, j;
     /* Initialisation de la matrice à 0 */
-    for(i = 0; i < 5; i++){
-        for(j = 0; j < 3; j++){
+    for(i = 0; i < HAUTEUR; i++){
+        for(j = 0; j < LARGEUR; j++){
             route[i][j] = 0;
         }
     }
@@ -23,6 +23,7 @@ void initGame(){
 
 /**
  * @brief Fonction readProfiles : Lecture des profiles
+ * @author Tom Marsura
  * @return void
 */
 void readProfiles(){
@@ -56,6 +57,7 @@ void readProfiles(){
 /**
 * @brief Fonction addScore : Change le score du profil
 * @param[in] profile int
+* @author Ayoub Laaribi
 * @return void
 */
 void addScore(int profil){
@@ -77,6 +79,47 @@ void addScore(int profil){
     fclose(fichier);
     /*Recherche du score et modif*/
 }
+
+/**
+ * @brief Nettoie les données du jeu, sauvegarde le profil une fois que le jeu est terminé 
+ * @author Ayoub Laaribi
+ * @return void 
+*/
+void cleanupGame(){
+    int i,j;
+/*Parcours de la route et met toutes les valeurs a NULL*/
+    for(i = 0 ; i< HAUTEUR ;i++){
+        for(j = 0; j<LARGEUR;j++){
+            route[i][j] = NULL;
+        }
+    }
+
+    /*Sauvegarde du profil*/
+    FILE * fichier = fopen("../save/save.csv","r");
+    char ligne[100];
+    char* id; /*numero de profil*/
+    int id_profil;
+    if (fichier != NULL){
+
+        while(fgets(ligne,100,fichier) != NULL){
+            id = strtok(ligne,";"); /*Numero de profil*/
+            id_profil = atoi(id); /*conversion en int*/
+        }
+
+    /*Modification du score*/
+        add(id_profil);
+    }
+
+
+
+
+
+    fclose(fichier);
+
+    addScore()
+}
+
+
 int main(){
     initGame();
     /* Affichage de la matrice */

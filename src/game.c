@@ -20,6 +20,7 @@
 
 /**
 *@brief Affiche le contenu d'une matrice
+*@author Ayoub Laaribi
 *@param[in] mat matrice de type int
 *@return void
 */
@@ -41,6 +42,7 @@ void affichae_mat(int mat[HAUTEUR][LARGEUR]){
 
 /**
  * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles
+ * @author Ayoub Laaribi
  * @param[in] mat matrice de type int
  * @return void
 */
@@ -105,10 +107,10 @@ void deplacement(){
       return ch;
   }
 
-  int c;
-  int i;
-  int x;
-  int y;
+    int c;
+    int i;
+    int x;
+    int y;
 
 
   for (i=0 ; i<LARGEUR ; i++){
