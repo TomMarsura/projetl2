@@ -1,7 +1,7 @@
 /**
  * @file game.c
  * @brief Bibliotheque Game.c
- * @author Ayoub LAARIBI,Tom MARSURA,Thibaut
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut
  * @version 1.0
 */
 
@@ -106,6 +106,7 @@ void deplacement(){
       tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
       return ch;
   }
+
 
     int c;
     int i;

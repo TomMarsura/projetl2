@@ -95,7 +95,7 @@ void cleanupGame(){
     }
 
     /*Sauvegarde du profil*/
-    FILE * fichier = fopen("../save/save.csv","r");
+    FILE * fichier = fopen("../save/save.csv","r");/*Ouverture du fichier*/
     char ligne[100];
     char* id; /*numero de profil*/
     int id_profil;
@@ -109,7 +109,7 @@ void cleanupGame(){
     /*Modification du score*/
         addScore(id_profil);
     }
-    fclose(fichier);
+    fclose(fichier);/*fermeture du fichier*/
 
 }
 
