@@ -1,13 +1,14 @@
 /**
  * @file game.c
  * @brief Bibliotheque Game.c
- * @author Ayoub LAARIBI,Tom MARSURA,Thibaut
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut
  * @version 1.0
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../lib/game.h"
+#include "../lib/menu.h"
 
 /* Include pour la fonction deplacement */
 #include <termios.h>
@@ -69,11 +70,22 @@ void obstacle(int mat[HAUTEUR][LARGEUR]){
 
 
 /**
+ * @author Ayoub Laaribi
+ * @brief formule qui calcule le score
+ * @return int
+*/
+int calcul_score(){
+  int point=11;
+  int dist=5;
+
+  return (point * cpt_distance)/dist;
+}
+/**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
  * @author Thibaut Gasnier
  * @return int
 */
-int crash(){
+int crash(int profil){
 
   int i;
 
@@ -84,6 +96,9 @@ int crash(){
       return 1;
     }
   }
+
+  /*modification du score*/
+  addScore(profil);
   /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 }
@@ -108,6 +123,7 @@ void deplacement(){
       tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
       return ch;
   }
+
 
     int c;
     int i;
@@ -179,6 +195,8 @@ void easyGame(){
     decalage();
     /* On attend 3 secondes entre chaque décalage */
     sleep(3);
+
+    cpt_distance++;
   }
 }
 

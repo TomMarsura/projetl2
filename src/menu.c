@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+
 #include "../lib/game.h"
 #include "../lib/menu.h"
 
@@ -40,29 +42,20 @@ void readProfiles(){
 }
 
 /**
-* @brief Fonction addScore : Change le score du profil
+* @brief Fonction addScore : Change le score du profil au file de la distance
 * @param[in] profile int
 * @author Ayoub Laaribi
 * @return void
 */
 void addScore(int profil){
-    /*Ouverture du fichier*/
-    FILE * fichier = fopen("../save/save.csv","r");
-    char ligne[100];
-    char * pch;
-    /*Recherche du profil a modifier*/
-    pch = strtok(ligne,";");
-    while(fgets(100,ligne,fichier) != NULL){
-    /*Si l'element est egal a l'id du profile alors c'est le bon,on peut donc le modifier*/
-        if(atoi(pch) == profil){
-        /*modif point*/
-        }else{
-        /*Passage a la ligne suivante*/
-            while(fgetc(fichier) != '\n'); //passage a la ligne suivante
-        }
-    }
-    fclose(fichier);
-    /*Recherche du score et modif*/
+
+/*initialisation*/
+    int score_dist;
+    /*Recup du score*/
+    score_dist = calcul_score();
+    /*modification de la case score*/
+    pointsProfils[profil] = pointsProfils[profil] + score_dist;
+
 }
 
 /**
@@ -72,6 +65,10 @@ void addScore(int profil){
 */
 void cleanupGame(){
     int i,j;
+/*Sauvegarde des données*/
+    //saveGame()
+
+    //Nettoyage de la route
 /*Parcours de la route et met toutes les valeurs a NULL*/
     for(i = 0 ; i< HAUTEUR ;i++){
         for(j = 0; j<LARGEUR;j++){
@@ -79,6 +76,7 @@ void cleanupGame(){
         }
     }
 
+<<<<<<< HEAD
     /*Sauvegarde du profil*/
     FILE * fichier = fopen("../save/save.csv","r");
     char ligne[100];
@@ -95,6 +93,8 @@ void cleanupGame(){
         addScore(id_profil);
     }
     fclose(fichier);
+=======
+>>>>>>> refs/remotes/origin/main
 }
 
 /**
