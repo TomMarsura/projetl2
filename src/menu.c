@@ -29,31 +29,16 @@ void initGame(){
  * @return void
 */
 void readProfiles(){
+    /* Fonction qui récupère les données dans un fichier save.csv et les inscrit dans des tableaux*/
     /* Format du fichier : numeroProfil;score;pseudo;nombreDeParties */
     /* numeroProfils -> numProfils; score -> pointsProfils; pseudo -> nomProfils; */
     FILE * fichier = fopen("../save/save.csv", "r");
     if(fichier != NULL){
-        char ligne[100];
-        int i = 0;
-        while(fgets(ligne, 100, fichier) != NULL){
-            char * pch;
-            pch = strtok(ligne, ";");
-            while(pch != NULL){
-                if(i == 0){
-                    numProfils[i] = atoi(pch);
-                }else if(i == 1){
-                    pointsProfils[i] = atoi(pch);
-                }else if(i == 2){
-                    strcpy(nomProfils[i], pch);
-                }else if(i == 3){
-                    nbPartiesProfils[i] = atoi(pch);
-                }
-                pch = strtok(NULL, ";");
-            }
-            i++;
+        for(int i = 0; i < MAX_PROFILS; i++){
+            fscanf(fichier, "%d %d %s %d", &numProfils[i], &pointsProfils[i], nomProfils[i], &nbPartiesProfils[i]);
         }
-        fclose(fichier);
     }
+    fclose(fichier);
 }
 
 /**
@@ -103,6 +88,19 @@ int main(){
             printf("%d ", route[i][j]);
         }
         printf("\n");
+    }
+
+    /* Affichage du fichier save */
+    printf("Affichage save : \n");
+    readProfiles();
+    for(i = 0; i < 5; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    }
+
+    /* Affichage des tableaux de données */
+    printf("Affichage des tableaux de données : \n");
+    for(i = 0; i < 5; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
     }
     return 0;
 }

@@ -1,13 +1,10 @@
-int pointsProfils[50] = {}; // Points des 50 profils
-char nomProfils[50][20] = {}; // Noms des 50 profils (20 caractères max)
-int numProfils[50] = {}; // Numéros des 50 profils
+#define MAX_PROFILS 50
+
+int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
+char nomProfils[MAX_PROFILS][20] = {}; // Noms des 50 profils (20 caractères max)
+int numProfils[MAX_PROFILS] = {}; // Numéros des 50 profils
 int nbProfils = 0; // Nombre de profils
-int nbPartiesProfils[] = {}; //nombre de partie joué
-
-
-
-
-
+int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
 
 /*PROTOTYPE FONCTIONS*/
 
