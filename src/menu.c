@@ -95,10 +95,27 @@ void cleanupGame(){
         addScore(id_profil);
     }
     fclose(fichier);
-
 }
 
+/**
+ * @brief Fonction saveGame : Sauvegarde les profils dans un fichier save.csv
+ * @author Tom Marsura
+ * @return void
+*/
+void saveGame(){
+    FILE * fichier = fopen("../save/save.csv", "w");
+    if(fichier != NULL){
+        for(int i = 0; i < MAX_PROFILS; i++){
+            fprintf(fichier, "%d %d %s %d", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+        }
+    }
+}
 
+/**
+ * @brief Fonction main : fonction principale du programme, permet de tester les fonctions du menu.c
+ * @author Tom Marsura
+ * @return int
+*/
 int main(){
     initGame();
     /* Affichage de la matrice */
@@ -119,6 +136,15 @@ int main(){
 
     /* Affichage des tableaux de données */
     printf("Affichage des tableaux de données : \n");
+    for(i = 0; i < 5; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    }
+
+    /* Test de sauvegarde */
+    printf("Test de sauvegarde : \n");
+    saveGame();
+    readProfiles();
+    printf("Affichage save : \n");
     for(i = 0; i < 5; i++){
         printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
     }
