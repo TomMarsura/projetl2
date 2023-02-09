@@ -66,7 +66,7 @@ void addScore(int profil){
 void cleanupGame(){
     int i,j;
 /*Sauvegarde des données*/
-    //saveGame();
+    saveGame();
 
     //Nettoyage de la route
 /*Parcours de la route et met toutes les valeurs a NULL*/
@@ -75,26 +75,6 @@ void cleanupGame(){
             route[i][j] = NULL;
         }
     }
-
-<<<<<<< HEAD
-    /*Sauvegarde du profil*/
-    FILE * fichier = fopen("../save/save.csv","r");
-    char ligne[100];
-    char* id; /*numero de profil*/
-    int id_profil;
-    if (fichier != NULL){
-
-        while(fgets(ligne,100,fichier) != NULL){
-            id = strtok(ligne,";"); /*Numero de profil*/
-            id_profil = atoi(id); /*conversion en int*/
-        }
-
-    /*Modification du score*/
-        addScore(id_profil);
-    }
-    fclose(fichier);
-=======
->>>>>>> refs/remotes/origin/main
 }
 
 /**
