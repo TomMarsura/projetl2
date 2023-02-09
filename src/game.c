@@ -98,10 +98,7 @@ int crash(){
 */
 void deplacement(){
 
-  time_t start_time = time(NULL);
-
   while (1) {
-
 
   /* La fonction clavier retourne le code ASCII de la touche du clavier sur la laquelle appuie le joueur */
     int clavier(){
@@ -116,10 +113,10 @@ void deplacement(){
         return ch;
     }
 
-      int c;
-      int i;
-      int x;
-      int y;
+    int c;
+    int i;
+    int x;
+    int y;
 
 
     for (i=0 ; i<LARGEUR ; i++){
@@ -148,10 +145,6 @@ void deplacement(){
       route[x][y] = 0;
       route[x][y-1] = 1;
       affichae_mat();
-    }
-
-    if (difftime(time(NULL), start_time) >= 5) {
-      break;
     }
   }
 }
@@ -186,14 +179,11 @@ void decalage(){
 */
 void easyGame(){
 
+  affichae_mat();
   /* Tant qu'il n'y a pas de crash */
   while (crash() == 0){
-    affichae_mat();
     deplacement();
-
     }
-    decalage();
-  }
 }
 
 
