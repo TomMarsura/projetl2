@@ -66,7 +66,7 @@ void addScore(int profil){
 void cleanupGame(){
     int i,j;
 /*Sauvegarde des données*/
-    //saveGame()
+    //saveGame();
 
     //Nettoyage de la route
 /*Parcours de la route et met toutes les valeurs a NULL*/
