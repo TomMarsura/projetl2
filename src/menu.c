@@ -75,6 +75,8 @@ void cleanupGame(){
             route[i][j] = NULL;
         }
     }
+    score = 0;
+    cpt_distance = 0;
 }
 
 /**
