@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+
 #include "../lib/game.h"
 #include "../lib/menu.h"
 
@@ -40,29 +42,20 @@ void readProfiles(){
 }
 
 /**
-* @brief Fonction addScore : Change le score du profil
+* @brief Fonction addScore : Change le score du profil au file de la distance
 * @param[in] profile int
 * @author Ayoub Laaribi
 * @return void
 */
 void addScore(int profil){
-    /*Ouverture du fichier*/
-    FILE * fichier = fopen("../save/save.csv","r");
-    char ligne[100];
-    char * pch;
-    /*Recherche du profil a modifier*/
-    pch = strtok(ligne,";");
-    while(fgets(100,ligne,fichier) != NULL){
-    /*Si l'element est egal a l'id du profile alors c'est le bon,on peut donc le modifier*/
-        if(atoi(pch) == profil){
-        /*modif point*/
-        }else{
-        /*Passage a la ligne suivante*/
-            while(fgetc(fichier) != '\n'); //passage a la ligne suivante
-        }
-    }
-    fclose(fichier);
-    /*Recherche du score et modif*/
+
+/*initialisation*/
+    int score_dist;
+    /*Recup du score*/
+    score_dist = calcul_score();
+    /*modification de la case score*/
+    pointsProfils[profil] = pointsProfils[profil] + score_dist;
+
 }
 
 /**
@@ -72,33 +65,37 @@ void addScore(int profil){
 */
 void cleanupGame(){
     int i,j;
+/*Sauvegarde des données*/
+    saveGame();
+
+    //Nettoyage de la route
 /*Parcours de la route et met toutes les valeurs a NULL*/
     for(i = 0 ; i< HAUTEUR ;i++){
         for(j = 0; j<LARGEUR;j++){
             route[i][j] = NULL;
         }
     }
-
-    /*Sauvegarde du profil*/
-    FILE * fichier = fopen("../save/save.csv","r");
-    char ligne[100];
-    char* id; /*numero de profil*/
-    int id_profil;
-    if (fichier != NULL){
-
-        while(fgets(ligne,100,fichier) != NULL){
-            id = strtok(ligne,";"); /*Numero de profil*/
-            id_profil = atoi(id); /*conversion en int*/
-        }
-
-    /*Modification du score*/
-        addScore(id_profil);
-    }
-    fclose(fichier);
-
 }
 
+/**
+ * @brief Fonction saveGame : Sauvegarde les profils dans un fichier save.csv
+ * @author Tom Marsura
+ * @return void
+*/
+void saveGame(){
+    FILE * fichier = fopen("../save/save.csv", "w");
+    if(fichier != NULL){
+        for(int i = 0; i < MAX_PROFILS; i++){
+            fprintf(fichier, "%d %d %s %d", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+        }
+    }
+}
 
+/**
+ * @brief Fonction main : fonction principale du programme, permet de tester les fonctions du menu.c
+ * @author Tom Marsura
+ * @return int
+*/
 int main(){
     initGame();
     /* Affichage de la matrice */
@@ -119,6 +116,15 @@ int main(){
 
     /* Affichage des tableaux de données */
     printf("Affichage des tableaux de données : \n");
+    for(i = 0; i < 5; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    }
+
+    /* Test de sauvegarde */
+    printf("Test de sauvegarde : \n");
+    saveGame();
+    readProfiles();
+    printf("Affichage save : \n");
     for(i = 0; i < 5; i++){
         printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
     }
