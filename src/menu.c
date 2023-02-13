@@ -57,6 +57,19 @@ void addScore(int profil){
     pointsProfils[profil] = pointsProfils[profil] + score_dist;
 
 }
+/**
+ * @brief Fonction saveGame : Sauvegarde les profils dans un fichier save.csv
+ * @author Tom Marsura
+ * @return void
+*/
+void saveGame(){
+    FILE * fichier = fopen("../save/save.csv", "w");
+    if(fichier != NULL){
+        for(int i = 0; i < MAX_PROFILS; i++){
+            fprintf(fichier, "%d %d %s %d", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+        }
+    }
+}
 
 /**
  * @brief Nettoie les données du jeu, sauvegarde le profil une fois que le jeu est terminé 
@@ -79,19 +92,6 @@ void cleanupGame(){
     cpt_distance = 0;
 }
 
-/**
- * @brief Fonction saveGame : Sauvegarde les profils dans un fichier save.csv
- * @author Tom Marsura
- * @return void
-*/
-void saveGame(){
-    FILE * fichier = fopen("../save/save.csv", "w");
-    if(fichier != NULL){
-        for(int i = 0; i < MAX_PROFILS; i++){
-            fprintf(fichier, "%d %d %s %d", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-        }
-    }
-}
 
 /**
  * @brief Fonction main : fonction principale du programme, permet de tester les fonctions du menu.c
