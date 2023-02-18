@@ -100,7 +100,7 @@ int crash(int profil){
   }
 
   /*modification du score*/
-  addScore(profil);
+  /*addScore(profil);*/
   /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 }
@@ -175,9 +175,23 @@ void decalage(){
 
   int i;
   int j;
+  int x;
+  int y;
+
+
+  for (i=0 ; i<LARGEUR ; i++){
+    /* Trouver la postion de la voiture sur la ligne */
+    if (route[HAUTEUR-1][i] == 1){
+      /* La variable x correspond à la ligne de la position de la voiture */
+      x = HAUTEUR-1;
+      /* La variable y correspond à la colonne de la position de la voiture */
+      y = i;
+      break;
+    }
+  }
 
   for (i=HAUTEUR-1 ; i>0 ; i--){
-    for (j=0 ; j<LARGEUR-1 ; j++){
+    for (j=0 ; j<LARGEUR ; j++){
       route[i][j] = route[i-1][j];
     }
   }
@@ -185,6 +199,13 @@ void decalage(){
   for (j = 0 ; j < LARGEUR ; j++){
     route[0][j] = 0;
   }
+
+  for (j = 0 ; j < LARGEUR ; j++){
+    route[HAUTEUR-1][j] = 0;
+  }
+
+  /* On met la voiture a lligne du dessus */
+  route[x][y] = 1;
   affichae_mat();
 }
 
@@ -197,19 +218,11 @@ void easyGame(){
 
   affichae_mat();
   /* Tant qu'il n'y a pas de crash */
-  while (crash() == 0){
-<<<<<<< HEAD
-    deplacement();
-    }
-=======
-    affichae_mat(route);
-    decalage();
-    /* On attend 3 secondes entre chaque décalage */
-    sleep(3);
+  deplacement();
+  sleep(5);
+  affichae_mat();
+  decalage();
 
-    cpt_distance++;
-  }
->>>>>>> 306b6ff40cffafa0db9a0e263cd01ca9a7306ed0
 }
 
 
