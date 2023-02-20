@@ -13,6 +13,8 @@
 /* Include pour la fonction deplacement */
 #include <termios.h>
 #include <unistd.h>
+#include <fcntl.h>
+
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -82,18 +84,20 @@ int calcul_score(){
 
   return (point * cpt_distance)/dist;
 }
+
+
 /**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
  * @author Thibaut Gasnier
  * @return int
 */
-int crash(int profil){
+int crash(){
 
   int i;
 
   for (i=0; i<LARGEUR-1 ; i++){
     /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
-    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-1][i] == 2)){
+    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 2)){
       /* On retourne 1 pour signnfier le crash */
       return 1;
     }
@@ -107,27 +111,47 @@ int crash(int profil){
 
 
 /**
+ * @brief Fonction clavier : Cette fonction permet de renvoyer le code ASCII de la touche renntré au clavier de manière non bloquante
+ * @author Thibaut Gasnier
+ * @return int
+*/
+int clavier() {
+
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+    if (ch != EOF) {
+        ungetc(ch, stdin);
+        return 1;
+    }
+
+    return 0;
+}
+
+
+/**
  * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier
  * @author Thibaut Gasnier
  * @return void
 */
 void deplacement(){
 
-  while (1) {
+  time_t start_time = time(NULL);
 
-  /* La fonction clavier retourne le code ASCII de la touche du clavier sur la laquelle appuie le joueur */
-    int clavier(){
-        struct termios oldattr, newattr;
-        int ch;
-        tcgetattr(STDIN_FILENO, &oldattr);
-        newattr = oldattr;
-        newattr.c_lflag &= ~(ICANON | ECHO);
-        tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
-        ch = getchar();
-        tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
-        return ch;
-    }
-
+  while ((time(NULL) - start_time) < 5) {
 
     int c;
     int i;
@@ -146,21 +170,23 @@ void deplacement(){
       }
     }
 
-    /* Si le joueur appuie sur la flèche de droite code ASCII=67 et verifier si la limite de la route sur la droite est dépassée */
-    c = clavier();
-    if ((c == 67) && (!(y == LARGEUR-1))){
-      /* On modifie la position de la voiture dans la matrice */
-      route[x][y] = 0;
-      route[x][y+1] = 1;
-      affichae_mat();
-    }
+    if (clavier()){
+      /* Si le joueur appuie sur la flèche de droite code ASCII=67 et verifier si la limite de la route sur la droite est dépassée */
+      c = getchar();
+      if ((c == 67) && (!(y == LARGEUR-1))){
+        /* On modifie la position de la voiture dans la matrice */
+        route[x][y] = 0;
+        route[x][y+1] = 1;
+        affichae_mat();
+      }
 
-    /* Si le joueur appuie sur la flèche de gauche code ASCII=68 et verifier si la limite de la route sur la gauche est dépassée */
-    else if ((c == 68) && (!(y == 0))){
-      /* On modifie la position de la voiture dans la matrice */
-      route[x][y] = 0;
-      route[x][y-1] = 1;
-      affichae_mat();
+      /* Si le joueur appuie sur la flèche de gauche code ASCII=68 et verifier si la limite de la route sur la gauche est dépassée */
+      else if ((c == 68) && (!(y == 0))){
+        /* On modifie la position de la voiture dans la matrice */
+        route[x][y] = 0;
+        route[x][y-1] = 1;
+        affichae_mat();
+      }
     }
   }
 }
@@ -173,6 +199,7 @@ void deplacement(){
 */
 void decalage(){
 
+  printf("DECALAGE \n");
   int i;
   int j;
   int x;
@@ -217,12 +244,19 @@ void decalage(){
 void easyGame(){
 
   affichae_mat();
-  /* Tant qu'il n'y a pas de crash */
-  deplacement();
-  sleep(5);
-  affichae_mat();
-  decalage();
 
+  while(1){
+
+    deplacement();
+    
+    if (crash() == 1){
+      printf("CRASH !!\n");
+      break;
+    }
+    else{
+      decalage();
+    }
+  }
 }
 
 
