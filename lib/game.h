@@ -1,3 +1,7 @@
+
+#ifndef _GAME_H_
+#define _GAME_H_
+
 #define HAUTEUR 5
 #define LARGEUR 3
 
@@ -13,3 +17,5 @@ void obstacle(int mat[HAUTEUR][LARGEUR]);
 int crash();
 void deplacement();
 int calcul_score();
+
+#endif

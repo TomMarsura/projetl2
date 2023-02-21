@@ -1,3 +1,8 @@
+
+#ifndef _MENU_H_
+#define _MENU_H_
+
+
 #define MAX_PROFILS 50
 
 int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
@@ -12,3 +17,6 @@ void cleanupGame();
 void initGame();
 void readProfiles();
 void addScore(int profil);
+void saveGame();
+
+#endif
