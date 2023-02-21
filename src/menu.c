@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 #include "../lib/game.h"
@@ -91,6 +92,59 @@ void cleanupGame(){
     score = 0;
     cpt_distance = 0;
 }
+
+
+/**
+ * @author Ayoub LAARIBI
+ * @brief Fonction create_ranking
+ * @return void
+*/
+void create_ranking(){ /*Fonction pas terminé*/
+    FILE * fichier = fopen("rank.csv","w");
+
+    int Point_sort[MAX_PROFILS];
+    int i;
+    /*Copie du tableau de score*/
+    for (i = 0; i < MAX_PROFILS;i++){
+        Point_sort[i] = pointsProfils[i];
+    }
+
+    /*tri des score*/
+    qsort(Point_sort,MAX_PROFILS);
+    /*inversement du tableau pour etre decroissant*/
+
+    /*Ecriture dans le fichier*/
+    for (i = 0 ;i< MAX_PROFILS;i++){
+        fprintf("%s : %d\n",/*NOM*/,Point_sort[i]);
+    }
+    fopen(fichier);
+}
+
+/**
+ * @author Ayoub Laaribi
+ * @brief fonction affiche le classement des joueur avec leur score
+ * @return void
+*/
+void print_rank(){
+    FILE * f = fopen("rank.csv","r");
+        fprintf(f,);
+    fclose(f);
+}
+
+/**
+ * @author Ayoub LAARIBI
+ * @brief Cette fonction a pour but d'afficher le menu
+ * @return void
+*/
+void menu(){
+    if(){
+        create_ranking();
+    }else if(){
+
+    }else if(){
+
+    }
+} 
 
 
 /**

@@ -18,5 +18,8 @@ void initGame();
 void readProfiles();
 void addScore(int profil);
 void saveGame();
+void menu();
+void create_ranking();
+void print_rank();
 
 #endif
