@@ -23,7 +23,20 @@ void initGame(){
     route[4][1] = 1;
     score = 0;
 }
+/**
+ * @brief Fonction creation d'un profil
+ * @author Ayoub Laaribi
+ * @return void
+*/
 
+void create_profile(){
+    char pseudo[SIZE_NAME];
+    
+    printf("Entrer votre pseudo :");
+    scanf("%s",pseudo);
+    nbProfils++;
+    nomProfils[nbProfils][SIZE_NAME] = pseudo;
+}
 /**
  * @brief Fonction readProfiles : Lecture des profiles
  * @author Tom Marsura
@@ -209,20 +222,43 @@ void print_rank(){
 }
 
 
+/*
+MENU
 
+AFFICHAGE MENU
+CHOIX PROFIL
+CREATION PROFIL
+
+
+*/
 /**
  * @author Ayoub LAARIBI
  * @brief Cette fonction a pour but d'afficher le menu
  * @return void
 */
 void menu(){
-    /*if(){
-        create_ranking();
-    }else if(){
+    int rep;
 
-    }else if(){
+    printf("entrer l'option :\n");
+    printf("1 : CLASSEMENT\n");
+    printf("2 : FACIL\n");
+    printf("3 : MOYEN\n");
+    printf("4 : DIFFICILE\n");
+    scanf("%d",&rep);
 
-    }*/
+    switch(rep)
+    {
+        case 1 : create_ranking(); 
+            print_rank();
+            break;
+
+        case 2 :/*LANCEMENT JEU FACILE*/
+            break;
+        case 3: /*LANCEMENT JEU MOYEN*/
+            break;
+         case 3: /*LANCEMENT JEU DIFFICILE*/
+            break;
+    }
 } 
 
 
