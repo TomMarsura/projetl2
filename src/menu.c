@@ -96,7 +96,7 @@ void cleanupGame(){
 /*Parcours de la route et met toutes les valeurs a NULL*/
     for(i = 0 ; i< HAUTEUR ;i++){
         for(j = 0; j<LARGEUR;j++){
-            route[i][j] = NULL;
+            route[i][j] = 0;
         }
     }
     score = 0;
@@ -104,19 +104,19 @@ void cleanupGame(){
 }
 
 
-void reverse(char source[20],char dest[20]){
+void reverse(char *source/*[MAX_PROFILS]*/,char *dest/*[MAX_PROFILS]*/){
     int i,j;
 
     for(i = 0; i < 20;i++);
-    for(j = 0;j < 20;j++,i--)
+    for(j = 0;j < i;j++,i--)
     {
-        dest[j] = source[i];
+        *(dest+j) = *(source+i);
     }
 }
 
 
 
-int cmpfunc(const void * a, const void * b) {
+int comparaison(const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
@@ -146,10 +146,11 @@ ECRITURE DES POINTS DANS LE FICHIER
 void create_ranking(){ /*Fonction pas terminé*/
     FILE * fichier = fopen("rank.csv","w");
 
+    /*initialisation*/
     int Point_sort[MAX_PROFILS];
     int PointS[MAX_PROFILS];
-    int i;
-    char nomP[20];
+    int i,j;
+    char nomP[SIZE_NAME];
 
     /*Copie du tableau de score*/
     for (i = 0; i < MAX_PROFILS;i++){
@@ -158,24 +159,25 @@ void create_ranking(){ /*Fonction pas terminé*/
 
     /*tri des score*/
 
-    /*void qsort( void * array, size_t elementCount, size_t elementSize,
-            int (*compareFunction)( const void*, const void* ) );*/
-    qsort(PointS,MAX_PROFILS,sizeof(int),cmpfunc);
+    qsort(PointS,MAX_PROFILS,sizeof(int),comparaison);
 
     /*inversement du tableau pour etre decroissant*/
     reverse(PointS,Point_sort);
     /*Ecriture dans le fichier*/
     for (i = 0 ;i< MAX_PROFILS;i++){
-
-        /*Si l'element de notre tableau est egal a l'indice de pointProfil
-        alors on peut affecter le nom du joueurs*/
-        if (Point_sort[i] == pointsProfils[i])
+        for(j = 0; j < MAX_PROFILS;j++)
         {
-            nomP[20] = nomProfils[i][20]; 
+            /*Si l'element de notre tableau est egal a l'indice de pointProfil
+            alors on peut affecter le nom du joueurs*/
+            if (Point_sort[i] == pointsProfils[j])
+            {
+                nomP[SIZE_NAME] = nomProfils[i][SIZE_NAME]; 
+                /*ecriture FORMAT : NOM : POINTS*/
+                fprintf("%s : %d\n",nomP,Point_sort[i]);
+            }
 
-            /*ecriture FORMAT : NOM : POINTS*/
-            fprintf("%s : %d\n",nomP,Point_sort[i]);
         }
+
     }
     fclose(fichier);
 }
@@ -185,11 +187,28 @@ void create_ranking(){ /*Fonction pas terminé*/
  * @brief fonction affiche le classement des joueur avec leur score
  * @return void
 */
+
+/*
+ALGORITHMIE
+
+OUVERTURE DU FICHER
+    TANT QUE QU'IL N Y A PAS D ERREUR OU FIN DE FICHIER
+        STOCKAGE DE CONTENU DANS name
+        AFFICHAGE DU CONTENU DE name
+
+*/
 void print_rank(){
+    char name[SIZE_NAME];
+
     FILE * f = fopen("rank.csv","r");
-        fprintf(f,);
+        while(fgets(name,SIZE_NAME,f))
+        {
+            printf("%s",name);
+        }
     fclose(f);
 }
+
+
 
 /**
  * @author Ayoub LAARIBI
@@ -197,13 +216,13 @@ void print_rank(){
  * @return void
 */
 void menu(){
-    if(){
+    /*if(){
         create_ranking();
     }else if(){
 
     }else if(){
 
-    }
+    }*/
 } 
 
 
