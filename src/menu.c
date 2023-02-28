@@ -42,6 +42,16 @@ void readProfiles(){
     fclose(fichier);
 }
 
+
+/*
+ALGORITHME
+
+
+
+
+
+
+*/
 /**
 * @brief Fonction addScore : Change le score du profil au file de la distance
 * @param[in] profile int
@@ -94,30 +104,80 @@ void cleanupGame(){
 }
 
 
+void reverse(char source[20],char dest[20]){
+    int i,j;
+
+    for(i = 0; i < 20;i++);
+    for(j = 0;j < 20;j++,i--)
+    {
+        dest[j] = source[i];
+    }
+}
+
+
+
+int cmpfunc(const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
+}
+
+
 /**
  * @author Ayoub LAARIBI
  * @brief Fonction create_ranking
  * @return void
 */
+
+
+/*ALGORITHME
+
+OUVERTURE DU FICHIER
+PARCOUR DES PROFILS AFIN DE COPIER LES POINTS DES PROFILS
+    COPIE DES VALEURS POINTPROFILS DANS LA TABLEAU POINTSORT
+TRIE TU TABLEAU POINT SORT : PAR ORDRE CROISSANT
+    REVERSE
+
+ECRITURE DES POINTS DANS LE FICHIER
+    RECUPERATION DU NOM DU PROFIL
+
+    SI L'ELEMENT DE NOTRE TABLEAU SORT EST EGAL A L'ELEMENT DE POINT PROFIL
+        ON AFFECTE DANS nomP Le nomProfils A L'INDICE DONNER
+*/
+
 void create_ranking(){ /*Fonction pas terminé*/
     FILE * fichier = fopen("rank.csv","w");
 
     int Point_sort[MAX_PROFILS];
+    int PointS[MAX_PROFILS];
     int i;
+    char nomP[20];
+
     /*Copie du tableau de score*/
     for (i = 0; i < MAX_PROFILS;i++){
-        Point_sort[i] = pointsProfils[i];
+        PointS[i] = pointsProfils[i];
     }
 
     /*tri des score*/
-    qsort(Point_sort,MAX_PROFILS);
-    /*inversement du tableau pour etre decroissant*/
 
+    /*void qsort( void * array, size_t elementCount, size_t elementSize,
+            int (*compareFunction)( const void*, const void* ) );*/
+    qsort(PointS,MAX_PROFILS,sizeof(int),cmpfunc);
+
+    /*inversement du tableau pour etre decroissant*/
+    reverse(PointS,Point_sort);
     /*Ecriture dans le fichier*/
     for (i = 0 ;i< MAX_PROFILS;i++){
-        fprintf("%s : %d\n",/*NOM*/,Point_sort[i]);
+
+        /*Si l'element de notre tableau est egal a l'indice de pointProfil
+        alors on peut affecter le nom du joueurs*/
+        if (Point_sort[i] == pointsProfils[i])
+        {
+            nomP[20] = nomProfils[i][20]; 
+
+            /*ecriture FORMAT : NOM : POINTS*/
+            fprintf("%s : %d\n",nomP,Point_sort[i]);
+        }
     }
-    fopen(fichier);
+    fclose(fichier);
 }
 
 /**
