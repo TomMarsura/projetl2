@@ -54,23 +54,32 @@ void affichae_mat(){
 */
 void obstacle(){
 
-    /*initialisation*/
-    int obstacle;
-    int nb_obstacle;
-    int cpt = 0;
-    /*genere position
-    nb obstacle
-    */
-/*genere le nombre d'obstacle soit 1 ou 2*/
-    nb_obstacle = rand() % 2 +1;
+    int position1;
+    position1 = rand() % LARGEUR; /*genenere aléatoirement la position du première obstacle*/
 
-    while( cpt != nb_obstacle){
-/*genere un nombre entre 0 et 3 , qui represente l'endroit ou l'obstacle va etre positionner*/
-        obstacle = rand() % 3 +1;
-        mat[0][obstacle] = 2;
-        cpt++;
+    int position2;
+    position2 = rand() % LARGEUR; /*genenere aléatoirement la position du deuxième obstacle*/
+
+    int apparition;
+    apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
+
+    int nb_obstacle_ligne;
+    nb_obstacle_ligne = rand() % 100; /*genere un pourcentage pour décider si on ajoute 1 ou 2 obsatcles à la ligne*/
+
+
+    if (apparition > 50){
+      if(nb_obstacle_ligne>33){
+        route[0][position1] = 2;
+      }
+      else{
+        route[0][position1] = 2;
+        route[0][position2] = 2;
+      }
     }
-    affichae_mat();
+
+
+
+
 }
 
 
@@ -256,6 +265,7 @@ void easyGame(){
     }
     else{
       decalage();
+      obstacle();
     }
   }
 }
