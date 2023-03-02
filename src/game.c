@@ -252,8 +252,6 @@ void easyGame(){
 
   float vitesse = 1.50;
 
-
-
   while(1){
 
     deplacement(vitesse);
@@ -268,8 +266,9 @@ void easyGame(){
 
       /*On verifie si la vitesse maximale est atteinte */
       if (vitesse >= VITESSE_MAX){
-        vitesse = vitesse - 0.10;
+        vitesse = vitesse - 0.05;
       }
+      printf("vitesse : %f",vitesse);
 
     }
   }
