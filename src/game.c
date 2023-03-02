@@ -30,6 +30,8 @@
 void affichae_mat(){
   /*initialisation*/
     int i,j;
+    system("clear");
+
 
     for (i = 0;i< 5;i++){
 
@@ -38,8 +40,7 @@ void affichae_mat(){
         }
         printf("\n");
     }
-    printf("\n");
-    printf("\n");
+
 
 
 }
@@ -51,7 +52,7 @@ void affichae_mat(){
  * @param[in] mat matrice de type int
  * @return void
 */
-void obstacle(int mat[HAUTEUR][LARGEUR]){
+void obstacle(){
 
     /*initialisation*/
     int obstacle;
@@ -151,7 +152,7 @@ void deplacement(){
 
   time_t start_time = time(NULL);
 
-  while ((time(NULL) - start_time) < 5) {
+  while ((time(NULL) - start_time) < 1) {
 
     int c;
     int i;
@@ -248,7 +249,7 @@ void easyGame(){
   while(1){
 
     deplacement();
-    
+
     if (crash() == 1){
       printf("CRASH !!\n");
       break;
