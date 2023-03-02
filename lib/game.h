@@ -15,9 +15,16 @@ int cpt_distance = 0;
 
 
 /* Prototype des fonctions */
+void affichae_mat();
 void obstacle();
-int crash();
-void deplacement(float vitesse);
 int calcul_score();
+int crash();
+int clavier();
+void deplacement(float vitesse);
+void decalage();
+void easyGame();
+
+
+
 
 #endif
