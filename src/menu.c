@@ -210,6 +210,11 @@ OUVERTURE DU FICHER
         AFFICHAGE DU CONTENU DE name
 
 */
+
+/**
+ *@brief Fonction qui permet d'afficher le classement des joueurs
+ *@author Ayoub Laaribi 
+*/
 void print_rank(){
     char name[SIZE_NAME];
 
@@ -253,6 +258,7 @@ void menu(){
             break;
 
         case 2 :/*LANCEMENT JEU FACILE*/
+            easyGame();
             break;
         case 3: /*LANCEMENT JEU MOYEN*/
             break;
