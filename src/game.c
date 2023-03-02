@@ -79,19 +79,6 @@ void obstacle(){
 
 
 /**
- * @author Ayoub Laaribi
- * @brief formule qui calcule le score
- * @return int
-*/
-int calcul_score(){
-  int point=11;
-  int dist=5;
-
-  return (point * cpt_distance)/dist;
-}
-
-
-/**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
  * @author Thibaut Gasnier
  * @return int
@@ -258,18 +245,18 @@ void easyGame(){
 
     if (crash() == 1){
       printf("CRASH !!\n");
+      printf("SCORE : %d \n",score);
       break;
     }
     else{
       decalage();
+      score = score + 1;
       obstacle();
 
       /*On verifie si la vitesse maximale est atteinte */
       if (vitesse >= VITESSE_MAX){
         vitesse = vitesse - 0.05;
       }
-      printf("vitesse : %f",vitesse);
-
     }
   }
 }
