@@ -31,11 +31,15 @@ void initGame(){
 
 void create_profile(){
     char pseudo[SIZE_NAME];
-    
+    int i;
     printf("Entrer votre pseudo :");
     scanf("%s",pseudo);
     nbProfils++;
-    nomProfils[nbProfils][SIZE_NAME] = pseudo;
+
+    for( i = 0;i<SIZE_NAME;i++){
+
+        nomProfils[nbProfils][i] = pseudo[i];
+    }
 }
 /**
  * @brief Fonction readProfiles : Lecture des profiles
@@ -117,7 +121,7 @@ void cleanupGame(){
 }
 
 
-void reverse(char *source/*[MAX_PROFILS]*/,char *dest/*[MAX_PROFILS]*/){
+/*void reverse(char *source/*[MAX_PROFILS],char *dest/*[MAX_PROFILS]){
     int i,j;
 
     for(i = 0; i < 20;i++);
@@ -125,7 +129,20 @@ void reverse(char *source/*[MAX_PROFILS]*/,char *dest/*[MAX_PROFILS]*/){
     {
         *(dest+j) = *(source+i);
     }
+}*/
+
+void reverse(char *source/*[MAX_PROFILS]*/,char *dest/*[MAX_PROFILS]*/){
+    int i,j;
+
+    for(i = 0; source[i] != '\0'; i++); 
+    i--; 
+
+    for(j = 0;j <= i;j++,i--){
+        *(dest+j) = *(source+i);
+    }
+    *(dest+j) = '\0'; 
 }
+
 
 
 
@@ -210,6 +227,11 @@ OUVERTURE DU FICHER
         AFFICHAGE DU CONTENU DE name
 
 */
+
+/**
+ *@brief Fonction qui permet d'afficher le classement des joueurs
+ *@author Ayoub Laaribi 
+*/
 void print_rank(){
     char name[SIZE_NAME];
 
@@ -253,10 +275,13 @@ void menu(){
             break;
 
         case 2 :/*LANCEMENT JEU FACILE*/
+            easyGame();
             break;
         case 3: /*LANCEMENT JEU MOYEN*/
+            printf("test");
             break;
-         case 3: /*LANCEMENT JEU DIFFICILE*/
+         case 4: /*LANCEMENT JEU DIFFICILE*/
+            printf("test");
             break;
     }
 } 
