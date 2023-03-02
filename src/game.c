@@ -48,8 +48,7 @@ void affichae_mat(){
 
 /**
  * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles
- * @author Ayoub Laaribi
- * @param[in] mat matrice de type int
+ * @author Ayoub Laaribi / Thibaut Gasnier
  * @return void
 */
 void obstacle(){
@@ -76,10 +75,6 @@ void obstacle(){
         route[0][position2] = 2;
       }
     }
-
-
-
-
 }
 
 
@@ -157,11 +152,11 @@ int clavier() {
  * @author Thibaut Gasnier
  * @return void
 */
-void deplacement(){
+void deplacement(float vitesse){
 
   time_t start_time = time(NULL);
 
-  while ((time(NULL) - start_time) < 1) {
+  while ((time(NULL) - start_time) < vitesse) {
 
     int c;
     int i;
@@ -255,9 +250,13 @@ void easyGame(){
 
   affichae_mat();
 
+  float vitesse = 1.50;
+
+
+
   while(1){
 
-    deplacement();
+    deplacement(vitesse);
 
     if (crash() == 1){
       printf("CRASH !!\n");
@@ -266,6 +265,12 @@ void easyGame(){
     else{
       decalage();
       obstacle();
+
+      /*On verifie si la vitesse maximale est atteinte */
+      if (vitesse >= VITESSE_MAX){
+        vitesse = vitesse - 0.10;
+      }
+
     }
   }
 }
