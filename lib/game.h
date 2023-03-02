@@ -5,6 +5,8 @@
 #define HAUTEUR 5
 #define LARGEUR 3
 
+#define VITESSE_MAX 0.1
+
 
 /* Variables globales */
 int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
@@ -15,7 +17,7 @@ int cpt_distance = 0;
 /* Prototype des fonctions */
 void obstacle();
 int crash();
-void deplacement();
+void deplacement(float vitesse);
 int calcul_score();
 
 #endif
