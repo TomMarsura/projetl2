@@ -17,7 +17,89 @@
 gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image                     
 */
 
+#define TAILLE_BLOCK 34
+
+
+enum {GAUCHE,MILIEU,DROITE};
+enum{VOITURE,OBSTACLE};
+
+
+SDL_Rect position, positionJoueur;
+
 void play(SDL_Window *window, SDL_Renderer *renderer)
+{
+    
+    
+   /* SDL_Surface *deplacement[3] = NULL;
+    SDL_Surface *PosVoiture = NULL;
+
+
+    /*telechargement image
+    deplacement[MILIEU] = IMG_Load("../img/pixel_car.png");
+    PosVoiture = deplacement(MILIEU);
+
+    positionJoueur.x = 3;
+    positionJoueur.y = 3;*/
+
+
+
+
+
+
+    SDL_Event event;
+    int continuer = 1;
+
+    while(continuer)
+    {
+        SDL_WaitEvent(&event);
+
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+            break;
+
+             case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_ESCAPE:
+                        continuer = 0;
+                break;
+                }
+
+            default:
+            break;
+        }
+
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+
+        //position.x = positionJoueur.x *TAILLE_BLOCK;
+        //position.x = positionJoueur.y *TAILLE_BLOCK;
+
+        //SDL_BlitSurface(PosVoiture,NULL,window,&position);
+
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+    }
+
+
+    /*for (int i = 0;i<4;i++){
+        SDL_FreeSurface(deplacement[i]);
+    }*/
+}
+
+/*FONCTION MENU*/
+
+/***************************************************************************************
+Cette fonction permet:
+                        - Classement
+                        - choix du profil
+                        - Creation profil
+                        -Lancement du jeu
+                        - shop
+*****************************************************************************************/
+void menu (SDL_Window *window, SDL_Renderer *renderer)
 {
     SDL_Event event;
     int continuer = 1;
@@ -32,16 +114,50 @@ void play(SDL_Window *window, SDL_Renderer *renderer)
                 continuer = 0;
             break;
 
+             case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_ESCAPE:
+                        continuer = 0;
+                break;
+                }
+                case SDLK_1:
+                    /*select profile*/
+                break;
+
+                case SDLK_2:
+                    /*create profil*/
+                break;
+
+                case SDLK_3:
+                    /*Lancement_du_jeu();*/
+                break;
+
             default:
             break;
         }
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
         SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
     }
+
 }
 
+
+
+
+/*FONCTION LANCEMENT DU JEU*/
+
+/***************************************************************************************
+Cette fonction permet d'ouvrir une fenetre et d'afficher le jeu en action avec lechoix de 
+difficulté
+*****************************************************************************************/
+void Lancement_du_jeu(SDL_Window *window, SDL_Renderer *renderer)
+{
+
+}
 
 int main(int argc, char* argv[]){
     
@@ -57,9 +173,9 @@ int main(int argc, char* argv[]){
     window = SDL_CreateWindow("Car GAME", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 730, 442, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    SDL_SetWindowIcon(window, IMG_Load("voiture_menu.png"));
+    SDL_SetWindowIcon(window, IMG_Load("../img/voiture_menu.png"));
 
-    menu = IMG_Load("voiture_menu.png");
+    menu = IMG_Load("../img/voiture_menu.png");
     SDL_Texture* textureMenu = SDL_CreateTextureFromSurface(renderer, menu);
     positionMenu.x = 0;
     positionMenu.y = 0;
@@ -80,7 +196,7 @@ int main(int argc, char* argv[]){
                 {
                     case SDLK_ESCAPE:
                         continuer = 0;
-                        break;
+                    break;
 
                     case SDLK_1:
                         play(window,renderer);
@@ -100,4 +216,5 @@ int main(int argc, char* argv[]){
     SDL_DestroyWindow(window);
     SDL_Quit();
     return EXIT_SUCCESS;
-}
+    }
+
