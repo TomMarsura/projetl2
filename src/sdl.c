@@ -158,7 +158,7 @@ void Lancement_du_jeu(SDL_Window *window, SDL_Renderer *renderer)
 {
 
 }
-/*
+
 int main(int argc, char* argv[]){
     
     SDL_Window* window = NULL;
@@ -216,46 +216,10 @@ int main(int argc, char* argv[]){
     SDL_DestroyWindow(window);
     SDL_Quit();
     return EXIT_SUCCESS;
-    }*/
-
-
-int main(int argc, char* argv[])
-{
-    int continuer = 1;
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Surface* surface = IMG_Load("../img/voiture.gif");
-    SDL_Window* window = SDL_CreateWindow("Car GAME", 
-                                          SDL_WINDOWPOS_UNDEFINED, 
-                                          SDL_WINDOWPOS_UNDEFINED, 
-                                          surface->w, 
-                                          surface->h, 
-                                          SDL_WINDOW_SHOWN);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
-    SDL_Event event;
-    while(continuer)
-    {
-
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            continuer = 0;
-            break;
-        case SDLK_ESCAPE:
-            continuer = 0;
-            break;
-        default:
-            break;
-        }
-    }
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(surface);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    return 0;
 }
+
+
+
+
 
 
