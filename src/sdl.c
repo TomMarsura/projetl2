@@ -6,15 +6,45 @@
 #include <SDL2/SDL_video.h>
 
 
+#include "../lib/game.h"
+#include "../lib/menu.h"
+
+
+
 /*Commande pour compiler : gcc -o sdl sdl.c -L:/usr/include -lSDL2main -lSDL2 -lSDL2_image
 
                                 ou
 gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image                     
 */
 
-
-int main(int argc, char* argv[])
+void play(SDL_Window *window, SDL_Renderer *renderer)
 {
+    SDL_Event event;
+    int continuer = 1;
+
+    while(continuer)
+    {
+        SDL_WaitEvent(&event);
+
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+            break;
+
+            default:
+            break;
+        }
+
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+    }
+}
+
+
+int main(int argc, char* argv[]){
+    
     SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
     SDL_Surface* menu = NULL;
@@ -51,6 +81,10 @@ int main(int argc, char* argv[])
                     case SDLK_ESCAPE:
                         continuer = 0;
                         break;
+
+                    case SDLK_1:
+                        play(window,renderer);
+                    break;
                     default:
                         break;
                 }
