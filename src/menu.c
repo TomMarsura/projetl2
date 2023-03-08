@@ -54,39 +54,19 @@ void readProfiles(){
     }
 }
 
-void countProfiles(){ /*Fonction qui compte le nombre de profils*/
-    while(nomProfils[nbProfils][0] != '\0'){
-        nbProfils++;
-    }
+void createProfile(){
+    char * nomProfil = malloc(sizeof(char) * 20);
+
+    printf("Entrez le nom du nouveau profil : ");
+    scanf("%20s", nomProfil);
+
+    numProfils[nbProfils] = nbProfils;
+    pointsProfils[nbProfils] = 0;
+    strcpy(nomProfils[nbProfils], nomProfil);
+    nbPartiesProfils[nbProfils] = 0;
+
+    nbProfils++;
 }
-
-
-/*
-ALGORITHME
-
-
-
-
-
-
-*/
-/**
-* @brief Fonction addScore : Change le score du profil au file de la distance
-* @param[in] profile int
-* @author Ayoub Laaribi
-* @return void
-*/ 
-/*
-void addScore(int profil){
-
-/*initialisation*/
-    //int score_dist;
-    /*Recup du score*/
-    //score_dist = calcul_score();
-    /*modification de la case score*/
-    //pointsProfils[profil] = pointsProfils[profil] + score_dist;
-
-//}
 
 /**
  * @brief Fonction saveGame : Sauvegarde les profils dans un fichier save.csv
@@ -221,9 +201,9 @@ int main(){
     int i, choix = 0;
 
     do{
-        printf("MENU DEBUG\n 1 - Affichage sauvegardes / Classement\n 2 - Affichage menu\n");
+        printf("MENU DEBUG\n 1 - Affichage sauvegardes / Classement\n 2 - Affichage menu\n 3 - Création profil\n");
         scanf("%d", &choix);
-    }while(choix < 1 || choix > 2);
+    }while(choix < 1 || choix > 3);
 
     if(choix == 1){
         /* Affichage du fichier save */
@@ -255,6 +235,22 @@ int main(){
     else if(choix == 2){
         readProfiles();
         menu();
+    }
+    else if(choix == 3){
+        /* Affichage des tableaux de données */
+        printf("Affichage des tableaux de données AVANT : \n");
+        for(i = 0; i < nbProfils; i++){
+            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+        }
+        readProfiles();
+        createProfile();
+        saveGame();
+        
+        /* Affichage des tableaux de données */
+        printf("Affichage des tableaux de données APRES : \n");
+        for(i = 0; i < nbProfils; i++){
+            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+        }
     }
     else{
         printf("Erreur de saisie\n");
