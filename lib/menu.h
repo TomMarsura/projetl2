@@ -14,13 +14,13 @@ int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
 
 /*PROTOTYPE FONCTIONS*/
 
-void cleanupGame(); 
 void initGame();
 void readProfiles();
-void addScore(int profil);
+void createProfile();
 void saveGame();
+void cleanupGame();
+void classement();
+void affichage_classement();
 void menu();
-void create_ranking();
-void print_rank();
 
 #endif
