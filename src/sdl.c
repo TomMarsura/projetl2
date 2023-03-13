@@ -152,9 +152,9 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
 
     
     SDL_Color TextColor;
-    TextColor.r = 255;
-    TextColor.g = 0;
-    TextColor.b = 0;
+    TextColor.r = 30;
+    TextColor.g = 29;
+    TextColor.b = 34;
     int choix = 0;
     int time;
 
@@ -435,9 +435,9 @@ int main(int argc, char *argv[])
    
     SDL_Event event;
     SDL_Color TextColor;
-    TextColor.r = 255;
-    TextColor.g = 0;
-    TextColor.b = 0;
+    TextColor.r = 30;
+    TextColor.g = 29;
+    TextColor.b = 34;
 
     unsigned int time;
     
