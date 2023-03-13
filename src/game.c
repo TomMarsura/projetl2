@@ -47,6 +47,7 @@ void affichae_mat(){
 
 
 /**
+  affichae_mat();
  * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles
  * @author Ayoub Laaribi / Thibaut Gasnier
  * @return void
@@ -233,7 +234,7 @@ void decalage(){
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu en appelant les autres fonctions
  * @return void
 */
-void easyGame(){
+void easyGame(int profil){
 
   affichae_mat();
 
@@ -246,6 +247,7 @@ void easyGame(){
     if (crash() == 1){
       printf("CRASH !!\n");
       printf("SCORE : %d \n",score);
+      pointsProfils[profil] += score;
       break;
     }
     else{
@@ -265,6 +267,6 @@ void easyGame(){
 
 int main(){
 
-  easyGame();
+  easyGame(0);
   return 0;
 }
