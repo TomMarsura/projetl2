@@ -251,7 +251,8 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
     //affichage des texte PLAY, CHOOSE PROFILE QUIT
     
     time = SDL_GetTicks();
-    int Visible = 1;
+    int VisiblePlay = 1;
+    int VisibleChoose = 1;
     choix = 0;
     int position = 0;
     while(program_launched) {
@@ -336,18 +337,25 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
          
             
             
-            
+            //Si la position est egal a 0 clignotement du message Play
             if(position == 0){
                 
                 unsigned ActualTime = SDL_GetTicks();
                 
                     if(ActualTime > time + 500){
                         time = ActualTime;
-                        Visible = !Visible;
-                        int alpha = Visible ? 255 : 0;
+                        VisiblePlay = !VisiblePlay;
+                        int alpha = VisiblePlay ? 255 : 0;
                         SDL_SetTextureAlphaMod(textTexture,alpha);
                     }
+            }else{
+              
+                VisiblePlay = 1;
+                        int alpha = VisiblePlay ? 255 : 0;
+                        SDL_SetTextureAlphaMod(textTexture,alpha);
+
             }
+            
             
             
 
@@ -357,11 +365,19 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
                 
                     if(ActualTime > time + 500){
                         time = ActualTime;
-                        Visible = !Visible;
-                        int alpha = Visible ? 255 : 0;
+                        VisibleChoose = !VisibleChoose;
+                        int alpha = VisibleChoose ? 255 : 0;
                         SDL_SetTextureAlphaMod(textTextureChoose,alpha);
                     }            
+            }else{
+
+                VisibleChoose = 1;
+                int alpha = VisibleChoose ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureChoose,alpha);
             }
+            
+
+            
 
             
 
