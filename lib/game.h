@@ -22,7 +22,7 @@ int crash();
 int clavier();
 void deplacement(float vitesse);
 void decalage();
-void easyGame();
+void easyGame(int profil);
 
 
 
