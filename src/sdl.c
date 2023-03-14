@@ -5,8 +5,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
 
-/*VARIABLE GLOBAL*/
-SDL_bool program_launched = SDL_TRUE;
+#include "lib/sdl.h"
+
+
 
 
 
@@ -25,109 +26,6 @@ void SDL_ExitWithMessage(const char *message)
     SDL_Quit();
     exit(EXIT_FAILURE);
 }
-
-
-/*FONCTION CHOICE MENU*/
-
-/**************************************************************
-Cette fonction a pour but de revoyer une position entre [1-3]
-selon la touche appuiyé
-**************************************************************/
-int choice_menu(SDL_Event event/*, SDL_Texture *option*/)
-{
-    
-    //int position[] = {1, 2, 3};
-    int position = 0;
-    //int i = 0;
-
-
-    while(SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                program_launched = SDL_FALSE;
-            break;
-                
-            case SDL_KEYDOWN:
-                    switch(event.key.keysym.scancode) {
-
-                        case SDLK_ESCAPE:
-                            program_launched = SDL_FALSE;
-                        break;
-                            
-                        case SDL_SCANCODE_KP_ENTER:
-                            printf("Vous avez appuye sur la touche ENTRER\n");
-                        break;
-
-
-
-                        //BAS
-                        case SDL_SCANCODE_DOWN:
-                            position = position + 1;
-                            printf("Vous avez appuye sur la touche BAS\n%d\n",position);
-                            //return position;
-                            EXIT_SUCCESS;
-                        
-                        break;
-                        case SDL_SCANCODE_S:
-                            position = position + 1;
-                            printf("Vous avez appuye sur la touche BAS\n%d\n",position);
-                            EXIT_SUCCESS;
-                            //return position;
-                        break;
-
-
-
-
-                        //HAUT
-                        /*case SDL_SCANCODE_Z:
-                            position = position + 1;
-                            printf("Vous avez appuye sur la touche BAS\n%d\n",position);
-                            return position;
-                        break;*/
-                        case SDL_SCANCODE_UP:
-                            //if(position> 0){
-                                position = position - 1;
-                                printf("Vous avez appuye sur la touche HAUT\n%d\n",position);
-                                //return position;
-                                EXIT_SUCCESS;
-                                
-                                
-                            /*}else{
-                               
-                                position = 0;
-                                
-                            }*/
-
-
-
-                        break;
-
-                            
-                        default:
-                            program_launched = SDL_FALSE;
-                        break;
-            }
-        }
-    }
-    return position;   
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -172,7 +70,7 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture");
-    }   
+    }
     /*Verification TTF_init*/
     if(TTF_Init() == -1) {
         SDL_DestroyTexture(texture);
@@ -193,7 +91,7 @@ void Lancement_menu(SDL_Window *window,SDL_Renderer *renderer)
     SDL_Surface* TextPlay = TTF_RenderText_Solid(police, "PLAY", TextColor);
     if(TextPlay == NULL) {
         TTF_CloseFont(police);
-        SDL_DestroyTexture(texture);
+       // SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Le texte sur la surface a echouee");
