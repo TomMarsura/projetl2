@@ -12,7 +12,7 @@
 
 SDL_bool program_launched = SDL_TRUE;
 
-void SDL_ExitWithMessage(const char *message);
-void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer);
+extern void SDL_ExitWithMessage(const char *message);
+extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer);
 
 #endif

@@ -9,20 +9,20 @@
 
 
 /* Variables globales */
-int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
-int score = 0;
-int cpt_distance = 0;
+ extern int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
+ extern int score = 0;
+ extern int cpt_distance = 0;
 
 
 /* Prototype des fonctions */
-void affichae_mat();
-void obstacle();
-int calcul_score();
-int crash();
-int clavier();
-void deplacement(float vitesse);
-void decalage();
-void easyGame(int profil);
+extern void affichae_mat();
+extern void obstacle();
+extern int calcul_score();
+extern int crash();
+extern int clavier();
+extern void deplacement(float vitesse);
+extern void decalage();
+extern void easyGame(int profil);
 
 
 

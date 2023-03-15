@@ -27,7 +27,7 @@
 *@param[in] mat matrice de type int
 *@return void
 */
-void affichae_mat(){
+extern void affichae_mat(){
   /*initialisation*/
     int i,j;
     system("clear");
@@ -52,7 +52,7 @@ void affichae_mat(){
  * @author Ayoub Laaribi / Thibaut Gasnier
  * @return void
 */
-void obstacle(){
+extern void obstacle(){
 
     int position1;
     position1 = rand() % LARGEUR; /*genenere aléatoirement la position du première obstacle*/
@@ -84,7 +84,7 @@ void obstacle(){
  * @author Thibaut Gasnier
  * @return int
 */
-int crash(){
+extern int crash(){
 
   int i;
 
@@ -108,7 +108,7 @@ int crash(){
  * @author Thibaut Gasnier
  * @return int
 */
-int clavier() {
+extern int clavier() {
 
     struct termios oldt, newt;
     int ch;
@@ -140,7 +140,7 @@ int clavier() {
  * @author Thibaut Gasnier
  * @return void
 */
-void deplacement(float vitesse){
+extern void deplacement(float vitesse){
 
   time_t start_time = time(NULL);
 
@@ -190,7 +190,7 @@ void deplacement(float vitesse){
  * @author Thibaut Gasnier
  * @return void
 */
-void decalage(){
+extern void decalage(){
 
   printf("DECALAGE \n");
   int i;
@@ -234,7 +234,7 @@ void decalage(){
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu en appelant les autres fonctions
  * @return void
 */
-void easyGame(int profil){
+extern void easyGame(int profil){
 
   affichae_mat();
 
@@ -265,8 +265,8 @@ void easyGame(int profil){
 
 
 
-int main(){
-
-  easyGame(0);
-  return 0;
-}
+//int main(){
+//
+//  easyGame(0);
+//  return 0;
+//}

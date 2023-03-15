@@ -5,7 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
 
-#include "lib/sdl.h"
+#include "../lib/sdl.h"
 
 /*gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf*/
 
@@ -14,7 +14,7 @@
 /*******************************************************
 Cette fonction renvoie un message d'erreur et qui la SDL
 ********************************************************/
-void SDL_ExitWithMessage(const char *message)
+extern void SDL_ExitWithMessage(const char *message)
 {
     SDL_Log("ERREUR : %s  \n", message);
     TTF_Quit();
@@ -33,14 +33,14 @@ Cette fonction lance le menu et permet:
                                     - SHOP
                                     - QUIT
 *************************************************************************/
-void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
+extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 {
 
     SDL_Color TextColor;
     TextColor.r = 30;
     TextColor.g = 29;
     TextColor.b = 34;
-    int choix = 0;
+    //int choix = 0;
     int time;
 
     SDL_Surface *ImageStart = IMG_Load("../img/voiture.gif");
@@ -134,7 +134,7 @@ void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     time = SDL_GetTicks();
     int VisiblePlay = 1;
     int VisibleChoose = 1;
-    choix = 0;
+    //choix = 0;
     int position = 0;
     while (program_launched)
     {
