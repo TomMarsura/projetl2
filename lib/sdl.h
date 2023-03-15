@@ -9,10 +9,14 @@
 #ifndef _SDL_H_
 #define _SDL_H_
 
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+
 
 extern SDL_bool program_launched;
 
 extern void SDL_ExitWithMessage(const char *message);
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer);
+extern void afficherTableau(SDL_Window *window, SDL_Renderer *renderer);
 
 #endif
