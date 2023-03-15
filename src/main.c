@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     /*initialisation*/
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
+    TTF_Init();
+
     SDL_Event event;
     SDL_Color TextColor;
     TextColor.r = 30;
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
         SDL_ExitWithMessage("Initialisation de la SDL echouee");
     }
 
-    SDL_Window *window = SDL_CreateWindow("Car GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+    SDL_Window *window = SDL_CreateWindow("Car GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     if (window == NULL)
     {
         SDL_ExitWithMessage("Creation de fenetre echoue\n");
@@ -112,6 +114,8 @@ int main(int argc, char *argv[])
 
     time = SDL_GetTicks();
     int Visible = 1;
+    
+    afficherTableau(window, renderer);
 
     while (program_launched)
     {
