@@ -1,39 +1,56 @@
-# Nom des fichiers sources
-SOURCES = src/game.c src/menu.c src/sdl.c test/test_main.c test/test_menu.c test/test_game.c
+# project name (generate executable with this name)
+TARGETS  = main
 
-# Nom des fichiers objets
-OBJECTS = obj/game.o obj/menu.o obj/sdl.o obj/test_main.o obj/test_menu.o obj/test_game.o
+CC       = gcc
+# compiling flags here
+CFLAGS   = -std=c99 -Wall -I.
 
-# Nom des fichiers d'en-tête
-HEADERS = lib/game.h lib/menu.h lib/sdl.h
+LINKER   = gcc
+# linking flags here
+LFLAGS   = -Wall -I. -lm
 
-# Nom du fichier exécutable
-EXECUTABLES = bin/test_game bin/test_menu bin/test_main
+SDLFALGS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
-# Compilateur et options de compilation
-CC = gcc
-CFLAGS = -c -Wall -Iinclude 
+# change these to proper directories where each file should be
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
+TRGS     := $(TARGETS:%=$(BINDIR)/%)
 
-# Options pour la bibliothèque SDL
-LDFLAGS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lm
+DIRS     = $(OBJDIR) $(BINDIR) 
 
-# Règle par défaut pour créer tous les fichiers objets et exécutables
-all: $(EXECUTABLES)
+.PHONY: DIRS
+all: $(DIRS) $(SDLFALGS) $(TRGS)
 
-# Règle pour créer les fichiers objets à partir des fichiers sources
-$(OBJECTS): obj/%.o : src/%.c $(HEADERS)
-	$(CC) $(CFLAGS) $< -o $@
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+$(BINDIR):
+	mkdir -p $(BINDIR)
 
-# Règles pour créer les fichiers exécutables à partir des fichiers objets
-bin/test_game: obj/game.o obj/sdl.o obj/test_game.o
-	$(CC) $^ $(LDFLAGS) -o $@
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+MAINS    := $(TARGETS:%=$(OBJDIR)/%.o)
+# Liste des fichiers .o sans ceux contenant un main
+OBJS     := $(filter-out $(MAINS),$(OBJECTS))
+rm       = rm -f
 
-bin/test_menu: obj/menu.o obj/sdl.o obj/test_menu.o
-	$(CC) $^ $(LDFLAGS) -o $@
 
-bin/test_main: obj/game.o obj/menu.o obj/sdl.o obj/test_main.o
-	$(CC) $^ $(LDFLAGS) -o $@
+#$(BINDIR)/$(TARGET): $(OBJECTS)
+$(TRGS): $(OBJECTS)
+	@$(LINKER) $(subst $(BINDIR),$(OBJDIR),$@).o $(OBJS) $(LFLAGS) -o $@
+	@echo "Linking complete!"
 
-# Règle pour nettoyer le dossier en supprimant les fichiers objets et exécutables
+$(OBJECTS): $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiled "$<" successfully!"
+
+.PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLES)
+	@$(rm) $(OBJECTS)
+	@echo "Cleanup complete!"
+
+.PHONY: remove
+remove: clean
+	@$(rm) $(BINDIR)/$(TARGETS)
+	@echo "Executable removed!"
