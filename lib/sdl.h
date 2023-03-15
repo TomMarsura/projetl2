@@ -10,7 +10,7 @@
 #define _SDL_H_
 
 
-SDL_bool program_launched = SDL_TRUE;
+extern SDL_bool program_launched;
 
 extern void SDL_ExitWithMessage(const char *message);
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer);

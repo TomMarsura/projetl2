@@ -21,6 +21,12 @@
 
 
 
+ /* Variables globales */
+ int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
+ int score = 0;
+ int cpt_distance = 0;
+
+
 /**
 *@brief Affiche le contenu d'une matrice
 *@author Ayoub Laaribi

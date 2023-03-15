@@ -7,8 +7,8 @@
 #include <SDL2/SDL_video.h>
 
 #include "../lib/sdl.h"
-
-
+#include "../lib/game.h"
+#include "../lib/menu.h"
 
 
 

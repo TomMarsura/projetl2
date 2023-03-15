@@ -6,11 +6,11 @@
 #define MAX_PROFILS 50
 #define SIZE_NAME 20
 
-extern int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
-extern char nomProfils[MAX_PROFILS][SIZE_NAME] = {}; // Noms des 50 profils (20 caractères max)
-extern int numProfils[MAX_PROFILS] = {}; // Numéros des 50 profils
-extern int nbProfils = 0; // Nombre de profils
-extern int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
+ extern int pointsProfils[MAX_PROFILS] ;
+ extern char nomProfils[MAX_PROFILS][SIZE_NAME];
+ extern int numProfils[MAX_PROFILS] ;
+ extern int nbProfils ;
+ extern int nbPartiesProfils[MAX_PROFILS] ;
 
 /*PROTOTYPE FONCTIONS*/
 

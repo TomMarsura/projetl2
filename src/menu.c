@@ -6,6 +6,16 @@
 #include "../lib/game.h"
 #include "../lib/menu.h"
 
+
+
+
+ int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
+ char nomProfils[MAX_PROFILS][SIZE_NAME] = {}; // Noms des 50 profils (20 caractères max)
+ int numProfils[MAX_PROFILS] = {}; // Numéros des 50 profils
+ int nbProfils = 0; // Nombre de profils
+ int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
+
+
 /**
  * @brief Fonction initGame : fonction qui initialise la partie
  * @author Tom Marsura

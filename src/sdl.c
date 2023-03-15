@@ -7,6 +7,10 @@
 
 #include "../lib/sdl.h"
 
+
+
+SDL_bool program_launched = SDL_TRUE ;
+
 /*gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf*/
 
 /*FONCTION SDL_ExitWithMessage*/

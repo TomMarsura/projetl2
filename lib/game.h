@@ -9,9 +9,13 @@
 
 
 /* Variables globales */
- extern int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
- extern int score = 0;
- extern int cpt_distance = 0;
+/* Variables globales */
+extern int route[HAUTEUR][LARGEUR];
+extern int score;
+extern int cpt_distance;
+
+
+
 
 
 /* Prototype des fonctions */
