@@ -140,18 +140,24 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
     TTF_CloseFont(police);
 }
 
+
+
+
+
+
+/*gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf*/
+
+
+
 /*FONCTION LANCEMENT MENU*/
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Cette fonction lance le menu et permet:
                                     - PLAY
-                                        -FACILE
-                                        -MOYEN
-                                        -DIFFICILE
                                     - CHOIX PROFIL
-                                        -SELECTION PROFIL
-                                        -CREATION PROFIL
+                                    - CREATE PRPOFIL
                                     - CLASSEMENT
+                                    - SHOP
                                     - QUIT
 *************************************************************************/
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
@@ -225,6 +231,8 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_ExitWithMessage("Impossible de charger la texture du texte");
     }
 
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
     SDL_Surface *ChooseProfile = TTF_RenderText_Solid(police, "Choose Profile", TextColor);
     if (ChooseProfile == NULL)
     {
@@ -241,7 +249,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
     SDL_FreeSurface(ChooseProfile);
 
-    if (textTexture == NULL)
+    if (textTextureChoose == NULL)
     {
         TTF_CloseFont(police);
         SDL_DestroyTexture(texture);
@@ -249,12 +257,69 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture du texte");
     }
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+   SDL_Surface *Classement = TTF_RenderText_Solid(police, "Classement", TextColor);
+    if (Classement == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistClassement = {90, 210, Classement->w, Classement->h};
+
+    SDL_Texture *textTextureClassement = SDL_CreateTextureFromSurface(renderer, Classement);
+
+    SDL_FreeSurface(Classement);
+
+    if (textTextureClassement == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    } 
+    
+    
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/  
+
+ SDL_Surface *Quit = TTF_RenderText_Solid(police, "Quit", TextColor);
+    if (Quit == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistQuit = {90, 250, Quit->w, Quit->h};
+
+    SDL_Texture *textTextureQuit = SDL_CreateTextureFromSurface(renderer, Quit);
+
+    SDL_FreeSurface(Quit);
+
+    if (textTextureQuit == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    } 
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
     // affichage des texte PLAY, CHOOSE PROFILE QUIT
 
     time = SDL_GetTicks();
     int VisiblePlay = 1;
     int VisibleChoose = 1;
+    int VisibleClassement = 1;
+    int VisibleQuit = 1;
     //choix = 0;
     int position = 0;
     while (program_launched)
@@ -352,7 +417,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
         if (position == 1)
         {
-            SDL_Log("test 1\n");
+         
             unsigned ActualTime = SDL_GetTicks();
 
             if (ActualTime > time + 500)
@@ -371,7 +436,55 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
             SDL_SetTextureAlphaMod(textTextureChoose, alpha);
         }
 
+
+        if (position == 2)
+        {
+         
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleClassement = !VisibleClassement;
+                int alpha = VisibleClassement ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureClassement, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleClassement = 1;
+            int alpha = VisibleClassement ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureClassement, alpha);
+        }
+
+
+
+
+        if (position == 3)
+        {
+         
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleQuit = !VisibleQuit;
+                int alpha = VisibleQuit ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureQuit, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleQuit = 1;
+            int alpha = VisibleQuit ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureQuit, alpha);
+        }
+
         SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderCopy(renderer, textTextureQuit, NULL, &DistQuit);
+        SDL_RenderCopy(renderer, textTextureClassement, NULL, &DistClassement);
         SDL_RenderCopy(renderer, textTextureChoose, NULL, &DistChooseProfile);
         SDL_RenderCopy(renderer, textTexture, NULL, &DistR);
         SDL_RenderPresent(renderer);
