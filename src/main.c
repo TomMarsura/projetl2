@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
                 case SDL_SCANCODE_ESCAPE:
                     program_launched = SDL_FALSE;
                     break;
-                case SDL_SCANCODE_KP_ENTER:
+                case SDL_SCANCODE_RETURN:
                     Lancement_menu(window, renderer);
                     printf("Vous avez appuye sur la touche ENTRER\n");
                     break;

@@ -28,9 +28,107 @@ extern void SDL_ExitWithMessage(const char *message)
     exit(EXIT_FAILURE);
 }
 
-/*FONCTION AFFICHAGE CLASSEMENT*/
+/*FONCTION CREATION DE PROFIL*/
+int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
+    //Effacer l'écran
+    SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+    SDL_RenderClear(renderer);
 
-void attenteClassement(){SDL_Event event;
+    //Charger l'image de fond
+
+    // Afficher la texture de fond
+    //SDL_RenderCopy(renderer, textureFond, NULL, NULL);
+
+    SDL_Surface *text_surface = NULL;
+    SDL_Texture *text_texture = NULL;
+    TTF_Font *font = NULL;
+    SDL_Rect text_rect = {0};
+    SDL_Event event;
+    int quit = 0;
+    char text_input[SIZE_NAME] = {0};
+    int text_input_length = 0;
+
+    // Initialisation de la SDL_ttf
+    if (TTF_Init() != 0) {
+        fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
+        return 1;
+    }
+
+    // Chargement de la police de caractères
+    font = TTF_OpenFont("../fonts/police.TTF", 28);
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+
+    // Boucle principale
+    while (!quit) {
+        // Gestion des événements
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = 1;
+            } else if (event.type == SDL_TEXTINPUT) {
+                if (text_input_length < SIZE_NAME) {
+                    text_input[text_input_length] = event.text.text[0];
+                    text_input_length++;
+                    text_input[text_input_length] = '\0';
+
+                    int font_size = 20;
+                    font = TTF_OpenFont("../fonts/police.TTF", font_size);
+
+                    // Création de la texture du texte
+                    SDL_Color white = {255, 255, 255, 255};
+                    //Création d'un rectangle pour le texte de taille 640x480
+                    text_rect.w = 200;
+                    text_rect.h = 100;
+                    text_surface = TTF_RenderUTF8_Blended_Wrapped(font, text_input, white, text_rect.w);
+                    text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+                }
+            } else if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_BACKSPACE && text_input_length > 0) {
+                    text_input_length--;
+                    text_input[text_input_length] = '\0';
+
+                    int font_size = 20;
+                    font = TTF_OpenFont("../fonts/police.TTF", font_size);
+
+                    // Création de la texture du texte
+                    SDL_Color white = {255, 255, 255, 255};
+                    //Création d'un rectangle pour le texte
+                    text_rect.w = 200;
+                    text_rect.h = 100;  
+                    text_surface = TTF_RenderUTF8_Blended_Wrapped(font, text_input, white, text_rect.w);
+                    text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+                } else if (event.key.keysym.sym == SDLK_RETURN) {
+                    createProfile(text_input);
+                    quit = 1;
+                }
+            }
+        }
+        // Effacement de l'écran
+        SDL_RenderClear(renderer);
+
+        // Affichage du texte
+        if (text_texture != NULL) {
+            SDL_QueryTexture(text_texture, NULL, NULL, &text_rect.w, &text_rect.h);
+            text_rect.x = (640 - text_rect.w) / 2;
+            text_rect.y = (480 - text_rect.h) / 2;
+            SDL_RenderCopy(renderer, text_texture, NULL, &text_rect);
+        }
+
+        // Rafraîchissement de l'écran
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
+    TTF_CloseFont(font);
+    return 0;
+}
+
+
+void attenteClassement(){
+    SDL_Event event;
     int quit = 0;
 
     while (!quit) {
@@ -51,7 +149,8 @@ void attenteClassement(){SDL_Event event;
     }
 }
 
-extern
+/*FONCTION AFFICHAGE CLASSEMENT*/
+
 void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 {
     // Effacer l'écran
@@ -87,6 +186,8 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 
     // Couleur du texte
     SDL_Color couleur = {255, 255, 255 };
+
+    //Réalisation du classement
     classement();
 
     char pointsTab[MAX_PROFILS][SIZE_NAME];
@@ -377,17 +478,21 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                     program_launched = SDL_FALSE;
                     break;
 
-                case SDL_SCANCODE_KP_ENTER:
+                case SDL_SCANCODE_RETURN:
                     if (position == 0) {
                         // appeler la fonction de lancement de jeu
                         printf("Lancement du jeu...\n");
                     } else if (position == 1) {
                         // imprimer un message à l'écran
-                        printf("Choix de profil...\n");
+                        creationProfil(window, renderer);
                     }
                     else if (position == 2){
                         // imprimer un message à l'écran
                         afficherTableau(window, renderer);
+                    }
+                    else if (position == 3){
+                        program_launched = SDL_FALSE;
+
                     }
                     break;
 
@@ -428,7 +533,6 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                     break;
 
                 default:
-                    program_launched = SDL_FALSE;
                     break;
                 }
             }
