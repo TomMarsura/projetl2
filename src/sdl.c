@@ -145,6 +145,245 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 
 
 
+/*FONCTION CHOICE*/
+
+/****************************************************************
+Cette fonction permet a l'utilisateur de choisir ca difficulté
+EASY AVERAGE HARD
+****************************************************************/
+void choice_difficult(SDL_Window *window, SDL_Renderer *renderer){
+
+
+     SDL_Color TextColor;
+    TextColor.r = 30;
+    TextColor.g = 29;
+    TextColor.b = 34;
+    //int choix = 0;
+    int time;
+
+    SDL_Surface *ImageStart = IMG_Load("../img/voiture.gif");
+    if (ImageStart == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger l'image");
+    }
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+
+    if (texture == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture");
+    }
+    /*Verification TTF_init*/
+    if (TTF_Init() == -1)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
+    }
+
+    /*Importation de la police*/
+    TTF_Font *police = TTF_OpenFont("../img/police.TTF", 35);
+    if (police == NULL)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+
+
+    SDL_Surface *TextEasy = TTF_RenderText_Solid(police, "Easy", TextColor);
+    if (TextEasy == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistE = {200, 90, TextEasy->w, TextEasy->h};
+
+    SDL_Texture *textEasyTexture = SDL_CreateTextureFromSurface(renderer, TextEasy);
+
+    SDL_FreeSurface(TextEasy);
+
+    if (textEasyTexture == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
+
+
+
+/*----------------------------------------------------------------------------------------------------*/
+    SDL_Surface *TextAverage = TTF_RenderText_Solid(police, "Average", TextColor);
+    if (TextAverage == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistA = {200, 90, TextAverage->w, TextAverage->h};
+
+    SDL_Texture *textAverageTexture = SDL_CreateTextureFromSurface(renderer, TextAverage);
+
+    SDL_FreeSurface(TextAverage);
+
+    if (textAverageTexture == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
+
+
+/**************************************************************************************/
+    SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
+    if (TextHard == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistH = {200, 90, TextHard->w, TextHard->h};
+
+    SDL_Texture *textHardTexture = SDL_CreateTextureFromSurface(renderer, TextHard);
+
+    SDL_FreeSurface(TextHard);
+
+    if (textHardTexture == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
+
+/*****************************************************************************************************/
+
+
+    int position = 0;
+    time = SDL_GetTicks();
+    int VisibleEasy = 1;
+    int VisibleAverage = 1;
+
+    while (program_launched)
+    {
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                program_launched = SDL_FALSE;
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.scancode)
+                {
+                    case SDL_SCANCODE_ESCAPE:
+                        program_launched = SDL_FALSE;
+                        break;
+                    }
+
+                    case SDL_SCANCODE_RIGHT:
+                        position++;
+                    break;
+
+                    case SDL_SCANCODE_LEFT:
+                        position--;
+                    break;
+            }
+        }
+
+/*-------------------------------------------------------------------------------------------------------------*/
+        
+        if(position == 0){
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleEasy = !VisibleEasy;
+                int alpha = VisibleEasy ? 255 : 0;
+                SDL_SetTextureAlphaMod(textEasyTexture, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleEasy = 1;
+            int alpha = VisibleEasy ? 255 : 0;
+            SDL_SetTextureAlphaMod(textEasyTexture, alpha);
+        }
+
+        if(position == 1){
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleAverage = !VisibleAverage;
+                int alpha = VisibleAverage ? 255 : 0;
+                SDL_SetTextureAlphaMod(textAverageTexture, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleAverage = 1;
+            int alpha = VisibleAverage ? 255 : 0;
+            SDL_SetTextureAlphaMod(textAverageTexture, alpha);
+        }
+
+
+        
+        SDL_RenderCopy(renderer, textHardTexture, NULL, &DistH);
+        SDL_RenderCopy(renderer, textAverageTexture, NULL, &DistA);
+        SDL_RenderCopy(renderer, textEasyTexture, NULL, &DistE);
+
+
+
+        SDL_RenderPresent(renderer);
+    }
+
+
+
+
+
+    TTF_CloseFont(police);
+    TTF_Quit();
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
+    SDL_Quit();
+
+
+
+}
+
+
+
+
 /*gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf*/
 
 
