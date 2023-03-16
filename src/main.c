@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     time = SDL_GetTicks();
     int Visible = 1;
     
-    afficherTableau(window, renderer);
+    
 
     while (program_launched)
     {
