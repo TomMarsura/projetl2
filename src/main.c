@@ -23,9 +23,9 @@ int main(int argc, char *argv[])
 
     SDL_Event event;
     SDL_Color TextColor;
-    TextColor.r = 30;
-    TextColor.g = 29;
-    TextColor.b = 34;
+    TextColor.r = 255;
+    TextColor.g = 255;
+    TextColor.b = 255;
 
     unsigned int time;
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     }
 
     /*Chargement de l'image du menu*/
-    SDL_Surface *ImageStart = IMG_Load("../img/voiture.gif");
+    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
     if (ImageStart == NULL)
     {
         SDL_DestroyRenderer(renderer);
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     }
 
     /*Importation de la police*/
-    TTF_Font *police = TTF_OpenFont("../img/police.TTF", 35);
+    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
     if (police == NULL)
     {
         SDL_DestroyTexture(texture);

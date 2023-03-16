@@ -29,13 +29,8 @@ extern void SDL_ExitWithMessage(const char *message)
 }
 
 /*FONCTION AFFICHAGE CLASSEMENT*/
-/**/
 
-void tabToString (){
-    
-}
-
-void attente(){SDL_Event event;
+void attenteClassement(){SDL_Event event;
     int quit = 0;
 
     while (!quit) {
@@ -63,7 +58,7 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
     SDL_RenderClear(renderer);
 
     // Charger l'image de fond
-    SDL_Surface* surfaceFond = IMG_Load("../img/voiture.gif");
+    SDL_Surface* surfaceFond = IMG_Load("../img/background.jpg");
     if (!surfaceFond)
     {
         printf("Erreur de chargement de l'image de fond : %s\n", SDL_GetError());
@@ -83,7 +78,7 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 
 
     // Charger la police d'écriture
-    TTF_Font* police = TTF_OpenFont("../img/police.TTF", 20);
+    TTF_Font* police = TTF_OpenFont("../fonts/police.TTF", 20);
     if (!police)
     {
         printf("Erreur de chargement de la police d'écriture : %s\n", TTF_GetError());
@@ -91,9 +86,7 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
     }
 
     // Couleur du texte
-    SDL_Color couleur = {65, 255, 50 };
-    
-    readProfiles();
+    SDL_Color couleur = {255, 255, 255 };
     classement();
 
     char pointsTab[MAX_PROFILS][SIZE_NAME];
@@ -169,7 +162,7 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
         // Libérer la police
         TTF_CloseFont(police);
 
-        attente();
+        attenteClassement();
 }
 
 
@@ -199,13 +192,15 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 {
 
     SDL_Color TextColor;
-    TextColor.r = 30;
-    TextColor.g = 29;
-    TextColor.b = 34;
+    TextColor.r = 255;
+    TextColor.g = 255;
+    TextColor.b = 255;
     //int choix = 0;
     int time;
+    
+    readProfiles();
 
-    SDL_Surface *ImageStart = IMG_Load("../img/voiture.gif");
+    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
     if (ImageStart == NULL)
     {
         SDL_DestroyRenderer(renderer);
@@ -232,7 +227,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     }
 
     /*Importation de la police*/
-    TTF_Font *police = TTF_OpenFont("../img/police.TTF", 35);
+    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
     if (police == NULL)
     {
         SDL_DestroyTexture(texture);
@@ -268,7 +263,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
-    SDL_Surface *ChooseProfile = TTF_RenderText_Solid(police, "Choose Profile", TextColor);
+    SDL_Surface* ChooseProfile = TTF_RenderText_Solid(police, "Choose Profile", TextColor);
     if (ChooseProfile == NULL)
     {
         TTF_CloseFont(police);
@@ -280,7 +275,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
     SDL_Rect DistChooseProfile = {90, 150, ChooseProfile->w, ChooseProfile->h};
 
-    SDL_Texture *textTextureChoose = SDL_CreateTextureFromSurface(renderer, ChooseProfile);
+    SDL_Texture* textTextureChoose = SDL_CreateTextureFromSurface(renderer, ChooseProfile);
 
     SDL_FreeSurface(ChooseProfile);
 
@@ -294,7 +289,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     }
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-   SDL_Surface *Classement = TTF_RenderText_Solid(police, "Classement", TextColor);
+   SDL_Surface* Classement = TTF_RenderText_Solid(police, "Classement", TextColor);
     if (Classement == NULL)
     {
         TTF_CloseFont(police);
@@ -392,7 +387,6 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                     }
                     else if (position == 2){
                         // imprimer un message à l'écran
-                        tabToString();
                         afficherTableau(window, renderer);
                     }
                     break;
