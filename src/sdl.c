@@ -31,7 +31,6 @@ extern void SDL_ExitWithMessage(const char *message)
 /*FONCTION CREATION DE PROFIL*/
 int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     //Effacer l'écran
-    SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
     SDL_RenderClear(renderer);
 
     //Charger l'image de fond
@@ -156,25 +155,6 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
     // Effacer l'écran
     SDL_RenderClear(renderer);
 
-    // Charger l'image de fond
-    SDL_Surface* surfaceFond = IMG_Load("../img/background.jpg");
-    if (!surfaceFond)
-    {
-        printf("Erreur de chargement de l'image de fond : %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-
-    // Créer une texture à partir de l'image de fond
-    SDL_Texture* textureFond = SDL_CreateTextureFromSurface(renderer, surfaceFond);
-    if (!textureFond)
-    {
-        printf("Erreur de création de la texture de fond : %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-
-    // Afficher la texture de fond
-    SDL_RenderCopy(renderer, textureFond, NULL, NULL);
-
 
     // Charger la police d'écriture
     TTF_Font* police = TTF_OpenFont("../fonts/police.TTF", 20);
@@ -291,7 +271,6 @@ Cette fonction lance le menu et permet:
 *************************************************************************/
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 {
-
     SDL_Color TextColor;
     TextColor.r = 255;
     TextColor.g = 255;
@@ -301,23 +280,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     
     readProfiles();
 
-    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
-    if (ImageStart == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger l'image");
-    }
-
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
-
-    if (texture == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger la texture");
-    }
+    
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {

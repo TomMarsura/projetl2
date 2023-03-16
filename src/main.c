@@ -48,25 +48,7 @@ int main(int argc, char *argv[])
         SDL_ExitWithMessage("Creation rendu echouée");
     }
 
-    /*Chargement de l'image du menu*/
-    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
-    if (ImageStart == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger l'image");
-    }
-
-    /*Creation de la texture*/
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
-
-    if (texture == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger la texture");
-    }
+    SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
