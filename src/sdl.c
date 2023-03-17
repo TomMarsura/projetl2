@@ -33,10 +33,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     //Effacer l'écran
     SDL_RenderClear(renderer);
 
-    //Charger l'image de fond
-
     // Afficher la texture de fond
-    //SDL_RenderCopy(renderer, textureFond, NULL, NULL);
 
     SDL_Surface *text_surface = NULL;
     SDL_Texture *text_texture = NULL;
@@ -106,6 +103,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
         }
         // Effacement de l'écran
         SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
 
         // Affichage du texte
         if (text_texture != NULL) {
@@ -154,6 +152,25 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 {
     // Effacer l'écran
     SDL_RenderClear(renderer);
+
+    // Charger l'image de fond
+    SDL_Surface* surfaceFond = IMG_Load("../img/background.jpg");
+    if (!surfaceFond)
+    {
+        printf("Erreur de chargement de l'image de fond : %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+
+    // Créer une texture à partir de l'image de fond
+    SDL_Texture* textureFond = SDL_CreateTextureFromSurface(renderer, surfaceFond);
+    if (!textureFond)
+    {
+        printf("Erreur de création de la texture de fond : %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+
+    // Afficher la texture de fond
+    SDL_RenderCopy(renderer, textureFond, NULL, NULL);
 
 
     // Charger la police d'écriture
@@ -280,6 +297,24 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     
     readProfiles();
 
+
+    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
+    if (ImageStart == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger l'image");
+    }
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+
+    if (texture == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture");
+    }
     
     /*Verification TTF_init*/
     if (TTF_Init() == -1)

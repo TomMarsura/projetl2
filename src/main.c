@@ -48,12 +48,29 @@ int main(int argc, char *argv[])
         SDL_ExitWithMessage("Creation rendu echouée");
     }
 
-    SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+    /*Chargement de l'image du menu*/
+    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
+    if (ImageStart == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger l'image");
+    }
+
+    /*Creation de la texture*/
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+
+    if (texture == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture");
+    }
 
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {
-        SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
@@ -63,7 +80,6 @@ int main(int argc, char *argv[])
     TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
     if (police == NULL)
     {
-        SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Importation de la police a echouee");
@@ -73,7 +89,6 @@ int main(int argc, char *argv[])
     if (TextSurface == NULL)
     {
         TTF_CloseFont(police);
-        SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Le texte sur la surface a echouee");
@@ -88,7 +103,6 @@ int main(int argc, char *argv[])
     if (textTexture == NULL)
     {
         TTF_CloseFont(police);
-        SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture du texte");
@@ -142,6 +156,7 @@ int main(int argc, char *argv[])
     }
 
     SDL_DestroyTexture(textTexture);
+    SDL_DestroyTexture(texture);
     TTF_CloseFont(police);
     TTF_Quit();
 
