@@ -4,7 +4,7 @@
 
 
 #define MAX_PROFILS 50
-#define SIZE_NAME 20
+#define SIZE_NAME 12
 
  extern int pointsProfils[MAX_PROFILS] ;
  extern char nomProfils[MAX_PROFILS][SIZE_NAME];

@@ -64,7 +64,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
             if (event.type == SDL_QUIT) {
                 quit = 1;
             } else if (event.type == SDL_TEXTINPUT) {
-                if (text_input_length < SIZE_NAME) {
+                if (text_input_length < SIZE_NAME - 1) {
                     text_input[text_input_length] = event.text.text[0];
                     text_input_length++;
                     text_input[text_input_length] = '\0';
@@ -96,7 +96,22 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
                     text_surface = TTF_RenderUTF8_Blended_Wrapped(font, text_input, white, text_rect.w);
                     text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
                 } else if (event.key.keysym.sym == SDLK_RETURN) {
-                    createProfile(text_input);
+                    //Verification si le nom existe déjà
+                    for (int i = 0; i < nbProfils; i++){
+                        if (strcmp(text_input, nomProfils[i]) == 0){
+                            printf("Ce nom existe déjà, veuillez en choisir un autre");
+                        }
+                    }
+                    //Verification si le nom est vide
+                    if (text_input_length == 0){
+                        printf("Veuillez entrer un nom");
+                    }
+                    else{
+                        createProfile(text_input);
+                        quit = 1;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_ESCAPE) {
                     quit = 1;
                 }
             }
@@ -150,6 +165,7 @@ void attenteClassement(){
 
 void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 {
+    // *--------------------------------------* INITIALISATION *--------------------------------------*
     // Effacer l'écran
     SDL_RenderClear(renderer);
 
@@ -193,9 +209,62 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 
     for (int i = 0; i < nbProfils; i++){
         sprintf(pointsTab[i], "%d", pointsProfils[i]);
-        sprintf(iTab[i], "%d", i);
+        sprintf(iTab[i], "%d", i+1);
         sprintf(partiesTab[i], "%d", nbPartiesProfils[i]);
     }
+
+    // *---------------------------------* NOMS DE COLONNES *---------------------------------*
+
+    //Affichage des noms de colonnes [Place, Nom, Points, Parties]
+    SDL_Surface* placeColonne = TTF_RenderText_Blended(police, "Place", couleur);
+    SDL_Surface* nameColonne = TTF_RenderText_Blended(police, "Nom", couleur);
+    SDL_Surface* pointsColonne = TTF_RenderText_Blended(police, "Points", couleur);
+    SDL_Surface* partiesColonne = TTF_RenderText_Blended(police, "Parties", couleur);
+
+    // Créer une texture à partir de la surface
+    SDL_Texture* texturePlaceColonne = SDL_CreateTextureFromSurface(renderer, placeColonne);
+    SDL_Texture* textureNomColonne = SDL_CreateTextureFromSurface(renderer, nameColonne);
+    SDL_Texture* texturePointsColonne = SDL_CreateTextureFromSurface(renderer, pointsColonne);
+    SDL_Texture* texturePartiesColonne = SDL_CreateTextureFromSurface(renderer, partiesColonne);
+
+    // Créer un rectangle pour la texture
+    SDL_Rect rectPlaceColonne = { 0.65 * SCREEN_WIDTH / 4 - placeColonne->w, 20, placeColonne->w, placeColonne->h };
+    SDL_Rect rectNomColonne = { 1.5 * SCREEN_WIDTH / 4 - nameColonne->w, 20, nameColonne->w, nameColonne->h };
+    SDL_Rect rectPointsColonne = { 2.75 * SCREEN_WIDTH / 4 - pointsColonne->w, 20, pointsColonne->w, pointsColonne->h };
+    SDL_Rect rectPartiesColonne = { 3.75 * SCREEN_WIDTH / 4 - partiesColonne->w, 20, partiesColonne->w, partiesColonne->h };
+
+    // Afficher la texture
+    SDL_RenderCopy(renderer, texturePlaceColonne, NULL, &rectPlaceColonne);
+    SDL_RenderCopy(renderer, textureNomColonne, NULL, &rectNomColonne);
+    SDL_RenderCopy(renderer, texturePointsColonne, NULL, &rectPointsColonne);
+    SDL_RenderCopy(renderer, texturePartiesColonne, NULL, &rectPartiesColonne);
+
+    // *---------------------------------* LIGNES DE SEPARATION *---------------------------------*
+    SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255); // Couleur des lignes de séparation
+    //Posisions des lignes de séparation
+    int x1 = 0.75 * SCREEN_WIDTH / 4;
+    int x2 = 2 * SCREEN_WIDTH / 4;
+    int x3 = 3 * SCREEN_WIDTH / 4;
+    int x4 = 4 * SCREEN_WIDTH / 4;
+    int y1 = 10;
+    int y2 = 50 + 30 * nbProfils;
+    int epaisseur = 5;
+
+    //Création des lignes de séparation
+    SDL_Rect line1 = { x1, y1, epaisseur, y2 - y1 };
+    SDL_Rect line2 = { x2, y1, epaisseur, y2 - y1 };
+    SDL_Rect line3 = { x3, y1, epaisseur, y2 - y1 };
+    SDL_Rect line4 = { x4, y1, epaisseur, y2 - y1 };
+
+    //Affichage des lignes de séparation
+    SDL_RenderFillRect(renderer, &line1);
+    SDL_RenderFillRect(renderer, &line2);
+    SDL_RenderFillRect(renderer, &line3);
+    SDL_RenderFillRect(renderer, &line4);
+
+
+    // *---------------------------------* BOUCLE D'AFFICHAGE *---------------------------------*
+    //Affichage des profils
 
     for (int i = 0; i < nbProfils; i++)
         {
@@ -229,9 +298,9 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
                 exit(EXIT_FAILURE);
             }
             
-            SDL_Rect rectI = { 0.5 * SCREEN_WIDTH / 4 - place->w, 50 + i * 30, place->w, place->h };
-            SDL_Rect rectName = {2 * SCREEN_WIDTH / 4 - name->w, 50 + i * 30, name->w, name->h };
-            SDL_Rect rectPoints = { 2.5 * SCREEN_WIDTH / 4 - points->w, 50 + i * 30, points->w, points->h };
+            SDL_Rect rectI = { 0.65 * SCREEN_WIDTH / 4 - place->w, 50 + i * 30, place->w, place->h };
+            SDL_Rect rectName = {0.90 * SCREEN_WIDTH / 4, 50 + i * 30, name->w, name->h};
+            SDL_Rect rectPoints = { 2.60 * SCREEN_WIDTH / 4 - points->w, 50 + i * 30, points->w, points->h };
             SDL_Rect rectParties = { 3.5 * SCREEN_WIDTH / 4 - parties->w, 50 + i * 30, parties->w, parties->h };
 
             // Afficher la texture
@@ -254,9 +323,20 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
         // Mettre à jour l'écran
         SDL_RenderPresent(renderer);
 
-        // Libérer la surface et la texture de fond
+        // Libération des surfaces
         SDL_FreeSurface(surfaceFond);
+        SDL_FreeSurface(placeColonne);
+        SDL_FreeSurface(nameColonne);
+        SDL_FreeSurface(pointsColonne);
+        SDL_FreeSurface(partiesColonne);
+
+        //Destruction des textures
         SDL_DestroyTexture(textureFond);
+        SDL_DestroyTexture(texturePlaceColonne);
+        SDL_DestroyTexture(textureNomColonne);
+        SDL_DestroyTexture(texturePointsColonne);
+        SDL_DestroyTexture(texturePartiesColonne);
+
         // Libérer la police
         TTF_CloseFont(police);
 
@@ -498,35 +578,35 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                 // BAS
                 case SDL_SCANCODE_DOWN:
                     position = position + 1;
+                    if (position > 3){
+                        position = 0;
+                    }
                     printf("Vous avez appuye sur la touche BAS\n%d\n", position);
-                    // return position;
 
                     break;
                 case SDL_SCANCODE_S:
                     position = position + 1;
+                    if (position > 3){
+                        position = 0;
+                    }
                     printf("Vous avez appuye sur la touche BAS\n%d\n", position);
-
-                    // return position;
                     break;
 
                 // HAUT
                 case SDL_SCANCODE_Z:
-                    position = position + 1;
-                    printf("Vous avez appuye sur la touche BAS\n%d\n", position);
-                    // eturn position;
+                    position = position - 1;
+                    if (position < 0){
+                        position = 3;
+                    }
+                    printf("Vous avez appuye sur la touche HAUT\n%d\n", position);
                     break;
-                case SDL_SCANCODE_UP:
-                    if (position > 0)
-                    {
-                        position = position - 1;
-                        printf("Vous avez appuye sur la touche HAUT\n%d\n", position);
-                        // return position;
-                    }
-                    else
-                    {
 
-                        position = 0;
+                case SDL_SCANCODE_UP:
+                    position = position - 1;
+                    if (position < 0){
+                        position = 3;
                     }
+                    printf("Vous avez appuye sur la touche HAUT\n%d\n", position);
 
                     break;
 

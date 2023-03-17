@@ -62,20 +62,11 @@ extern void readProfiles(){
             nbProfils++;
         }
     }
-}
 
-extern void createProfile(){
-    char * nomProfil = malloc(sizeof(char) * 20);
-
-    printf("Entrez le nom du nouveau profil : ");
-    scanf("%20s", nomProfil);
-
-    numProfils[nbProfils] = nbProfils;
-    pointsProfils[nbProfils] = 0;
-    strcpy(nomProfils[nbProfils], nomProfil);
-    nbPartiesProfils[nbProfils] = 0;
-
-    nbProfils++;
+    //Printf des noms
+    for(int i = 0; i < nbProfils; i++){
+        printf("%s", nomProfils[i]);
+    }
 }
 
 /**
@@ -90,6 +81,22 @@ extern void saveGame(){
             fprintf(fichier, "%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
         }
     }
+}
+
+/**
+ * @brief Fonction createProfile : Créer un profil et l'ajoute dans le tableau des profils
+ * @author Tom Marsura
+ * @return void
+*/
+extern void createProfile(char nomProfil[SIZE_NAME]){
+    numProfils[nbProfils] = nbProfils;
+    pointsProfils[nbProfils] = 0;
+    strcpy(nomProfils[nbProfils], nomProfil);
+    nbPartiesProfils[nbProfils] = 0;
+
+    nbProfils++;
+
+    saveGame(); // Sauvegarde les profils dans le fichier save.csv
 }
 
 /**
@@ -199,72 +206,3 @@ extern void menu(){
             break;
     }
 }
-
-
-/**
- * @brief Fonction main : fonction principale du programme, permet de tester les fonctions du menu.c
- * @author Tom Marsura
- * @return int
-*/
-
-//
-//int main(){
-//    initGame();
-//    int i, choix = 0;
-//
-//    do{
-//        printf("MENU DEBUG\n 1 - Affichage sauvegardes / Classement\n 2 - Affichage menu\n 3 - Création profil\n");
-//        scanf("%d", &choix);
-//    }while(choix < 1 || choix > 3);
-//
-//    if(choix == 1){
-//        /* Affichage du fichier save */
-//        printf("Affichage save : \n");
-//        readProfiles();
-//        for(i = 0; i < nbProfils; i++){
-//            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-//        }
-//
-//        /* Affichage des tableaux de données */
-//        printf("Affichage des tableaux de données : \n");
-//        for(i = 0; i < nbProfils; i++){
-//            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-//        }
-//
-//        /* Test de sauvegarde */
-//        printf("Test de sauvegarde : \n");
-//        saveGame();
-//        readProfiles();
-//        for(i = 0; i < nbProfils; i++){
-//            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-//        }
-//
-//        /* Test de tri de tableau */
-//        printf("Test de tri de tableau : \n");
-//        classement();
-//        affichage_classement();
-//    }
-//    else if(choix == 2){
-//        readProfiles();
-//        menu();
-//    }
-//    else if(choix == 3){
-//        /* Affichage des tableaux de données */
-//        printf("Affichage des tableaux de données AVANT : \n");
-//        for(i = 0; i < nbProfils; i++){
-//            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-//        }
-//        readProfiles();
-//        createProfile();
-//        saveGame();
-//        
-//        /* Affichage des tableaux de données */
-//        printf("Affichage des tableaux de données APRES : \n");
-//        for(i = 0; i < nbProfils; i++){
-//            printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-//        }
-//    }
-//    else{
-//        printf("Erreur de saisie\n");
-//    }
-//}
