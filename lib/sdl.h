@@ -12,6 +12,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+typedef enum bool_s {FAUX, VRAI} bool_t;
 
 extern SDL_bool program_launched;
 
