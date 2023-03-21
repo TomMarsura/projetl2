@@ -126,7 +126,6 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
                     printf("\n%d\n", text_input_length);
                     // Afficher l'erreur de nom vide si nécessaire
                     if (text_input_length == 0 && nomExist == FAUX) {
-                        textureErreurActuelle = NULL;
                         textureErreurActuelle = textureErreurNomVide;
                     }
 
@@ -138,7 +137,6 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
 
                     // Afficher l'erreur de nom existant si nécessaire
                     if (nomExist == VRAI) {
-                        textureErreurActuelle = NULL;
                         textureErreurActuelle = textureErreurNomExist;
                         nomExist = FAUX;
                     }
