@@ -11,10 +11,7 @@
 /*#include "../lib/menu.h"*/
 
 /* Include pour la fonction deplacement */
-#include <termios.h>
-#include <unistd.h>
-#include <fcntl.h>
-
+#include "../lib/game.h"
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -24,17 +21,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
 
-#define HAUTEUR 5
-#define LARGEUR 3
-
-#define VITESSE_MAX 0.1
-
-
-
- /* Variables globales */
- int route[HAUTEUR][LARGEUR] = {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
- int score = 0;
- int cpt_distance = 0;
 
 
 /**
@@ -47,9 +33,9 @@ extern void affiche_mat(){
   /*initialisation*/
     int i,j;
 
-    for (i = 0;i< 5;i++){
+    for (i = 0;i< HAUTEUR;i++){
 
-        for(j = 0;j<3;j++){
+        for(j = 0;j<LARGEUR;j++){
             printf("%d",route[i][j]);
         }
         printf("\n");
@@ -81,17 +67,39 @@ extern void obstacle(){
     int nb_obstacle_ligne;
     nb_obstacle_ligne = rand() % 100; /*genere un pourcentage pour décider si on ajoute 1 ou 2 obsatcles à la ligne*/
 
+    // Vérifier que la position1 et position2 ne sont pas sur la même colonne pour éviter les obstacles superposés
+    while (position1 == position2) {
+        position2 = rand() % LARGEUR;
+    }
 
     if (apparition > 50){
-      if(nb_obstacle_ligne>33){
-        route[0][position1] = 2;
-      }
-      else{
-        route[0][position1] = 2;
-        route[0][position2] = 2;
-      }
+        if(nb_obstacle_ligne>33){
+            if (route[1][position1] != 1 && route[1][position2] != 1) {
+                route[0][position1] = 2;
+            }
+            else {
+                route[0][position2] = 2;
+            }
+        }
+        else{
+            if (route[1][position1] != 1) {
+                route[0][position1] = 2;
+            }
+            else if (route[1][position2] != 1) {
+                route[0][position2] = 2;
+            }
+            else {
+                // S'il y a un obstacle sur les deux colonnes, on ajoute un obstacle sur une colonne différente
+                int position3 = rand() % LARGEUR;
+                while (position3 == position1 || position3 == position2) {
+                    position3 = rand() % LARGEUR;
+                }
+                route[0][position3] = 2;
+            }
+        }
     }
 }
+
 
 
 /**
@@ -196,9 +204,6 @@ extern void decalage(){
     route[0][j] = 0;
   }
 
-  for (j = 0 ; j < LARGEUR ; j++){
-    route[HAUTEUR-1][j] = 0;
-  }
 
   /* On met la voiture a lligne du dessus */
   route[x][y] = 1;
@@ -214,7 +219,7 @@ extern void easyGame(int profil){
 
   affiche_mat();
 
-  float vitesse = 1.50;
+  int vitesse = 1;
 
   while(1){
 
@@ -272,43 +277,62 @@ int main(int argc, char* argv[]) {
 
     SDL_Event event;
     int quit = 1;
+    int crash_cote = 0;
+    int position_voiture = 1;
 
-    float vitesse = 1.50;
+    float vitesse = 0.1;
 
     affiche_mat();
 
     while (quit) {
 
-        if (crash() == 1){
-          quit = 0;
-          printf("CRASH\n");
-          break;
-        }
+      if (crash() == 1){
+        quit = 0;
+        printf("CRASH\n");
+        break;
+      }
 
-        else{
+      if (crash_cote == 1){
+        quit = 0;
+        printf("CRASH COTE\n");
+        break;
+      }
 
-          time_t start_time = time(NULL);
+      else{
 
-          while ((time(NULL) - start_time) < 1) {
+        time_t start_time = time(NULL);
 
-            while (SDL_PollEvent(&event)) {
+        while ((time(NULL) - start_time) < 0.5) {
 
-              if (event.type == SDL_QUIT) {
-                quit = 0;
-              }
+          while (SDL_PollEvent(&event)) {
 
-              if (event.type == SDL_KEYDOWN) {
-                switch (event.key.keysym.sym) {
-                  case SDLK_RIGHT:
+            if (event.type == SDL_QUIT) {
+              quit = 0;
+            }
+
+            if (event.type == SDL_KEYDOWN) {
+              switch (event.key.keysym.sym) {
+
+                case SDLK_RIGHT:
+                    position_voiture++;
+
+                    if (route[HAUTEUR-1][position_voiture] == 2){
+                    crash_cote = 1;
+                    }
                     deplacement(1);
                     break;
 
-                  case SDLK_LEFT:
-                    deplacement(2);
-                    break;
+                    case SDLK_LEFT:
+                      position_voiture--;
 
-                  default:
-                    break;
+                      if (route[HAUTEUR-1][position_voiture] == 2){
+                        crash_cote = 1;
+                      }
+                      deplacement(2);
+                      break;
+
+                      default:
+                        break;
                 }
               }
             }
@@ -326,22 +350,20 @@ int main(int argc, char* argv[]) {
                 }
                 if (route[i][j] == 2) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100; // Position verticale de la case
+                    rectangle.y = startY + i * 150; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
                 }
+              }
             }
-          }
-        /* Afficher le rendu à l'écran */
-          SDL_RenderPresent(renderer);
-      }
+            SDL_RenderPresent(renderer);
+        }
+
       decalage();
       obstacle();
-
+      vitesse = vitesse - 0.05;
 
     }
   }
-
-
 
     // Libérer la mémoire allouée pour l'image et la fenêtre SDL
     SDL_FreeSurface(car);
