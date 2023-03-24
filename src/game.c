@@ -248,13 +248,16 @@ int main(int argc, char* argv[]) {
 
     // Créer une fenêtre SDL
     SDL_Window* window = SDL_CreateWindow("GAME CAR", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, 0);
+    SDL_Renderer * renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
 
     SDL_Surface* car = IMG_Load("../img/car.png");
-    SDL_Renderer * renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
-    SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer,car);
+    SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
+
+    SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
+    SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
     SDL_Surface* fond = IMG_Load("../img/route.png");
-    SDL_Texture* textureRoute = SDL_CreateTextureFromSurface(renderer,fond);
+    SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
     SDL_Rect rectangle;
 
@@ -264,7 +267,7 @@ int main(int argc, char* argv[]) {
     int startX = (800 - LARGEUR * 135) / 2;
     int startY = (800 - HAUTEUR * 100) / 2;
 
-    SDL_RenderCopy(renderer, textureRoute, NULL, NULL); // Dessiner l'image de fond
+    SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
 
     SDL_Event event;
@@ -274,52 +277,80 @@ int main(int argc, char* argv[]) {
 
     affiche_mat();
 
-
     while (quit) {
-      while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+
+        if (crash() == 1){
           quit = 0;
+          printf("CRASH\n");
+          break;
         }
-        if (event.type == SDL_KEYDOWN) {
-          switch (event.key.keysym.sym) {
-            case SDLK_RIGHT:
-              deplacement(1);
-              break;
 
-            case SDLK_LEFT:
-              deplacement(2);
-              break;
+        else{
 
-            default:
-              break;
-          }
-        }
-      }
+          time_t start_time = time(NULL);
 
-    SDL_RenderCopy(renderer, textureRoute, NULL, NULL);
+          while ((time(NULL) - start_time) < 1) {
 
+            while (SDL_PollEvent(&event)) {
 
-    /* Dessiner l'image de la voiture pour chaque case de la matrice qui contient un 1 */
-    for (int i = 0; i < HAUTEUR; i++) {
-        for (int j = 0; j < LARGEUR; j++) {
-            if (route[i][j] == 1) {
-                rectangle.x = startX + j * 160; // Position horizontale de la case
-                rectangle.y = startY + i * 100; // Position verticale de la case
-                SDL_RenderCopy(renderer, texture, NULL, &rectangle);
+              if (event.type == SDL_QUIT) {
+                quit = 0;
+              }
+
+              if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                  case SDLK_RIGHT:
+                    deplacement(1);
+                    break;
+
+                  case SDLK_LEFT:
+                    deplacement(2);
+                    break;
+
+                  default:
+                    break;
+                }
+              }
             }
-        }
+
+            SDL_RenderCopy(renderer, texture_route, NULL, NULL);
+
+
+            /* Dessiner l'image de la voiture pour chaque case de la matrice qui contient un 1 */
+            for (int i = 0; i < HAUTEUR; i++) {
+              for (int j = 0; j < LARGEUR; j++) {
+                if (route[i][j] == 1) {
+                    rectangle.x = startX + j * 160; // Position horizontale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
+                    SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
+                }
+                if (route[i][j] == 2) {
+                    rectangle.x = startX + j * 160; // Position horizontale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
+                    SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
+                }
+            }
+          }
+        /* Afficher le rendu à l'écran */
+          SDL_RenderPresent(renderer);
+      }
+      decalage();
+      obstacle();
+
+
     }
-    /* Afficher le rendu à l'écran */
-    SDL_RenderPresent(renderer);
   }
+
 
 
     // Libérer la mémoire allouée pour l'image et la fenêtre SDL
     SDL_FreeSurface(car);
     SDL_FreeSurface(fond);
+    SDL_FreeSurface(img_obstacle);
 
-    SDL_DestroyTexture(texture);
-    SDL_DestroyTexture(textureRoute);
+    SDL_DestroyTexture(texture_voiture);
+    SDL_DestroyTexture(texture_route);
+    SDL_DestroyTexture(texture_obstacle);
 
     SDL_DestroyWindow(window);
 
@@ -328,6 +359,7 @@ int main(int argc, char* argv[]) {
     SDL_Quit();
 
     return 0;
+
 }
 
 
