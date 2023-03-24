@@ -10,9 +10,9 @@
 
 /* Variables globales */
 /* Variables globales */
-extern int route[HAUTEUR][LARGEUR];
-extern int score;
-extern int cpt_distance;
+int route[HAUTEUR][LARGEUR]= {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
+int score;
+int cpt_distance;
 
 
 
@@ -23,8 +23,7 @@ extern void affichae_mat();
 extern void obstacle();
 extern int calcul_score();
 extern int crash();
-extern int clavier();
-extern void deplacement(float vitesse);
+extern void deplacement(int touche);
 extern void decalage();
 extern void easyGame(int profil);
 
