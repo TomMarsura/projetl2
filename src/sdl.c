@@ -1564,8 +1564,8 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
                 case SDL_SCANCODE_RETURN:
                     if (position == 0) {
-                        //choice_difficult(window,renderer);
-                        CrashMessage(window,renderer);
+                        choice_difficult(window,renderer);
+                        //CrashMessage(window,renderer);
                         // appeler la fonction de lancement de jeu
                     } else if (position == 1) {
                         choice_profile(window,renderer);
