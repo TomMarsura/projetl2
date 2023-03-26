@@ -20,5 +20,5 @@ extern void SDL_ExitWithMessage(const char *message);
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer);
 extern void afficherTableau(SDL_Window *window, SDL_Renderer *renderer);
 void choice_profile(SDL_Window* window, SDL_Renderer* renderer);
-
+void CrashMessage(SDL_Window* window, SDL_Renderer* renderer);
 #endif

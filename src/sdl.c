@@ -72,8 +72,18 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
     }
 
     /*Importation de la police*/
-    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
+    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 55);
     if (police == NULL)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+
+
+    TTF_Font *policeChoix = TTF_OpenFont("../fonts/police.TTF", 35);
+    if (policeChoix == NULL)
     {
         SDL_DestroyTexture(texture);
         SDL_DestroyRenderer(renderer);
@@ -84,7 +94,7 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
     /*Initialisation d'un rectangle*/
     SDL_Rect rectangle = {100, 100, 50, 50};
 
-
+/*****************************************************************************************************************/
     /*Message*/
     SDL_Surface *Message_crash = TTF_RenderText_Solid(police, "Game Over", TextColor);
     if (Message_crash == NULL)
@@ -96,7 +106,7 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Le texte sur la surface a echouee");
     }
 
-        SDL_Rect DistMessage = {90, 350, Message_crash->w, Message_crash->h};
+        SDL_Rect DistMessage = {190, 30, Message_crash->w, Message_crash->h};
 
         SDL_Texture *textTextureMessage = SDL_CreateTextureFromSurface(renderer, Message_crash);
 
@@ -110,10 +120,70 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
             SDL_DestroyWindow(window);
             SDL_ExitWithMessage("Impossible de charger la texture du texte");
         }
+/*****************************************************************************************************************/
+SDL_Surface *Rejouer = TTF_RenderText_Solid(policeChoix, "Rejouer", TextColor);
+    if (Rejouer == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
 
+        SDL_Rect DistRejouer = {70, 470, Rejouer->w, Rejouer->h};
+
+        SDL_Texture *textTextureRejouer = SDL_CreateTextureFromSurface(renderer, Rejouer);
+
+        SDL_FreeSurface(Rejouer);
+
+        if (textTextureRejouer == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+
+
+/*****************************************************************************************************************/
+SDL_Surface *Quit = TTF_RenderText_Solid(policeChoix, "Quitter", TextColor);
+    if (Quit == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistQuit = {510, 470, Quit->w, Quit->h};
+
+        SDL_Texture *textTextureQuit = SDL_CreateTextureFromSurface(renderer, Quit);
+
+        SDL_FreeSurface(Quit);
+
+        if (textTextureQuit == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+
+
+
+
+
+/*****************************************************************************************************************/
         int time = SDL_GetTicks();
-        int valide = 0;
-        int valideVisible = 1;
+        int position = 0;
+        int VisibleRejouer = 1;
+        int VisibleQuit = 1;
 
         while(program_launched){
             SDL_Event event;
@@ -133,20 +203,34 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
                             break;
 
                             case SDLK_RETURN:
-                                if(valide == 0){
+                                if(position == 0){
                                     /*quitter*/
-                                    Lancement_menu(window,renderer);
+                                    printf("REJOUER\n");
+                                }else if( position == 1){
+                                    printf("QUITTER\n");
+                                }
+                            break;
+
+                            case SDLK_RIGHT:
+                                position++;
+
+                                if(position > 1){
+                                    position = 0;
+                                }
+                            break;
+                            case SDLK_LEFT:
+                                position--;
+
+                                if(position < 0){
+                                    position = 1;
                                 }
                             break;
                         }
                     
-                    
-                    
-                    break;
                 }
             }
 
-            if ( valide == 0)
+            if ( position == 0)
         {
 
             unsigned ActualTime = SDL_GetTicks();
@@ -154,22 +238,49 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
             if (ActualTime > time + 500)
             {
                 time = ActualTime;
-                valideVisible = !valideVisible;
-                int alpha = valideVisible ? 255 : 0;
-                SDL_SetTextureAlphaMod(textTextureMessage, alpha);
+                VisibleRejouer = !VisibleRejouer;
+                int alpha = VisibleRejouer ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureRejouer, alpha);
             }
         }
         else
         {
 
-            valideVisible = 1;
-            int alpha = valideVisible ? 255 : 0;
-            SDL_SetTextureAlphaMod(textTextureMessage, alpha);
+            VisibleRejouer = 1;
+            int alpha = VisibleRejouer ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureRejouer, alpha);
         }
 
 
 
 
+        if ( position == 1)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleQuit = !VisibleQuit;
+                int alpha = VisibleQuit ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureQuit, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleQuit = 1;
+            int alpha = VisibleQuit ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureQuit, alpha);
+        }
+
+
+
+
+        SDL_RenderCopy(renderer,texture,NULL,NULL);
+        SDL_RenderCopy(renderer, textTextureQuit, NULL, &DistQuit);
+        SDL_RenderCopy(renderer, textTextureRejouer, NULL, &DistRejouer);
         SDL_RenderCopy(renderer, textTextureMessage, NULL, &DistMessage);
         SDL_RenderPresent(renderer);  
         }
@@ -1424,7 +1535,8 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
                 case SDL_SCANCODE_RETURN:
                     if (position == 0) {
-                        choice_difficult(window,renderer);
+                        //choice_difficult(window,renderer);
+                        CrashMessage(window,renderer);
                         // appeler la fonction de lancement de jeu
                     } else if (position == 1) {
                         choice_profile(window,renderer);
