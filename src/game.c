@@ -26,81 +26,149 @@
 /**
 *@brief Affiche le contenu d'une matrice
 *@author Ayoub Laaribi
-*@param[in] mat matrice de type int
 *@return void
 */
-
-
 extern void affiche_mat(){
   /*initialisation*/
-    int i,j;
+  int i,j;
 
-    for (i = 0;i< HAUTEUR;i++){
-
-        for(j = 0;j<LARGEUR;j++){
-            printf("%d",route[i][j]);
-        }
-        printf("\n");
+  for (i=0;i< HAUTEUR;i++){
+    for(j=0;j<LARGEUR;j++){
+      printf("%d",route[i][j]);
     }
+    printf("\n");
+  }
 
-      printf("\n");
-      printf("\n");
-      printf("\n");
-
+  printf("\n");
+  printf("\n");
+  printf("\n");
 }
 
 
 /**
+*@brief Retoune le nombre d'obsatcle sur de l'avant dernière ligne
+*@author Thibaut Gasnier
+*@return int
+*/
+extern int nb_obstacle(){
+
+  int nb = 0;
+  int i;
+
+  for (i=0;i< LARGEUR-1 ;i++){
+    if (route[1][i] == 2){
+      nb++;
+    }
+  }
+
+  return nb;
+}
+
+/**
+*@brief Retoune la postion la case qui ne contient pas d'obstacle
+*@author Thibaut Gasnier
+*@return int
+*/
+extern int position_libre(){
+
+  int pos;
+  int i;
+
+  for (i=0;i< LARGEUR-1 ;i++){
+    if (route[1][i] != 2){
+      pos = i;
+    }
+  }
+
+  return pos;
+}
+
+
+
+/**
   affichae_mat();
- * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles
+ * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
  * @author Ayoub Laaribi / Thibaut Gasnier
  * @return void
 */
-extern void obstacle(){
+extern void obstacle_hard(){
 
-    int position1;
-    position1 = rand() % LARGEUR; /*genenere aléatoirement la position du première obstacle*/
+  int position1;
+  position1 = rand() % LARGEUR; /*genenere aléatoirement la position du première obstacle*/
 
-    int position2;
-    position2 = rand() % LARGEUR; /*genenere aléatoirement la position du deuxième obstacle*/
+  int position2;
+  position2 = rand() % LARGEUR; /*genenere aléatoirement la position du deuxième obstacle*/
 
-    int apparition;
-    apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
+  int apparition;
+  apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
-    int nb_obstacle_ligne;
-    nb_obstacle_ligne = rand() % 100; /*genere un pourcentage pour décider si on ajoute 1 ou 2 obsatcles à la ligne*/
+  int nb_obstacle_ligne;
+  nb_obstacle_ligne = rand() % 100; /*genere un pourcentage pour décider si on ajoute 1 ou 2 obsatcles à la ligne*/
 
-    // Vérifier que la position1 et position2 ne sont pas sur la même colonne pour éviter les obstacles superposés
-    while (position1 == position2) {
-        position2 = rand() % LARGEUR;
+  /* Vérifier que la position1 et position2 ne sont pas sur la même colonne pour éviter les obstacles superposés */
+  while (position1 == position2) {
+    position2 = rand() % LARGEUR;
+  }
+
+  if (apparition > 50){
+
+    /* On a un seul obbstacle a ajouter*/
+    if(nb_obstacle_ligne>33){
+
+      if (nb_obstacle() < 2){
+        route[0][position1] = 2;
+      }
+
+      else if (nb_obstacle() == 2){
+        if (position1 != position_libre()){
+          route[0][position1] = 2;
+        }
+      }
     }
 
-    if (apparition > 50){
-        if(nb_obstacle_ligne>33){
-            if (route[1][position1] != 1 && route[1][position2] != 1) {
-                route[0][position1] = 2;
-            }
-            else {
-                route[0][position2] = 2;
-            }
+    else{
+
+      if (nb_obstacle() == 0){
+          route[0][position1] = 2;
+          route[0][position2] = 2;
+      }
+
+      else if (nb_obstacle() == 1){
+        if ((position1 || position2) == position_libre()){
+          route[0][position1] = 2;
+          route[0][position2] = 2;
         }
-        else{
-            if (route[1][position1] != 1) {
-                route[0][position1] = 2;
-            }
-            else if (route[1][position2] != 1) {
-                route[0][position2] = 2;
-            }
-            else {
-                // S'il y a un obstacle sur les deux colonnes, on ajoute un obstacle sur une colonne différente
-                int position3 = rand() % LARGEUR;
-                while (position3 == position1 || position3 == position2) {
-                    position3 = rand() % LARGEUR;
-                }
-                route[0][position3] = 2;
-            }
+      }
+
+      else if (nb_obstacle() == 2){
+        if ((position1 && position2) != position_libre()){
+          route[0][position1] = 2;
+          route[0][position2] = 2;
         }
+      }
     }
+  }
+}
+
+
+
+/**
+  affichae_mat();
+ * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour easyGame.
+ * @author Ayoub Laaribi / Thibaut Gasnier
+ * @return void
+*/
+extern void obstacle_easy(){
+
+  int position;
+  position = rand() % LARGEUR; /*genenere aléatoirement la position de l'obstacle*/
+
+  int apparition;
+  apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
+
+  if (apparition > 50){
+    route[0][position] = 2;
+  }
 }
 
 
@@ -172,6 +240,7 @@ extern void deplacement(int touche){
 }
 
 
+
 /**
  * @brief Fonction decalage : Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas
  * @author Thibaut Gasnier
@@ -180,11 +249,11 @@ extern void deplacement(int touche){
 extern void decalage(){
 
   printf("DECALAGE \n");
+
   int i;
   int j;
   int x;
   int y;
-
 
   for (i=0 ; i<LARGEUR ; i++){
     /* Trouver la postion de la voiture sur la ligne */
@@ -207,11 +276,11 @@ extern void decalage(){
     route[0][j] = 0;
   }
 
-
   /* On met la voiture a lligne du dessus */
   route[x][y] = 1;
   affiche_mat();
 }
+
 
 
 /**
@@ -242,7 +311,7 @@ extern void easyGame(int profil){
 
   SDL_Rect rectangle;
 
-  rectangle.w = rectangle.h = 100; // Taille de chaque case de la matrice
+  rectangle.w = rectangle.h = 90; // Taille de chaque case de la matrice
 
   // Calculer la position de départ du rectangle pour centrer la matrice
   int startX = (800 - LARGEUR * 135) / 2;
@@ -290,38 +359,40 @@ extern void easyGame(int profil){
             switch (event.key.keysym.sym) {
 
               case SDLK_RIGHT:
+                if (crash_cote == 0){
                   position_voiture++;
 
                   if (route[HAUTEUR-1][position_voiture] == 2){
                     crash_cote = 1;
-                    printf("CRASH COTE\n");
-                    break;
-
                   }
                   printf(" Crash cote = %d\n",crash_cote);
-                  deplacement(1);
+                  if (crash_cote == 0){
+                    deplacement(1);
+                  }
                   break;
+                }
 
-                  case SDLK_LEFT:
-                    position_voiture--;
+              case SDLK_LEFT:
+                if (crash_cote == 0){
+                  position_voiture--;
 
-                    if (route[HAUTEUR-1][position_voiture] == 2){
-                      crash_cote = 1;
-                      printf("CRASH COTE\n");
-                      break;
-                    }
+                  if (route[HAUTEUR-1][position_voiture] == 2){
+                    crash_cote = 1;
+                  }
+                  printf(" Crash cote = %d\n",crash_cote);
+                  if (crash_cote == 0){
                     deplacement(2);
-                    printf(" Crash cote = %d\n",crash_cote);
-                    break;
+                  }
+                  break;
+                }
 
-                  default:
-                    break;
+              default:
+                break;
               }
             }
           }
 
           SDL_RenderCopy(renderer, texture_route, NULL, NULL);
-
 
           /* Dessiner l'image de la voiture pour chaque case de la matrice qui contient un 1 */
           for (int i = 0; i < HAUTEUR; i++) {
@@ -333,7 +404,7 @@ extern void easyGame(int profil){
               }
               if (route[i][j] == 2) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 150; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
             }
@@ -341,16 +412,16 @@ extern void easyGame(int profil){
           SDL_RenderPresent(renderer);
       }
 
-    decalage();
-    obstacle();
+      decalage();
+      obstacle_easy();
 
-    if (vitesse > VITESSE_MAX_EASY){
-      vitesse = vitesse - 10;
-      printf("Vitesse = %d\n",vitesse);
+      if (vitesse > VITESSE_MAX_EASY){
+        vitesse = vitesse - 10;
+        printf("Vitesse = %d\n",vitesse);
+      }
+
     }
-
   }
-}
 
   // Libérer la mémoire allouée pour l'image et la fenêtre SDL
   SDL_FreeSurface(car);
@@ -366,9 +437,7 @@ extern void easyGame(int profil){
   // Quitter SDL et SDL_image
   IMG_Quit();
   SDL_Quit();
-
 }
-
 
 
 
