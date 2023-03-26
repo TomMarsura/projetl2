@@ -5,7 +5,10 @@
 #define HAUTEUR 5
 #define LARGEUR 3
 
-#define VITESSE_MAX 0.1
+#define VITESSE_DEPART 800
+
+#define VITESSE_MAX_HARD 200
+#define VITESSE_MAX_EASY 400
 
 
 /* Variables globales */
