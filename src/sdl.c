@@ -285,6 +285,18 @@ SDL_Surface *Quit = TTF_RenderText_Solid(policeChoix, "Quitter", TextColor);
         SDL_RenderPresent(renderer);  
         }
 
+
+
+
+    /*Liberation des texture*/
+        SDL_DestroyTexture(textTextureMessage);
+        SDL_DestroyTexture(textTextureQuit);
+        SDL_DestroyTexture(textTextureRejouer);
+
+        // Libérer la police
+        TTF_CloseFont(police);
+        TTF_CloseFont(policeChoix);
+
 }
 
 
@@ -626,9 +638,20 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
     /*Destruction*/
 
-    //SDL_DestroyTexture();
+    SDL_DestroyTexture(textTextureRetour);
+    SDL_DestroyTexture(textTextureSupr);
+    SDL_DestroyTexture(textTextureChoisir);
+    SDL_DestroyTexture(textTextureCree);
+
+    TTF_CloseFont(police);
 }
 
+
+/**
+ * @brief Cette fonction permet a l'utilisateur de choisir sa diffculter
+ * @author Ayoub Laaribi
+ * @return void
+*/
 void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
     int time;
     SDL_Color TextColor;
@@ -1115,7 +1138,10 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     return 0;
 }
 
-
+/**
+ * @author Tom Marsura
+ * @return void
+*/
 void attenteClassement(){
     SDL_Event event;
     int quit = 0;
@@ -1139,7 +1165,10 @@ void attenteClassement(){
 }
 
 /*FONCTION AFFICHAGE CLASSEMENT*/
-
+/**
+ * @author Tom Marsura
+ * @return void
+*/
 void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 {
     // *--------------------------------------* INITIALISATION *--------------------------------------*
