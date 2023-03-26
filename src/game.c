@@ -29,6 +29,8 @@
 *@param[in] mat matrice de type int
 *@return void
 */
+
+
 extern void affiche_mat(){
   /*initialisation*/
     int i,j;
@@ -40,6 +42,7 @@ extern void affiche_mat(){
         }
         printf("\n");
     }
+
       printf("\n");
       printf("\n");
       printf("\n");
@@ -217,178 +220,162 @@ extern void decalage(){
 */
 extern void easyGame(int profil){
 
+  srand(time(NULL));
+
+  // Initialiser SDL
+  SDL_Init(SDL_INIT_VIDEO);
+
+  IMG_Init(IMG_INIT_JPG);
+
+  // Créer une fenêtre SDL
+  SDL_Window* window = SDL_CreateWindow("GAME CAR", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, 0);
+  SDL_Renderer * renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+
+  SDL_Surface* car = IMG_Load("../img/car.png");
+  SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
+
+  SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
+  SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
+
+  SDL_Surface* fond = IMG_Load("../img/route.png");
+  SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
+
+  SDL_Rect rectangle;
+
+  rectangle.w = rectangle.h = 100; // Taille de chaque case de la matrice
+
+  // Calculer la position de départ du rectangle pour centrer la matrice
+  int startX = (800 - LARGEUR * 135) / 2;
+  int startY = (800 - HAUTEUR * 100) / 2;
+
+  SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
+
+
+  SDL_Event event;
+  int quit = 1;
+  int crash_cote = 0;
+  int position_voiture = 1;
+
+  int vitesse = VITESSE_DEPART;
+
   affiche_mat();
 
-  int vitesse = 1;
-
-  while(1){
-
-    deplacement(vitesse);
+  while (quit) {
 
     if (crash() == 1){
-      printf("CRASH !!\n");
-      printf("SCORE : %d \n",score);
-      /*pointsProfils[profil] += score;*/
+      quit = 0;
+      printf("CRASH\n");
       break;
     }
-    else{
-      decalage();
-      score = score + 1;
-      obstacle();
 
-      /*On verifie si la vitesse maximale est atteinte */
-      if (vitesse >= VITESSE_MAX){
-        vitesse = vitesse - 0.05;
-      }
+    if (crash_cote == 1){
+      quit = 0;
+      printf("CRASH COTE\n");
+      break;
     }
-  }
-}
 
+    else{
 
-int main(int argc, char* argv[]) {
-    // Initialiser SDL
-    SDL_Init(SDL_INIT_VIDEO);
+      int start_time = SDL_GetTicks();
 
-    IMG_Init(IMG_INIT_JPG);
+      while ((SDL_GetTicks() - start_time) < vitesse) {
 
-    // Créer une fenêtre SDL
-    SDL_Window* window = SDL_CreateWindow("GAME CAR", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, 0);
-    SDL_Renderer * renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+        while (SDL_PollEvent(&event)) {
 
-    SDL_Surface* car = IMG_Load("../img/car.png");
-    SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
+          if (event.type == SDL_QUIT) {
+            quit = 0;
+          }
 
-    SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
-    SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
+          if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
 
-    SDL_Surface* fond = IMG_Load("../img/route.png");
-    SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
+              case SDLK_RIGHT:
+                  position_voiture++;
 
-    SDL_Rect rectangle;
-
-    rectangle.w = rectangle.h = 100; // Taille de chaque case de la matrice
-
-    // Calculer la position de départ du rectangle pour centrer la matrice
-    int startX = (800 - LARGEUR * 135) / 2;
-    int startY = (800 - HAUTEUR * 100) / 2;
-
-    SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
-
-
-    SDL_Event event;
-    int quit = 1;
-    int crash_cote = 0;
-    int position_voiture = 1;
-
-    float vitesse = 0.1;
-
-    affiche_mat();
-
-    while (quit) {
-
-      if (crash() == 1){
-        quit = 0;
-        printf("CRASH\n");
-        break;
-      }
-
-      if (crash_cote == 1){
-        quit = 0;
-        printf("CRASH COTE\n");
-        break;
-      }
-
-      else{
-
-        time_t start_time = time(NULL);
-
-        while ((time(NULL) - start_time) < 0.5) {
-
-          while (SDL_PollEvent(&event)) {
-
-            if (event.type == SDL_QUIT) {
-              quit = 0;
-            }
-
-            if (event.type == SDL_KEYDOWN) {
-              switch (event.key.keysym.sym) {
-
-                case SDLK_RIGHT:
-                    position_voiture++;
-
-                    if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] == 2){
                     crash_cote = 1;
-                    }
-                    deplacement(1);
+                    printf("CRASH COTE\n");
                     break;
 
-                    case SDLK_LEFT:
-                      position_voiture--;
+                  }
+                  printf(" Crash cote = %d\n",crash_cote);
+                  deplacement(1);
+                  break;
 
-                      if (route[HAUTEUR-1][position_voiture] == 2){
-                        crash_cote = 1;
-                      }
-                      deplacement(2);
+                  case SDLK_LEFT:
+                    position_voiture--;
+
+                    if (route[HAUTEUR-1][position_voiture] == 2){
+                      crash_cote = 1;
+                      printf("CRASH COTE\n");
                       break;
+                    }
+                    deplacement(2);
+                    printf(" Crash cote = %d\n",crash_cote);
+                    break;
 
-                      default:
-                        break;
-                }
+                  default:
+                    break;
               }
             }
+          }
 
-            SDL_RenderCopy(renderer, texture_route, NULL, NULL);
+          SDL_RenderCopy(renderer, texture_route, NULL, NULL);
 
 
-            /* Dessiner l'image de la voiture pour chaque case de la matrice qui contient un 1 */
-            for (int i = 0; i < HAUTEUR; i++) {
-              for (int j = 0; j < LARGEUR; j++) {
-                if (route[i][j] == 1) {
-                    rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100; // Position verticale de la case
-                    SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
-                }
-                if (route[i][j] == 2) {
-                    rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 150; // Position verticale de la case
-                    SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
-                }
+          /* Dessiner l'image de la voiture pour chaque case de la matrice qui contient un 1 */
+          for (int i = 0; i < HAUTEUR; i++) {
+            for (int j = 0; j < LARGEUR; j++) {
+              if (route[i][j] == 1) {
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
+              }
+              if (route[i][j] == 2) {
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 150; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
             }
-            SDL_RenderPresent(renderer);
-        }
+          }
+          SDL_RenderPresent(renderer);
+      }
 
-      decalage();
-      obstacle();
-      vitesse = vitesse - 0.05;
+    decalage();
+    obstacle();
 
+    if (vitesse > VITESSE_MAX_EASY){
+      vitesse = vitesse - 10;
+      printf("Vitesse = %d\n",vitesse);
     }
+
   }
+}
 
-    // Libérer la mémoire allouée pour l'image et la fenêtre SDL
-    SDL_FreeSurface(car);
-    SDL_FreeSurface(fond);
-    SDL_FreeSurface(img_obstacle);
+  // Libérer la mémoire allouée pour l'image et la fenêtre SDL
+  SDL_FreeSurface(car);
+  SDL_FreeSurface(fond);
+  SDL_FreeSurface(img_obstacle);
 
-    SDL_DestroyTexture(texture_voiture);
-    SDL_DestroyTexture(texture_route);
-    SDL_DestroyTexture(texture_obstacle);
+  SDL_DestroyTexture(texture_voiture);
+  SDL_DestroyTexture(texture_route);
+  SDL_DestroyTexture(texture_obstacle);
 
-    SDL_DestroyWindow(window);
+  SDL_DestroyWindow(window);
 
-    // Quitter SDL et SDL_image
-    IMG_Quit();
-    SDL_Quit();
-
-    return 0;
+  // Quitter SDL et SDL_image
+  IMG_Quit();
+  SDL_Quit();
 
 }
 
 
 
 
-//int main(){
-//
-//  easyGame(0);
-//  return 0;
-//}
+
+int main(){
+
+  easyGame(0);
+  return 0;
+
+}
