@@ -22,8 +22,10 @@ int cpt_distance;
 
 
 /* Prototype des fonctions */
+extern int nb_obstacle();
 extern void affichae_mat();
-extern void obstacle();
+extern void obstacle_easy();
+extern void obstacle_hard();
 extern int calcul_score();
 extern int crash();
 extern void deplacement(int touche);
