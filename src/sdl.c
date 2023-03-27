@@ -62,7 +62,7 @@ void CrashMessage(SDL_Window* window, SDL_Renderer* renderer,int profile){
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture");
     }
-    
+
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {
@@ -254,7 +254,7 @@ SDL_Surface *Score = TTF_RenderText_Solid(policeChoix, "Score :", TextColor);
                                 }
                             break;
                         }
-                    
+
                 }
             }
 
@@ -311,7 +311,7 @@ SDL_Surface *Score = TTF_RenderText_Solid(policeChoix, "Score :", TextColor);
         SDL_RenderCopy(renderer, textTextureQuit, NULL, &DistQuit);
         SDL_RenderCopy(renderer, textTextureRejouer, NULL, &DistRejouer);
         SDL_RenderCopy(renderer, textTextureMessage, NULL, &DistMessage);
-        SDL_RenderPresent(renderer);  
+        SDL_RenderPresent(renderer);
         }
 
 
@@ -360,7 +360,7 @@ void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture");
     }
-    
+
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {
@@ -466,7 +466,7 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
-    
+
     SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     if (TextRetour == NULL)
     {
@@ -510,15 +510,15 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
         while(SDL_PollEvent(&event)){
             switch(event.type){
-                
-                
+
+
                 case SDL_QUIT:
                 program_launched = SDL_FALSE;
                 break;
 
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym){
-                        
+
                         case SDLK_ESCAPE:
                             program_launched = SDL_FALSE;
                         break;
@@ -535,14 +535,14 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
                                     // imprimer un message à l'écran
                                     printf("HARD MODE\n");
                                 }
-                               
+
                             break;
 
 
 
                         case SDLK_DOWN:
                             position++;
-                            
+
                             if (position > 4){
                                 position = 0;
                             }
@@ -556,13 +556,13 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
                                 position = 3;
                             }
                             printf("Vous avez appuye sur la touche left\n%d\n", position);
-                      
+
                         break;
                     }
 
 
             }
-        } 
+        }
 
         if (position == 0)
         {
@@ -707,7 +707,7 @@ void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture");
     }
-    
+
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {
@@ -844,7 +844,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
- 
+
     time = SDL_GetTicks();
     int VisibleEasy = 1;
     int VisibleMedium = 1;
@@ -857,15 +857,15 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
 
         while(SDL_PollEvent(&event)){
             switch(event.type){
-                
-                
+
+
                 case SDL_QUIT:
                 program_launched = SDL_FALSE;
                 break;
 
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym){
-                        
+
                         case SDLK_ESCAPE:
                             program_launched = SDL_FALSE;
                         break;
@@ -874,6 +874,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                 if (position == 0) {
                                     // appeler la fonction easy
                                     printf("EASY MODE\n");
+                                    easyGame();
                                 } else if (position == 1) {
                                     // imprimer un message à l'écran
                                     printf("AVERAGE MODE\n");
@@ -882,14 +883,14 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                     // imprimer un message à l'écran
                                     printf("HARD MODE\n");
                                 }
-                               
+
                             break;
 
 
 
                         case SDLK_DOWN:
                             position++;
-                            
+
                             if (position > 3){
                                 position = 0;
                             }
@@ -903,13 +904,13 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                 position = 3;
                             }
                             printf("Vous avez appuye sur la touche left\n%d\n", position);
-                      
+
                         break;
                     }
 
 
             }
-        } 
+        }
 
         if (position == 0)
         {
@@ -1112,7 +1113,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
 
                     //Création d'un rectangle pour le texte
                     text_rect.w = 300;
-                    text_rect.h = 100;  
+                    text_rect.h = 100;
                     text_surface = TTF_RenderUTF8_Blended_Wrapped(font, text_input, white, text_rect.w);
                     text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
                 } else if (event.key.keysym.sym == SDLK_RETURN) {
@@ -1141,7 +1142,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
                         nomExist = FAUX;
                     }
 
-                    
+
                 }
                 else if (event.key.keysym.sym == SDLK_ESCAPE) {
                     quit = 1;
@@ -1170,7 +1171,7 @@ int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_Texture* textureCreateProfil = SDL_CreateTextureFromSurface(renderer, createProfil);
         SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
         SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
-        
+
         // Créer un rectangle pour la texture
         SDL_Rect rectCreateProfil = {(SCREEN_WIDTH - createProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, createProfil->w, createProfil->h };
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
@@ -1242,7 +1243,7 @@ void attenteClassement(){
             }
         }
 
-        SDL_Delay(10);    
+        SDL_Delay(10);
     }
 }
 
@@ -1385,7 +1386,7 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
                 printf("Erreur de création de la texture : %s\n", SDL_GetError());
                 exit(EXIT_FAILURE);
             }
-            
+
             SDL_Rect rectI = { 0.65 * SCREEN_WIDTH / 4 - place->w, 50 + i * 30, place->w, place->h };
             SDL_Rect rectName = {0.90 * SCREEN_WIDTH / 4, 50 + i * 30, name->w, name->h};
             SDL_Rect rectPoints = { 2.60 * SCREEN_WIDTH / 4 - points->w, 50 + i * 30, points->w, points->h };
@@ -1462,7 +1463,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     TextColor.b = 255;
     //int choix = 0;
     int time;
-    
+
     readProfiles();
 
 
@@ -1483,7 +1484,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture");
     }
-    
+
     /*Verification TTF_init*/
     if (TTF_Init() == -1)
     {
@@ -1579,10 +1580,10 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture du texte");
-    } 
-    
-    
-/*---------------------------------------------------------------------------------------------------------------------------------------------------*/  
+    }
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
  SDL_Surface *Quit = TTF_RenderText_Solid(police, "Quit", TextColor);
     if (Quit == NULL)
@@ -1607,7 +1608,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_ExitWithMessage("Impossible de charger la texture du texte");
-    } 
+    }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
     // affichage des texte PLAY, CHOOSE PROFILE QUIT
@@ -1730,7 +1731,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
         if (position == 1)
         {
-         
+
             unsigned ActualTime = SDL_GetTicks();
 
             if (ActualTime > time + 500)
@@ -1752,7 +1753,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
         if (position == 2)
         {
-         
+
             unsigned ActualTime = SDL_GetTicks();
 
             if (ActualTime > time + 500)
@@ -1776,7 +1777,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
         if (position == 3)
         {
-         
+
             unsigned ActualTime = SDL_GetTicks();
 
             if (ActualTime > time + 500)
@@ -1803,5 +1804,3 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_RenderPresent(renderer);
     }
 }
-
-
