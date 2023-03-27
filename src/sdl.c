@@ -20,6 +20,7 @@ SDL_bool program_launched = SDL_TRUE ;
 /*******************************************************
 Cette fonction renvoie un message d'erreur et qui la SDL
 ********************************************************/
+
 extern void SDL_ExitWithMessage(const char *message)
 {
     SDL_Log("ERREUR : %s  \n", message);
@@ -36,7 +37,7 @@ extern void SDL_ExitWithMessage(const char *message)
  * @author Ayoub Laaribi
  * @return void
 */
-void CrashMessage(SDL_Window* window, SDL_Renderer* renderer){
+void CrashMessage(SDL_Window* window, SDL_Renderer* renderer,int profile){
      SDL_Color TextColor;
     TextColor.r = 255;
     TextColor.g = 255;
@@ -174,10 +175,37 @@ SDL_Surface *Quit = TTF_RenderText_Solid(policeChoix, "Quitter", TextColor);
             SDL_ExitWithMessage("Impossible de charger la texture du texte");
         }
 
+/*****************************************************************************************************************/
 
 
+SDL_Surface *Score = TTF_RenderText_Solid(policeChoix, "Score :", TextColor);
+    if (Score == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
 
+        SDL_Rect DistScore = {510, 470, Score->w, Score->h};
 
+        SDL_Texture *textTextureScore = SDL_CreateTextureFromSurface(renderer, Score);
+
+        SDL_FreeSurface(Score);
+
+        if (textTextureScore == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+/*****************************************************************************************************************/
+
+SDL_Surface* points = TTF_RenderText_Blended(policeChoix, pointsTab[profile], TextColor);
 
 /*****************************************************************************************************************/
         int time = SDL_GetTicks();
@@ -279,6 +307,7 @@ SDL_Surface *Quit = TTF_RenderText_Solid(policeChoix, "Quitter", TextColor);
 
 
         SDL_RenderCopy(renderer,texture,NULL,NULL);
+        SDL_RenderCopy(renderer, textTextureScore, NULL, &DistScore);
         SDL_RenderCopy(renderer, textTextureQuit, NULL, &DistQuit);
         SDL_RenderCopy(renderer, textTextureRejouer, NULL, &DistRejouer);
         SDL_RenderCopy(renderer, textTextureMessage, NULL, &DistMessage);
@@ -289,9 +318,10 @@ SDL_Surface *Quit = TTF_RenderText_Solid(policeChoix, "Quitter", TextColor);
 
 
     /*Liberation des texture*/
-        SDL_DestroyTexture(textTextureMessage);
+        SDL_DestroyTexture(textTextureScore);
         SDL_DestroyTexture(textTextureQuit);
         SDL_DestroyTexture(textTextureRejouer);
+        SDL_DestroyTexture(textTextureMessage);
 
         // Libérer la police
         TTF_CloseFont(police);
