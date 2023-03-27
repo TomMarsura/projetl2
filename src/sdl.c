@@ -205,7 +205,7 @@ SDL_Surface *Score = TTF_RenderText_Solid(policeChoix, "Score :", TextColor);
 
 /*****************************************************************************************************************/
 
-SDL_Surface* points = TTF_RenderText_Blended(policeChoix, pointsTab[profile], TextColor);
+//SDL_Surface* points = TTF_RenderText_Blended(policeChoix, pointsTab[profile], TextColor);
 
 /*****************************************************************************************************************/
         int time = SDL_GetTicks();
@@ -813,11 +813,43 @@ SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
-    
+
+
+
+SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
+    if (TextRetour == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistRetour = {90, 450, TextRetour->w, TextRetour->h};
+
+        SDL_Texture *textTextureRetour = SDL_CreateTextureFromSurface(renderer, TextRetour);
+
+        SDL_FreeSurface(TextRetour);
+
+        if (textTextureRetour == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+ 
     time = SDL_GetTicks();
     int VisibleEasy = 1;
     int VisibleMedium = 1;
     int VisibleHard = 1;
+    int VisibleRetour = 1;
     int position = 0;
 
     while(program_launched){
@@ -942,7 +974,26 @@ SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
             SDL_SetTextureAlphaMod(textTextureHard, alpha);
         }
 
+        if (position == 3)
+        {
 
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleRetour = !VisibleRetour;
+                int alpha = VisibleRetour ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureRetour, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleRetour = 1;
+            int alpha = VisibleRetour ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureRetour, alpha);
+        }
 
 
 
@@ -951,6 +1002,7 @@ SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
 
 
     SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
     SDL_RenderCopy(renderer, textTextureHard, NULL, &DistHard);
     SDL_RenderCopy(renderer, textTextureMedium, NULL, &DistMedium);
     SDL_RenderCopy(renderer, textTextureEasy, NULL, &DistEasy);
