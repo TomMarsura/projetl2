@@ -14,6 +14,7 @@
 
 /*PROTOTYPE FONCTIONS*/
 
+extern void initGame();
 extern void readProfiles();
 extern void createProfile();
 extern void saveGame();
