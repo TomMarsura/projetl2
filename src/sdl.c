@@ -331,353 +331,6 @@ SDL_Surface *Score = TTF_RenderText_Solid(policeChoix, "Score :", TextColor);
 
 
 /**
- * @brief Cette Fonction permet de creer,choisir ou supprimer un profil
- * @author Ayoub LAARIBI
- * @return void
-*/
-void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
-    int time;
-    SDL_Color TextColor;
-    TextColor.r = 255;
-    TextColor.g = 255;
-    TextColor.b = 255;
-
-    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
-    if (ImageStart == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger l'image");
-    }
-
-
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
-
-    if (texture == NULL)
-    {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Impossible de charger la texture");
-    }
-
-    /*Verification TTF_init*/
-    if (TTF_Init() == -1)
-    {
-        SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
-    }
-
-    /*Importation de la police*/
-    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
-    if (police == NULL)
-    {
-        SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Importation de la police a echouee");
-    }
-
-
-    SDL_Surface *TextCree = TTF_RenderText_Solid(police, "Cree", TextColor);
-    if (TextCree == NULL)
-    {
-        TTF_CloseFont(police);
-        // SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Le texte sur la surface a echouee");
-    }
-
-        SDL_Rect DistCree = {90, 300, TextCree->w, TextCree->h};
-
-        SDL_Texture *textTextureCree = SDL_CreateTextureFromSurface(renderer, TextCree);
-
-        SDL_FreeSurface(TextCree);
-
-        if (textTextureCree == NULL)
-        {
-            TTF_CloseFont(police);
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_ExitWithMessage("Impossible de charger la texture du texte");
-        }
-
-/*.....................................................................................................................................*/
-
-
-
-SDL_Surface *TextChoisir = TTF_RenderText_Solid(police, "Choisir", TextColor);
-    if (TextChoisir == NULL)
-    {
-        TTF_CloseFont(police);
-        // SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Le texte sur la surface a echouee");
-    }
-
-        SDL_Rect DistChoisir = {90, 350, TextChoisir->w, TextChoisir->h};
-
-        SDL_Texture *textTextureChoisir = SDL_CreateTextureFromSurface(renderer, TextChoisir);
-
-        SDL_FreeSurface(TextChoisir);
-
-        if (textTextureChoisir == NULL)
-        {
-            TTF_CloseFont(police);
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_ExitWithMessage("Impossible de charger la texture du texte");
-        }
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-
-SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
-    if (TextSupr == NULL)
-    {
-        TTF_CloseFont(police);
-        // SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Le texte sur la surface a echouee");
-    }
-
-        SDL_Rect DistSupr = {90, 400, TextSupr->w, TextSupr->h};
-
-        SDL_Texture *textTextureSupr = SDL_CreateTextureFromSurface(renderer, TextSupr);
-
-        SDL_FreeSurface(TextSupr);
-
-        if (textTextureSupr == NULL)
-        {
-            TTF_CloseFont(police);
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_ExitWithMessage("Impossible de charger la texture du texte");
-        }
-
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------*/
-
-    SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
-    if (TextRetour == NULL)
-    {
-        TTF_CloseFont(police);
-        // SDL_DestroyTexture(texture);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithMessage("Le texte sur la surface a echouee");
-    }
-
-        SDL_Rect DistRetour = {90, 450, TextRetour->w, TextRetour->h};
-
-        SDL_Texture *textTextureRetour = SDL_CreateTextureFromSurface(renderer, TextRetour);
-
-        SDL_FreeSurface(TextRetour);
-
-        if (textTextureRetour == NULL)
-        {
-            TTF_CloseFont(police);
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_ExitWithMessage("Impossible de charger la texture du texte");
-        }
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-
-
-    time = SDL_GetTicks();
-    int VisibleCree = 1;
-    int VisibleChoisir = 1;
-    int VisibleSupr = 1;
-    int VisibleRetour = 1;
-    int position = 0;
-
-    while(program_launched){
-        SDL_Event event;
-
-        while(SDL_PollEvent(&event)){
-            switch(event.type){
-
-
-                case SDL_QUIT:
-                program_launched = SDL_FALSE;
-                break;
-
-                case SDL_KEYDOWN:
-                    switch(event.key.keysym.sym){
-
-                        case SDLK_ESCAPE:
-                            program_launched = SDL_FALSE;
-                        break;
-
-                            case SDLK_RETURN:
-                                if (position == 0) {
-                                    // appeler la fonction easy
-                                    printf("EASY MODE\n");
-                                } else if (position == 1) {
-                                    // imprimer un message à l'écran
-                                    printf("MEDIUM MODE\n");
-                                }
-                                else if (position == 2){
-                                    // imprimer un message à l'écran
-                                    printf("HARD MODE\n");
-                                }
-
-                            break;
-
-
-
-                        case SDLK_DOWN:
-                            position++;
-
-                            if (position > 4){
-                                position = 0;
-                            }
-                            printf("Vous avez appuye sur la touche right\n%d\n", position);
-                        break;
-
-                        case SDLK_UP:
-                            position--;
-
-                            if (position < 0){
-                                position = 3;
-                            }
-                            printf("Vous avez appuye sur la touche left\n%d\n", position);
-
-                        break;
-                    }
-
-
-            }
-        }
-
-        if (position == 0)
-        {
-
-            unsigned ActualTime = SDL_GetTicks();
-
-            if (ActualTime > time + 500)
-            {
-                time = ActualTime;
-                VisibleCree = !VisibleCree;
-                int alpha = VisibleCree ? 255 : 0;
-                SDL_SetTextureAlphaMod(textTextureCree, alpha);
-            }
-        }
-        else
-        {
-
-            VisibleCree = 1;
-            int alpha = VisibleCree ? 255 : 0;
-            SDL_SetTextureAlphaMod(textTextureCree, alpha);
-        }
-
-        if( position == 1)
-        {
-
-            unsigned ActualTime = SDL_GetTicks();
-
-            if (ActualTime > time + 500)
-            {
-                time = ActualTime;
-                VisibleChoisir = !VisibleChoisir;
-                int alpha = VisibleChoisir ? 255 : 0;
-                SDL_SetTextureAlphaMod(textTextureChoisir, alpha);
-            }
-        }
-        else
-        {
-
-            VisibleChoisir = 1;
-            int alpha = VisibleChoisir ? 255 : 0;
-            SDL_SetTextureAlphaMod(textTextureChoisir, alpha);
-        }
-
-        if( position == 2)
-        {
-
-            unsigned ActualTime = SDL_GetTicks();
-
-            if (ActualTime > time + 500)
-            {
-                time = ActualTime;
-                VisibleSupr = !VisibleSupr;
-                int alpha = VisibleSupr ? 255 : 0;
-                SDL_SetTextureAlphaMod(textTextureSupr, alpha);
-            }
-        }
-        else
-        {
-
-            VisibleSupr = 1;
-            int alpha = VisibleSupr ? 255 : 0;
-            SDL_SetTextureAlphaMod(textTextureSupr, alpha);
-        }
-
-
-        if( position == 3)
-        {
-
-            unsigned ActualTime = SDL_GetTicks();
-
-            if (ActualTime > time + 500)
-            {
-                time = ActualTime;
-                VisibleRetour = !VisibleRetour;
-                int alpha = VisibleRetour ? 255 : 0;
-                SDL_SetTextureAlphaMod(textTextureRetour, alpha);
-            }
-        }
-        else
-        {
-
-            VisibleRetour = 1;
-            int alpha = VisibleRetour ? 255 : 0;
-            SDL_SetTextureAlphaMod(textTextureRetour, alpha);
-        }
-
-
-
-
-
-
-
-
-
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
-    SDL_RenderCopy(renderer, textTextureSupr, NULL, &DistSupr);
-    SDL_RenderCopy(renderer, textTextureChoisir, NULL, &DistChoisir);
-    SDL_RenderCopy(renderer, textTextureCree, NULL, &DistCree);
-
-    SDL_RenderPresent(renderer);
-    }
-
-    /*Destruction*/
-
-    SDL_DestroyTexture(textTextureRetour);
-    SDL_DestroyTexture(textTextureSupr);
-    SDL_DestroyTexture(textTextureChoisir);
-    SDL_DestroyTexture(textTextureCree);
-
-    TTF_CloseFont(police);
-}
-
-
-/**
  * @brief Cette fonction permet a l'utilisateur de choisir sa diffculter
  * @author Ayoub Laaribi
  * @return void
@@ -1012,16 +665,257 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     }
 }
 
+int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
+    //Effacer l'écran
+    SDL_RenderClear(renderer);
+ 
+    int position = 0;
+    TTF_Font *font = NULL;
+    TTF_Font *fontLogo = NULL;
+    TTF_Font *fontFooter = NULL;
+    SDL_Event event;
+    int quit = 0;
+    int font_size = 30;
+ 
+    // Initialisation de la SDL_ttf
+    if (TTF_Init() != 0) {
+        fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
+        return 1;
+    }
+ 
+ 
+    // Chargement de la police de caractères
+    font = TTF_OpenFont("../fonts/police.TTF", font_size);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    fontLogo = TTF_OpenFont("../fonts/police.TTF", font_size + 20);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    fontFooter = TTF_OpenFont("../fonts/police.TTF", font_size - 20);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    // Création de la texture du texte
+    SDL_Color white = {255, 255, 255, 255};
+ 
+ 
+    // Boucle principale
+    while (!quit) {
+        // Gestion des événements
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = 1;
+            } else if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_RIGHT){
+                    position++;
+                    if(position >= nbProfils){
+                        position = 0;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_LEFT){
+                    position--;
+                    if(position < 0){
+                        position = nbProfils - 1;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_RETURN){
+                    profilCourant = position;
+                    quit = 1;
+                }
+                else if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    quit = 1;
+                }
+            }
+        }
+ 
+        // Dessine le fond gris
+        SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+        SDL_Rect background = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        SDL_RenderFillRect(renderer, &background);
+ 
+        SDL_Surface* text_surface = TTF_RenderText_Blended(font, nomProfils[position], white);
+        SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+        SDL_Rect text_rect = {(SCREEN_WIDTH - text_surface->w) / 2, SCREEN_HEIGHT / 2, text_surface->w, text_surface->h };
+ 
+        // Création du rectangle autour du texte
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_Rect text_back = {(SCREEN_WIDTH - 350) / 2, (SCREEN_HEIGHT - 15) / 2, 350, 50};
+        SDL_RenderDrawRect(renderer, &text_back);
+ 
+        //Affichage textes
+        SDL_Surface* createProfil = TTF_RenderText_Blended(font, "Choisissez votre profil", white);
+        SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", white);
+        SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", white);
+ 
+        // Créer une texture à partir de la surface
+        SDL_Texture* textureCreateProfil = SDL_CreateTextureFromSurface(renderer, createProfil);
+        SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
+        SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
+ 
+        // Créer un rectangle pour la texture
+        SDL_Rect rectCreateProfil = {(SCREEN_WIDTH - createProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, createProfil->w, createProfil->h };
+        SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
+        SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
+ 
+        // Afficher la texture
+        SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
+        SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
+        SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
+        SDL_RenderCopy(renderer, text_texture, NULL, &text_rect);
+ 
+        // Rafraîchissement de l'écran
+        SDL_RenderPresent(renderer);
+        SDL_DestroyTexture(textureCreateProfil);
+        SDL_DestroyTexture(textureCarGame);
+        SDL_DestroyTexture(textureEscape);
+        SDL_DestroyTexture(text_texture);
+        SDL_FreeSurface(text_surface);
+        SDL_FreeSurface(escape);
+        SDL_FreeSurface(carGame);
+        SDL_FreeSurface(createProfil);
+    }
+ 
+    TTF_CloseFont(font);
+    TTF_CloseFont(fontLogo);
+    return 0;
+}
 
-
-
-
-
-
-
-
-
-
+int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
+    //Effacer l'écran
+    SDL_RenderClear(renderer);
+ 
+    int position = 0;
+    TTF_Font *font = NULL;
+    TTF_Font *fontLogo = NULL;
+    TTF_Font *fontFooter = NULL;
+    SDL_Event event;
+    int quit = 0;
+    int font_size = 30;
+ 
+    // Initialisation de la SDL_ttf
+    if (TTF_Init() != 0) {
+        fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
+        return 1;
+    }
+ 
+ 
+    // Chargement de la police de caractères
+    font = TTF_OpenFont("../fonts/police.TTF", font_size);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    fontLogo = TTF_OpenFont("../fonts/police.TTF", font_size + 20);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    fontFooter = TTF_OpenFont("../fonts/police.TTF", font_size - 20);
+ 
+    if (font == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return 1;
+    }
+ 
+    // Création de la texture du texte
+    SDL_Color white = {255, 255, 255, 255};
+ 
+ 
+    // Boucle principale
+    while (!quit) {
+        // Gestion des événements
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = 1;
+            } else if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_RIGHT){
+                    position++;
+                    if(position >= nbProfils){
+                        position = 0;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_LEFT){
+                    position--;
+                    if(position < 0){
+                        position = nbProfils - 1;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_RETURN){
+                    deleteProfil(position);
+                    quit = 1;
+                }
+                else if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    quit = 1;
+                }
+            }
+        }
+ 
+        // Dessine le fond gris
+        SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
+        SDL_Rect background = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        SDL_RenderFillRect(renderer, &background);
+ 
+        SDL_Surface* text_surface = TTF_RenderText_Blended(font, nomProfils[position], white);
+        SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+        SDL_Rect text_rect = {(SCREEN_WIDTH - text_surface->w) / 2, SCREEN_HEIGHT / 2, text_surface->w, text_surface->h };
+ 
+        // Création du rectangle autour du texte
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_Rect text_back = {(SCREEN_WIDTH - 350) / 2, (SCREEN_HEIGHT - 15) / 2, 350, 50};
+        SDL_RenderDrawRect(renderer, &text_back);
+ 
+        //Affichage textes
+        SDL_Surface* createProfil = TTF_RenderText_Blended(font, "Choisissez le profil à supprimer", white);
+        SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", white);
+        SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", white);
+ 
+        // Créer une texture à partir de la surface
+        SDL_Texture* textureCreateProfil = SDL_CreateTextureFromSurface(renderer, createProfil);
+        SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
+        SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
+ 
+        // Créer un rectangle pour la texture
+        SDL_Rect rectCreateProfil = {(SCREEN_WIDTH - createProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, createProfil->w, createProfil->h };
+        SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
+        SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
+ 
+        // Afficher la texture
+        SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
+        SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
+        SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
+        SDL_RenderCopy(renderer, text_texture, NULL, &text_rect);
+ 
+        // Rafraîchissement de l'écran
+        SDL_RenderPresent(renderer);
+        SDL_DestroyTexture(textureCreateProfil);
+        SDL_DestroyTexture(textureCarGame);
+        SDL_DestroyTexture(textureEscape);
+        SDL_DestroyTexture(text_texture);
+        SDL_FreeSurface(text_surface);
+        SDL_FreeSurface(escape);
+        SDL_FreeSurface(carGame);
+        SDL_FreeSurface(createProfil);
+    }
+ 
+    TTF_CloseFont(font);
+    TTF_CloseFont(fontLogo);
+    return 0;
+}
 
 /**
  * @author Tom Marsura
@@ -1433,13 +1327,347 @@ void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
 }
 
 
+/**
+ * @brief Cette Fonction permet de creer,choisir ou supprimer un profil
+ * @author Ayoub LAARIBI
+ * @return void
+*/
+void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
+    int time;
+    SDL_Color TextColor;
+    TextColor.r = 255;
+    TextColor.g = 255;
+    TextColor.b = 255;
+
+    SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
+    if (ImageStart == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger l'image");
+    }
+
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+
+    if (texture == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture");
+    }
+
+    /*Verification TTF_init*/
+    if (TTF_Init() == -1)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
+    }
+
+    /*Importation de la police*/
+    TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
+    if (police == NULL)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+
+
+    SDL_Surface *TextCree = TTF_RenderText_Solid(police, "Cree", TextColor);
+    if (TextCree == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistCree = {90, 300, TextCree->w, TextCree->h};
+
+        SDL_Texture *textTextureCree = SDL_CreateTextureFromSurface(renderer, TextCree);
+
+        SDL_FreeSurface(TextCree);
+
+        if (textTextureCree == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+/*.....................................................................................................................................*/
+
+
+
+SDL_Surface *TextChoisir = TTF_RenderText_Solid(police, "Choisir", TextColor);
+    if (TextChoisir == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistChoisir = {90, 350, TextChoisir->w, TextChoisir->h};
+
+        SDL_Texture *textTextureChoisir = SDL_CreateTextureFromSurface(renderer, TextChoisir);
+
+        SDL_FreeSurface(TextChoisir);
+
+        if (textTextureChoisir == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
+    if (TextSupr == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistSupr = {90, 400, TextSupr->w, TextSupr->h};
+
+        SDL_Texture *textTextureSupr = SDL_CreateTextureFromSurface(renderer, TextSupr);
+
+        SDL_FreeSurface(TextSupr);
+
+        if (textTextureSupr == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+    SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
+    if (TextRetour == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistRetour = {90, 450, TextRetour->w, TextRetour->h};
+
+        SDL_Texture *textTextureRetour = SDL_CreateTextureFromSurface(renderer, TextRetour);
+
+        SDL_FreeSurface(TextRetour);
+
+        if (textTextureRetour == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 
 
-/*gcc -o sdl sdl.c -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf*/
+    time = SDL_GetTicks();
+    int VisibleCree = 1;
+    int VisibleChoisir = 1;
+    int VisibleSupr = 1;
+    int VisibleRetour = 1;
+    int position = 0;
+
+    int quit = 0;
+
+    while(!quit){
+        SDL_Event event;
+
+        while(SDL_PollEvent(&event)){
+            switch(event.type){
+                case SDL_QUIT:
+                program_launched = SDL_FALSE;
+                break;
+
+                case SDL_KEYDOWN:
+                    switch(event.key.keysym.sym){
+
+                        case SDLK_RETURN:
+                            if (position == 0) {
+                                creationProfil(window, renderer);
+                                quit = 1;
+                            } else if (position == 1) {
+                                choixProfil(window, renderer);
+                                quit = 1;
+                            }
+                            else if (position == 2){
+                                supprimeProfil(window, renderer);
+                                quit = 1;
+                            }
+                            else {
+                                quit = 1;
+                            }
+                        break;
+
+                        case SDLK_DOWN:
+                            position++;
+
+                            if (position > 4){
+                                position = 0;
+                            }
+                            printf("Vous avez appuye sur la touche right\n%d\n", position);
+                        break;
+
+                        case SDLK_UP:
+                            position--;
+
+                            if (position < 0){
+                                position = 3;
+                            }
+                            printf("Vous avez appuye sur la touche left\n%d\n", position);
+
+                        break;
+                    }
 
 
+            }
+        }
+
+        if (position == 0)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleCree = !VisibleCree;
+                int alpha = VisibleCree ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureCree, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleCree = 1;
+            int alpha = VisibleCree ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureCree, alpha);
+        }
+
+        if( position == 1)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleChoisir = !VisibleChoisir;
+                int alpha = VisibleChoisir ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureChoisir, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleChoisir = 1;
+            int alpha = VisibleChoisir ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureChoisir, alpha);
+        }
+
+        if( position == 2)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleSupr = !VisibleSupr;
+                int alpha = VisibleSupr ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureSupr, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleSupr = 1;
+            int alpha = VisibleSupr ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureSupr, alpha);
+        }
+
+
+        if( position == 3)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleRetour = !VisibleRetour;
+                int alpha = VisibleRetour ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureRetour, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleRetour = 1;
+            int alpha = VisibleRetour ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureRetour, alpha);
+        }
+
+
+
+
+
+
+
+
+
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
+    SDL_RenderCopy(renderer, textTextureSupr, NULL, &DistSupr);
+    SDL_RenderCopy(renderer, textTextureChoisir, NULL, &DistChoisir);
+    SDL_RenderCopy(renderer, textTextureCree, NULL, &DistCree);
+
+    SDL_RenderPresent(renderer);
+    }
+
+    /*Destruction*/
+
+    SDL_DestroyTexture(textTextureRetour);
+    SDL_DestroyTexture(textTextureSupr);
+    SDL_DestroyTexture(textTextureChoisir);
+    SDL_DestroyTexture(textTextureCree);
+
+    TTF_CloseFont(police);
+}
 
 /*FONCTION LANCEMENT MENU*/
 

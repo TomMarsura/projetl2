@@ -20,6 +20,8 @@ int route [HAUTEUR][LARGEUR];
 int score;
 int cpt_distance;
 
+int profilCourant;
+
 /**
  * @brief Fonction initGame : fonction qui initialise la partie
  * @author Tom Marsura
@@ -39,12 +41,18 @@ extern void initGame(){
     route[4][1] = 1;
     score = 0;
     cpt_distance = 0;
+    profilCourant = 0;
 }
-/**
- * @brief Fonction creation d'un profil
- * @author Ayoub Laaribi
- * @return void
-*/
+
+extern void cleanProfiles(){
+    for(int i = 0; i < MAX_PROFILS; i++){
+        pointsProfils[i] = 0;
+        nbPartiesProfils[i] = 0;
+        numProfils[i] = 0;
+        strcpy(nomProfils[i], "");
+    }
+    nbProfils = 0;
+}
 
 /**
  * @brief Fonction readProfiles : Lecture des profiles
@@ -58,20 +66,20 @@ extern void readProfiles(){
     FILE * fichier = fopen("../save/save.csv", "r");
     int i = 0;
 
+    cleanProfiles();
+    printf("TEST3\n\n");
+
     if (fichier == NULL){
         printf("Erreur lors de l'ouverture du fichier\n");
     }
     else{   
         /*Lecture dans le fichier et assignation des valeurs dans les tableaux*/
+        printf("TEST\n\n");
         while(fscanf(fichier, "%d %d %s %d ", &numProfils[i], &pointsProfils[i], nomProfils[i], &nbPartiesProfils[i]) != EOF){
+            printf("TEST2\n\n");
             i++;
             nbProfils++;
         }
-    }
-
-    //Printf des noms
-    for(int i = 0; i < nbProfils; i++){
-        printf("%s", nomProfils[i]);
     }
 }
 
@@ -87,6 +95,7 @@ extern void saveGame(){
             fprintf(fichier, "%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
         }
     }
+    fclose(fichier);
 }
 
 /**
@@ -103,6 +112,42 @@ extern void createProfile(char nomProfil[SIZE_NAME]){
     nbProfils++;
 
     saveGame(); // Sauvegarde les profils dans le fichier save.csv
+}
+
+/**
+ * @brief deleteProfil : Supprime un profil du tableau des profils
+ * @author Tom Marsura
+ * @return void
+*/
+extern void deleteProfil(int idProfil){
+    int i;
+
+    /* Affichage tableau avant supression */
+    printf("TABLEAU AVANT SUPRESSION\n\n");
+    for(i = 0; i < nbProfils; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    }
+
+    for(i = idProfil; i < nbProfils; i++){
+        numProfils[i] = numProfils[i+1];
+        printf("test1\n");
+        pointsProfils[i] = pointsProfils[i+1];
+        printf("test2\n");
+        strcpy(nomProfils[i], nomProfils[i+1]);
+        printf("test3\n");
+        nbPartiesProfils[i] = nbPartiesProfils[i+1];
+        printf("test4\n");
+    }
+    nbProfils--;
+
+    /* Affichage tableau après supression */
+    printf("TABLEAU APRES SUPRESSION\n\n");
+    for(i = 0; i < nbProfils; i++){
+        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    }
+
+    saveGame(); // Sauvegarde les profils dans le fichier save.csv
+    readProfiles(); // Met à jour les profils
 }
 
 /**
@@ -161,54 +206,5 @@ extern void classement()
         int tmpNbParties = nbPartiesProfils[i];
         nbPartiesProfils[i] = nbPartiesProfils[maxIndex];
         nbPartiesProfils[maxIndex] = tmpNbParties;
-    }
-}
-
-/**
- * @brief Fonction main : fonction d'affichage du classement par points
- * @author Tom Marsura
- * @return int
-*/
-extern void affichage_classement(){
-    for(int i = 0; i < nbProfils; i++){
-        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-    }
-}
-
-/**
- * @author Ayoub LAARIBI
- * @brief Cette fonction a pour but d'afficher le menu
- * @return void
-*/
-extern void menu(){
-    int rep = 0;
-
-    do{
-        printf("entrer l'option :\n");
-        printf("1 : CLASSEMENT\n");
-        printf("2 : FACILE\n");
-        printf("3 : MOYEN\n");
-        printf("4 : DIFFICILE\n");
-        printf("CHOIX : ");
-        scanf("%d",&rep);
-    }while(rep < 1 || rep > 4);
-
-    switch(rep)
-    {
-        case 1 : /*AFFICHAGE DU CLASSEMENT*/
-            printf("Affichage du classement trié : \n");
-            classement();
-            affichage_classement();
-            break;
-
-        case 2 :/*LANCEMENT JEU FACILE*/
-            printf("Lancement du jeu en mode facile\n");
-            break;
-        case 3: /*LANCEMENT JEU MOYEN*/
-            printf("test\n");
-            break;
-         case 4: /*LANCEMENT JEU DIFFICILE*/
-            printf("test\n");
-            break;
     }
 }
