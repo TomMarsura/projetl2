@@ -12,6 +12,7 @@
 
 /* Include pour la fonction deplacement */
 #include "../lib/game.h"
+#include "../lib/menu.h"
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -291,6 +292,8 @@ extern void easyGame(int profil){
 
   srand(time(NULL));
 
+  initGame();
+
   // Initialiser SDL
   SDL_Init(SDL_INIT_VIDEO);
 
@@ -437,14 +440,4 @@ extern void easyGame(int profil){
   // Quitter SDL et SDL_image
   IMG_Quit();
   SDL_Quit();
-}
-
-
-
-
-int main(){
-
-  easyGame(0);
-  return 0;
-
 }

@@ -9,12 +9,16 @@
 
 
 
- int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
- char nomProfils[MAX_PROFILS][SIZE_NAME] = {}; // Noms des 50 profils (20 caractères max)
- int numProfils[MAX_PROFILS] = {}; // Numéros des 50 profils
- int nbProfils = 0; // Nombre de profils
- int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
+int pointsProfils[MAX_PROFILS] = {}; // Points des 50 profils
+char nomProfils[MAX_PROFILS][SIZE_NAME] = {}; // Noms des 50 profils (20 caractères max)
+int numProfils[MAX_PROFILS] = {}; // Numéros des 50 profils
+int nbProfils = 0; // Nombre de profils
+int nbPartiesProfils[MAX_PROFILS] = {}; //nombre de partie joué
 
+
+int route [HAUTEUR][LARGEUR];
+int score;
+int cpt_distance;
 
 /**
  * @brief Fonction initGame : fonction qui initialise la partie
@@ -23,6 +27,7 @@
 */
 extern void initGame(){
     int i, j;
+    
     /* Initialisation de la matrice à 0 */
     for(i = 0; i < HAUTEUR; i++){
         for(j = 0; j < LARGEUR; j++){
@@ -33,6 +38,7 @@ extern void initGame(){
     /* Placement de la voiture au milieu de la dernière ligne */
     route[4][1] = 1;
     score = 0;
+    cpt_distance = 0;
 }
 /**
  * @brief Fonction creation d'un profil

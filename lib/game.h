@@ -13,9 +13,9 @@
 
 /* Variables globales */
 /* Variables globales */
-int route[HAUTEUR][LARGEUR]= {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,1,0}};
-int score;
-int cpt_distance;
+extern int route[HAUTEUR][LARGEUR];
+extern int score;
+extern int cpt_distance;
 
 
 
