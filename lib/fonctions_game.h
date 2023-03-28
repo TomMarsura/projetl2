@@ -5,9 +5,6 @@
 #define HAUTEUR 5
 #define LARGEUR 3
 
-#define VITESSE_DEPART 800
-
-
 
 /* Variables globales */
 /* Variables globales */
