@@ -10,7 +10,7 @@
 #define _SDL_H_
 
 #define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_HEIGHT 800
 
 typedef enum bool_s {FAUX, VRAI} bool_t;
 
