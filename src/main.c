@@ -6,11 +6,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
 
+#include "../lib/gestionMenu.h"
 #include "../lib/sdl.h"
-#include "../lib/game.h"
-#include "../lib/menu.h"
-
-
 
 /*FONCTION PRINCIPAL*/
 
@@ -20,8 +17,6 @@ int main(int argc, char *argv[])
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     TTF_Init();
-
-    SDL_Event event;
     SDL_Color TextColor;
     TextColor.r = 255;
     TextColor.g = 255;
@@ -111,7 +106,9 @@ int main(int argc, char *argv[])
     time = SDL_GetTicks();
     int Visible = 1;
 
-    while (program_launched)
+    int quit = 0;
+
+    while (!quit)
     {
         SDL_Event event;
         while (SDL_PollEvent(&event))
@@ -119,14 +116,14 @@ int main(int argc, char *argv[])
             switch (event.type)
             {
             case SDL_QUIT:
-                program_launched = SDL_FALSE;
-                break;
+                quit = 1;
+            break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.scancode)
                 {
                 case SDL_SCANCODE_ESCAPE:
-                    program_launched = SDL_FALSE;
-                    break;
+                    quit = 1;
+                break;
                 case SDL_SCANCODE_RETURN:
                     Lancement_menu(window, renderer);
                     printf("Vous avez appuye sur la touche ENTRER\n");

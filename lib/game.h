@@ -1,4 +1,3 @@
-
 #ifndef _GAME_H_
 #define _GAME_H_
 
@@ -18,20 +17,11 @@ extern int score;
 extern int cpt_distance;
 
 
-
-
-
+#include <SDL2/SDL.h>
 /* Prototype des fonctions */
-extern int nb_obstacle();
-extern void affichae_mat();
-extern void obstacle_easy();
-extern void obstacle_hard();
-extern int calcul_score();
-extern int crash();
-extern void deplacement(int touche);
-extern void decalage();
-extern void easyGame(int profil);
-
+extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
+extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
+extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
 
 
 
