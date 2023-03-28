@@ -64,6 +64,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
+  int fin = 0;
 
   int vitesse = VITESSE_DEPART;
 
@@ -71,13 +72,13 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
 
   while (quit) {
 
-    if (crash() == 1){
+    if (fin == 1){
       quit = 0;
       printf("CRASH\n");
       break;
     }
 
-    if (crash_cote == 1){
+    if (fin == 2){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -143,23 +144,22 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                   SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
               }
               if (route[i][j] == 2) {
-                if (i == HAUTEUR-1){
                   rectangle.x = startX + j * 160; // Position horizontale de la case
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
-                }
-                else{
-                  rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 150; // Position verticale de la case
-                  SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
-                }
-
               }
             }
           }
           SDL_RenderPresent(renderer);
       }
 
+      if (crash() == 1){
+        fin = 1;
+      }
+
+      if (crash_cote == 1){
+        fin = 2;
+      }
       decalage();
       obstacle_easy();
 
@@ -167,6 +167,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
         vitesse = vitesse - 10;
         printf("Vitesse = %d\n",vitesse);
       }
+
+
 
     }
   }
@@ -231,6 +233,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
+  int fin = 0;
 
   int vitesse = VITESSE_DEPART;
 
@@ -238,13 +241,13 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
 
   while (quit) {
 
-    if (crash() == 1){
+    if (fin == 1){
       quit = 0;
       printf("CRASH\n");
       break;
     }
 
-    if (crash_cote == 1){
+    if (fin == 2){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -319,6 +322,13 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
           SDL_RenderPresent(renderer);
       }
 
+      if (crash() == 1){
+        fin = 1;
+      }
+
+      if (crash_cote == 1){
+        fin = 2;
+      }
       decalage();
       obstacle_hard();
 
@@ -326,6 +336,8 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
         vitesse = vitesse - 10;
         printf("Vitesse = %d\n",vitesse);
       }
+
+
 
     }
   }
@@ -375,9 +387,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   SDL_Surface* fond = IMG_Load("../img/route.png");
   SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
-  SDL_Surface* point = IMG_Load("../img/point.jpg");
-  SDL_Texture* texture_point = SDL_CreateTextureFromSurface(renderer,point);
-
   SDL_Rect rectangle;
 
   rectangle.w = rectangle.h = 90; // Taille de chaque case de la matrice
@@ -393,6 +402,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
+  int fin = 0;
 
   int vitesse = VITESSE_DEPART;
 
@@ -400,13 +410,13 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
 
   while (quit) {
 
-    if (crash() == 1){
+    if (fin == 1){
       quit = 0;
       printf("CRASH\n");
       break;
     }
 
-    if (crash_cote == 1){
+    if (fin == 2){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -476,23 +486,27 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
-              if (route[i][j] == 0) {
-                  rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
-                  SDL_RenderCopy(renderer, texture_point, NULL, &rectangle);
-              }
             }
           }
           SDL_RenderPresent(renderer);
       }
 
+      if (crash() == 1){
+        fin = 1;
+      }
+
+      if (crash_cote == 1){
+        fin = 2;
+      }
       decalage();
       obstacle_hard();
 
       if (vitesse > VITESSE_MAX_HARD){
-        vitesse = vitesse - 20;
+        vitesse = vitesse - 15;
         printf("Vitesse = %d\n",vitesse);
       }
+
+
 
     }
   }
