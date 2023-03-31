@@ -345,17 +345,14 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     SDL_RenderPresent(renderer);
     }
 
+
     SDL_DestroyTexture(texture);
     SDL_DestroyTexture(textTextureEasy);
     SDL_DestroyTexture(textTextureMedium);
     SDL_DestroyTexture(textTextureHard);
     SDL_DestroyTexture(textTextureRetour);
     SDL_DestroyTexture(textureCarGame);
-
-    SDL_FreeSurface(TextEasy);
-    SDL_FreeSurface(TextMedium);
-    SDL_FreeSurface(TextHard);
-    SDL_FreeSurface(TextRetour);
+    
     SDL_FreeSurface(carGame);
 
     TTF_CloseFont(police);
