@@ -65,7 +65,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
     }
 
-    /*Importation de la police*/
+    /*Importation des polices*/
     TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
     if (police == NULL)
     {
@@ -211,6 +211,16 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     while (program_launched)
     {
         SDL_Event event;
+        
+
+        SDL_Surface* textProfilCourant = TTF_RenderText_Blended(police, "Profil actuel : ", TextColor);
+        SDL_Surface* textProfilCourantName = TTF_RenderText_Blended(police, nomProfils[profilCourant], TextColor);
+        int textWidth = textProfilCourant->w + textProfilCourantName->w;
+        SDL_Texture* textureProfilCourant = SDL_CreateTextureFromSurface(renderer, textProfilCourant);
+        SDL_Rect rectProfilCourant = {(SCREEN_WIDTH / 2) - (textWidth / 2), 170, textProfilCourant->w, textProfilCourant->h };
+        SDL_Rect rectProfilCourantName = {rectProfilCourant.x + textProfilCourant->w, 170, textProfilCourantName->w, textProfilCourantName->h }; 
+        SDL_Texture* textureProfilCourantName = SDL_CreateTextureFromSurface(renderer, textProfilCourantName);
+
         
         if(nbProfils == 0){
             creationProfil(window, renderer);
@@ -389,7 +399,18 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_RenderCopy(renderer, textTextureChoose, NULL, &DistChooseProfile);
         SDL_RenderCopy(renderer, textTexture, NULL, &DistR);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
+        SDL_RenderCopy(renderer, textureProfilCourant, NULL, &rectProfilCourant);
+        SDL_RenderCopy(renderer, textureProfilCourantName, NULL, &rectProfilCourantName);
         SDL_RenderPresent(renderer);
+        
+        SDL_DestroyTexture(textureProfilCourant);
+        SDL_DestroyTexture(textureProfilCourantName);
+        SDL_FreeSurface(textProfilCourant);
+        SDL_FreeSurface(textProfilCourantName);
+        textureProfilCourant = NULL;
+        textProfilCourant = NULL;
+        textureProfilCourantName = NULL;
+        textProfilCourantName = NULL;
     }
 
     TTF_CloseFont(police);
@@ -399,6 +420,9 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     SDL_DestroyTexture(textTextureChoose);
     SDL_DestroyTexture(textTextureClassement);
     SDL_DestroyTexture(textTextureQuit);
+    SDL_DestroyTexture(textureCarGame);
+
+    SDL_FreeSurface(carGame);
 
     //Réinitialisation des pointeurs
     texture = NULL;
@@ -406,6 +430,8 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     textTextureChoose = NULL;
     textTextureClassement = NULL;
     textTextureQuit = NULL;
+    carGame = NULL;
+    textureCarGame = NULL;
     police = NULL;
     fontLogo = NULL;
 }

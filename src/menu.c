@@ -67,20 +67,18 @@ extern void readProfiles(){
     int i = 0;
 
     cleanProfiles();
-    printf("TEST3\n\n");
 
     if (fichier == NULL){
         printf("Erreur lors de l'ouverture du fichier\n");
     }
     else{   
         /*Lecture dans le fichier et assignation des valeurs dans les tableaux*/
-        printf("TEST\n\n");
         while(fscanf(fichier, "%d %d %s %d ", &numProfils[i], &pointsProfils[i], nomProfils[i], &nbPartiesProfils[i]) != EOF){
-            printf("TEST2\n\n");
             i++;
             nbProfils++;
         }
     }
+    fclose(fichier);
 }
 
 /**
@@ -120,32 +118,22 @@ extern void createProfile(char nomProfil[SIZE_NAME]){
  * @return void
 */
 extern void deleteProfil(int idProfil){
-    int i;
 
-    /* Affichage tableau avant supression */
-    printf("TABLEAU AVANT SUPRESSION\n\n");
-    for(i = 0; i < nbProfils; i++){
-        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
+    printf("nbProfils : %d\n\n", nbProfils);
+
+    if(idProfil == nbProfils - 1){
+        nbProfils--;
+    } else {
+        for(int i = idProfil; i < nbProfils - 1; i++){
+            numProfils[i] = numProfils[i+1];
+            pointsProfils[i] = pointsProfils[i+1];
+            strcpy(nomProfils[i], nomProfils[i+1]);
+            nbPartiesProfils[i] = nbPartiesProfils[i+1];
+        }
+        nbProfils--;
     }
 
-    for(i = idProfil; i < nbProfils; i++){
-        numProfils[i] = numProfils[i+1];
-        printf("test1\n");
-        pointsProfils[i] = pointsProfils[i+1];
-        printf("test2\n");
-        strcpy(nomProfils[i], nomProfils[i+1]);
-        printf("test3\n");
-        nbPartiesProfils[i] = nbPartiesProfils[i+1];
-        printf("test4\n");
-    }
-    nbProfils--;
-
-    /* Affichage tableau après supression */
-    printf("TABLEAU APRES SUPRESSION\n\n");
-    for(i = 0; i < nbProfils; i++){
-        printf("%d %d %s %d \n", numProfils[i], pointsProfils[i], nomProfils[i], nbPartiesProfils[i]);
-    }
-
+    printf("nbProfils : %d\n\n", nbProfils);
     saveGame(); // Sauvegarde les profils dans le fichier save.csv
     readProfiles(); // Met à jour les profils
 }
@@ -169,42 +157,4 @@ void cleanupGame(){
     }
     score = 0;
     cpt_distance = 0;
-}
-
-
-/**
- * @brief Fonction main : fonction de création du classement par points
- * @author Tom Marsura
- * @return int
-*/
-extern void classement()
-{
-    int i, j;
-    int maxIndex;
-
-    for (i = 0; i < nbProfils; i++) {
-        maxIndex = i;
-        for (j = i+1; j < nbProfils; j++) {
-            if (pointsProfils[j] > pointsProfils[maxIndex]) {
-                maxIndex = j;
-            }
-        }
-        // Échange des éléments à l'indice i et maxIndex pour tous les tableaux
-        int tmpPoints = pointsProfils[i];
-        pointsProfils[i] = pointsProfils[maxIndex];
-        pointsProfils[maxIndex] = tmpPoints;
-
-        char tmpNom[SIZE_NAME];
-        strcpy(tmpNom, nomProfils[i]);
-        strcpy(nomProfils[i], nomProfils[maxIndex]);
-        strcpy(nomProfils[maxIndex], tmpNom);
-
-        int tmpNum = numProfils[i];
-        numProfils[i] = numProfils[maxIndex];
-        numProfils[maxIndex] = tmpNum;
-
-        int tmpNbParties = nbPartiesProfils[i];
-        nbPartiesProfils[i] = nbPartiesProfils[maxIndex];
-        nbPartiesProfils[maxIndex] = tmpNbParties;
-    }
 }

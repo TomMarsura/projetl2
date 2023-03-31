@@ -54,7 +54,6 @@ int main(int argc, char *argv[])
 
     /*Creation de la texture*/
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
 
     if (texture == NULL)
     {
@@ -93,7 +92,6 @@ int main(int argc, char *argv[])
 
     SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, TextSurface);
 
-    SDL_FreeSurface(TextSurface);
 
     if (textTexture == NULL)
     {
@@ -106,9 +104,7 @@ int main(int argc, char *argv[])
     time = SDL_GetTicks();
     int Visible = 1;
 
-    int quit = 0;
-
-    while (!quit)
+    while (program_launched)
     {
         SDL_Event event;
         while (SDL_PollEvent(&event))
@@ -116,17 +112,16 @@ int main(int argc, char *argv[])
             switch (event.type)
             {
             case SDL_QUIT:
-                quit = 1;
-            break;
+                program_launched = SDL_FALSE;
+                break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.scancode)
                 {
                 case SDL_SCANCODE_ESCAPE:
-                    quit = 1;
+                    program_launched = SDL_FALSE;
                 break;
                 case SDL_SCANCODE_RETURN:
                     Lancement_menu(window, renderer);
-                    printf("Vous avez appuye sur la touche ENTRER\n");
                     break;
 
                 default:
@@ -155,6 +150,18 @@ int main(int argc, char *argv[])
     SDL_DestroyTexture(textTexture);
     SDL_DestroyTexture(texture);
     TTF_CloseFont(police);
+
+    SDL_FreeSurface(TextSurface);
+    TextSurface = NULL;
+    
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+    ImageStart = NULL;
+
+    //Réinitialisation des pointeurs
+    texture = NULL;
+    textTexture = NULL;
+    police = NULL;
+
     TTF_Quit();
 
     SDL_DestroyRenderer(renderer);

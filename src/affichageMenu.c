@@ -53,6 +53,22 @@ extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Importation de la police a echouee");
     }
 
+    TTF_Font *fontLogo = TTF_OpenFont("../fonts/police.TTF", 50);
+    if (fontLogo == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+    
+    /*Creation du texte*/
+
+    SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
+    SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
+    SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
+
 
     SDL_Surface *TextEasy = TTF_RenderText_Solid(police, "Easy", TextColor);
     if (TextEasy == NULL)
@@ -180,13 +196,13 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
 
     int quit = 0;
 
-    while(!quit){
+    while(!quit && program_launched){
         SDL_Event event;
 
         while(SDL_PollEvent(&event)){
             switch(event.type){
                 case SDL_QUIT:
-                    quit = 1;
+                    program_launched = SDL_FALSE;
                 break;
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym){
@@ -207,7 +223,9 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                     HardGame(window, renderer, profilCourant);
                                     quit = 1;
                                 }
-
+                                else if (position == 3){
+                                    quit = 1;
+                                }
                             break;
 
 
@@ -218,7 +236,6 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                             if (position > 3){
                                 position = 0;
                             }
-                            printf("Vous avez appuye sur la touche right\n%d\n", position);
                         break;
 
                         case SDLK_UP:
@@ -227,7 +244,6 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                             if (position < 0){
                                 position = 3;
                             }
-                            printf("Vous avez appuye sur la touche left\n%d\n", position);
 
                         break;
                     }
@@ -319,21 +335,46 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
             int alpha = VisibleRetour ? 255 : 0;
             SDL_SetTextureAlphaMod(textTextureRetour, alpha);
         }
-
-
-
-
-
-
-
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
     SDL_RenderCopy(renderer, textTextureHard, NULL, &DistHard);
     SDL_RenderCopy(renderer, textTextureMedium, NULL, &DistMedium);
     SDL_RenderCopy(renderer, textTextureEasy, NULL, &DistEasy);
+    SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
 
     SDL_RenderPresent(renderer);
     }
+
+    SDL_DestroyTexture(texture);
+    SDL_DestroyTexture(textTextureEasy);
+    SDL_DestroyTexture(textTextureMedium);
+    SDL_DestroyTexture(textTextureHard);
+    SDL_DestroyTexture(textTextureRetour);
+    SDL_DestroyTexture(textureCarGame);
+
+    SDL_FreeSurface(TextEasy);
+    SDL_FreeSurface(TextMedium);
+    SDL_FreeSurface(TextHard);
+    SDL_FreeSurface(TextRetour);
+    SDL_FreeSurface(carGame);
+
+    TTF_CloseFont(police);
+    TTF_CloseFont(fontLogo);
+
+    //Réinitialisation des pointeurs
+    texture = NULL;
+    textTextureEasy = NULL;
+    textTextureMedium = NULL;
+    textTextureHard = NULL;
+    textTextureRetour = NULL;
+    textureCarGame = NULL;
+    TextEasy = NULL;
+    TextMedium = NULL;
+    TextHard = NULL;
+    TextRetour = NULL;
+    carGame = NULL;
+    police = NULL;
+    fontLogo = NULL;
 }
 
 /**
@@ -376,7 +417,7 @@ extern void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
     }
 
-    /*Importation de la police*/
+    /*Importation des polices*/
     TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
     if (police == NULL)
     {
@@ -386,6 +427,15 @@ extern void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Importation de la police a echouee");
     }
 
+    TTF_Font *fontLogo = TTF_OpenFont("../fonts/police.TTF", 50);
+    if (fontLogo == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
 
     SDL_Surface *TextCree = TTF_RenderText_Solid(police, "Cree", TextColor);
     if (TextCree == NULL)
@@ -397,20 +447,26 @@ extern void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Le texte sur la surface a echouee");
     }
 
-        SDL_Rect DistCree = {90, 300, TextCree->w, TextCree->h};
+    /*Creation du texte*/
 
-        SDL_Texture *textTextureCree = SDL_CreateTextureFromSurface(renderer, TextCree);
+    SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
+    SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
+    SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
 
-        SDL_FreeSurface(TextCree);
+    SDL_Rect DistCree = {90, 300, TextCree->w, TextCree->h};
 
-        if (textTextureCree == NULL)
-        {
-            TTF_CloseFont(police);
-            SDL_DestroyTexture(texture);
-            SDL_DestroyRenderer(renderer);
-            SDL_DestroyWindow(window);
-            SDL_ExitWithMessage("Impossible de charger la texture du texte");
-        }
+    SDL_Texture *textTextureCree = SDL_CreateTextureFromSurface(renderer, TextCree);
+
+    SDL_FreeSurface(TextCree);
+
+    if (textTextureCree == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
 
 /*.....................................................................................................................................*/
 
@@ -511,13 +567,13 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
     int quit = 0;
 
-    while(!quit){
+    while(!quit && program_launched){
         SDL_Event event;
 
         while(SDL_PollEvent(&event)){
             switch(event.type){
                 case SDL_QUIT:
-                    quit = 1;
+                    program_launched = SDL_FALSE;
                 break;
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym){
@@ -648,13 +704,14 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
             SDL_SetTextureAlphaMod(textTextureRetour, alpha);
         }
 
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
-    SDL_RenderCopy(renderer, textTextureSupr, NULL, &DistSupr);
-    SDL_RenderCopy(renderer, textTextureChoisir, NULL, &DistChoisir);
-    SDL_RenderCopy(renderer, textTextureCree, NULL, &DistCree);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
+        SDL_RenderCopy(renderer, textTextureSupr, NULL, &DistSupr);
+        SDL_RenderCopy(renderer, textTextureChoisir, NULL, &DistChoisir);
+        SDL_RenderCopy(renderer, textTextureCree, NULL, &DistCree);
+        SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
 
-    SDL_RenderPresent(renderer);
+        SDL_RenderPresent(renderer);
     }
 
     /*Destruction*/
@@ -663,6 +720,27 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
     SDL_DestroyTexture(textTextureSupr);
     SDL_DestroyTexture(textTextureChoisir);
     SDL_DestroyTexture(textTextureCree);
+    SDL_DestroyTexture(textureCarGame);
+    SDL_DestroyTexture(texture);
+    
+    SDL_FreeSurface(carGame);
 
     TTF_CloseFont(police);
+    TTF_CloseFont(fontLogo);
+
+    //Réinitialisation des pointeurs
+    textTextureRetour = NULL;
+    textTextureSupr = NULL;
+    textTextureChoisir = NULL;
+    textTextureCree = NULL;
+    textureCarGame = NULL;
+    texture = NULL;
+    carGame = NULL;
+    ImageStart = NULL;
+    TextRetour = NULL;
+    TextSupr = NULL;
+    TextChoisir = NULL;
+    TextCree = NULL;
+    police = NULL;
+    fontLogo = NULL;
 }

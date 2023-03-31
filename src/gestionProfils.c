@@ -52,11 +52,11 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
  
  
     // Boucle principale
-    while (!quit) {
+    while (!quit && program_launched) {
         // Gestion des événements
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                quit = 1;
+                program_launched = SDL_FALSE;
             } else if (event.type == SDL_KEYDOWN) {
                 if (event.key.keysym.sym == SDLK_RIGHT){
                     position++;
@@ -195,33 +195,8 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
  
  
     // Boucle principale
-    while (!quit) {
-        // Gestion des événements
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                quit = 1;
-            } else if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_RIGHT){
-                    position++;
-                    if(position >= nbProfils){
-                        position = 0;
-                    }
-                }
-                else if (event.key.keysym.sym == SDLK_LEFT){
-                    position--;
-                    if(position < 0){
-                        position = nbProfils - 1;
-                    }
-                }
-                else if (event.key.keysym.sym == SDLK_RETURN){
-                    deleteProfil(position);
-                    quit = 1;
-                }
-                else if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    quit = 1;
-                }
-            }
-        }
+    while (!quit && program_launched) {
+        
  
         // Dessine le fond gris
         SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
@@ -252,6 +227,36 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
         SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
  
+        // Gestion des événements
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                program_launched = SDL_FALSE;
+            } else if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_RIGHT){
+                    position++;
+                    if(position >= nbProfils){
+                        position = 0;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_LEFT){
+                    position--;
+                    if(position < 0){
+                        position = nbProfils - 1;
+                    }
+                }
+                else if (event.key.keysym.sym == SDLK_RETURN){
+                    deleteProfil(position);
+                    if (position == profilCourant){
+                        profilCourant = 0;
+                    }
+                    quit = 1;
+                }
+                else if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    quit = 1;
+                }
+            }
+        }
+
         // Afficher la texture
         SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
@@ -335,14 +340,14 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
 
     fontLogo = TTF_OpenFont("../fonts/police.TTF", font_size + 20);
 
-    if (font == NULL) {
+    if (fontLogo == NULL) {
         fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
         return 1;
     }
 
     fontFooter = TTF_OpenFont("../fonts/police.TTF", font_size - 20);
 
-    if (font == NULL) {
+    if (fontFooter == NULL) {
         fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
         return 1;
     }
@@ -361,11 +366,11 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     SDL_Texture* textureErreurNbProfils = SDL_CreateTextureFromSurface(renderer, erreurNbProfils);
 
     // Boucle principale
-    while (!quit) {
+    while (!quit && program_launched) {
         // Gestion des événements
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                quit = 1;
+                program_launched = SDL_FALSE;
             } else if (event.type == SDL_TEXTINPUT) {
                 if (text_input_length < SIZE_NAME - 1) {
                     text_input[text_input_length] = event.text.text[0];
@@ -426,6 +431,7 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
                 }
             }
         }
+        
         // Effacement de l'écran
         SDL_RenderClear(renderer);
 

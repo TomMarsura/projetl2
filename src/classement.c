@@ -7,6 +7,43 @@
 #include "../lib/menu.h"
 
 /**
+ * @brief Fonction main : fonction de création du classement par points
+ * @author Tom Marsura
+ * @return int
+*/
+extern void classement()
+{
+    int i, j;
+    int maxIndex;
+
+    for (i = 0; i < nbProfils; i++) {
+        maxIndex = i;
+        for (j = i+1; j < nbProfils; j++) {
+            if (pointsProfils[j] > pointsProfils[maxIndex]) {
+                maxIndex = j;
+            }
+        }
+        // Échange des éléments à l'indice i et maxIndex pour tous les tableaux
+        int tmpPoints = pointsProfils[i];
+        pointsProfils[i] = pointsProfils[maxIndex];
+        pointsProfils[maxIndex] = tmpPoints;
+
+        char tmpNom[SIZE_NAME];
+        strcpy(tmpNom, nomProfils[i]);
+        strcpy(nomProfils[i], nomProfils[maxIndex]);
+        strcpy(nomProfils[maxIndex], tmpNom);
+
+        int tmpNum = numProfils[i];
+        numProfils[i] = numProfils[maxIndex];
+        numProfils[maxIndex] = tmpNum;
+
+        int tmpNbParties = nbPartiesProfils[i];
+        nbPartiesProfils[i] = nbPartiesProfils[maxIndex];
+        nbPartiesProfils[maxIndex] = tmpNbParties;
+    }
+}
+
+/**
  * @author Tom Marsura
  * @return void
 */
@@ -18,7 +55,7 @@
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_KEYDOWN:
-                    if (event.key.keysym.sym == SDLK_BACKSPACE) {
+                    if (event.key.keysym.sym == SDLK_ESCAPE) {
                         quit = 1;
                     }
                     break;
@@ -69,6 +106,13 @@ extern void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
     {
         printf("Erreur de chargement de la police d'écriture : %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
+    }
+
+    TTF_Font* fontFooter = TTF_OpenFont("../fonts/police.TTF", 10);
+
+    if (fontFooter == NULL) {
+        fprintf(stderr, "Erreur TTF_OpenFont : %s", TTF_GetError());
+        return ;
     }
 
     // Couleur du texte
@@ -164,6 +208,7 @@ extern void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
             SDL_Surface* name = TTF_RenderText_Blended(police, nomProfils[i], couleur);
             SDL_Surface* points = TTF_RenderText_Blended(police, pointsTab[i], couleur);
             SDL_Surface* parties = TTF_RenderText_Blended(police, partiesTab[i], couleur);
+            SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", couleur);
             if (!name)
             {
                 printf("Erreur de création de la surface : %s\n", SDL_GetError());
@@ -175,6 +220,7 @@ extern void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
             SDL_Texture* textureName = SDL_CreateTextureFromSurface(renderer, name);
             SDL_Texture* texturePoints = SDL_CreateTextureFromSurface(renderer, points);
             SDL_Texture* textureParties = SDL_CreateTextureFromSurface(renderer, parties);
+            SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
             if (!textureName)
             {
                 printf("Erreur de création de la texture : %s\n", SDL_GetError());
@@ -190,32 +236,38 @@ extern void afficherTableau(SDL_Window* window, SDL_Renderer* renderer)
             SDL_Rect rectName = {0.90 * SCREEN_WIDTH / 4, 50 + i * 30, name->w, name->h};
             SDL_Rect rectPoints = { 2.60 * SCREEN_WIDTH / 4 - points->w, 50 + i * 30, points->w, points->h };
             SDL_Rect rectParties = { 3.5 * SCREEN_WIDTH / 4 - parties->w, 50 + i * 30, parties->w, parties->h };
+            SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
 
             // Afficher la texture
             SDL_RenderCopy(renderer, texturePlace, NULL, &rectI);
             SDL_RenderCopy(renderer, textureName, NULL, &rectName);
             SDL_RenderCopy(renderer, texturePoints, NULL, &rectPoints);
             SDL_RenderCopy(renderer, textureParties, NULL, &rectParties);
+            SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
 
             // Libérer la surface et la texture
             SDL_FreeSurface(place);
             SDL_FreeSurface(name);
             SDL_FreeSurface(points);
             SDL_FreeSurface(parties);
+            SDL_FreeSurface(escape);
             SDL_DestroyTexture(texturePlace);
             SDL_DestroyTexture(textureName);
             SDL_DestroyTexture(texturePoints);
             SDL_DestroyTexture(textureParties);
+            SDL_DestroyTexture(textureEscape);
 
             //Réinitialisation des pointeurs
             place = NULL;
             name = NULL;
             points = NULL;
             parties = NULL;
+            escape = NULL;
             texturePlace = NULL;
             textureName = NULL;
             texturePoints = NULL;
             textureParties = NULL;
+            textureEscape = NULL;
         }
 
         // Mettre à jour l'écran
