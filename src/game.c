@@ -14,6 +14,7 @@
 #include "../lib/game.h"
 #include "../lib/menu.h"
 #include "../lib/fonctions_game.h"
+#include "../lib/affichageMenu.h"
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -29,16 +30,16 @@
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Easy.
  * @return void
 */
-extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
+extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
 
   initGame();
 
   // Initialiser SDL
-  SDL_Init(SDL_INIT_VIDEO);
+  /*SDL_Init(SDL_INIT_VIDEO);
 
-  IMG_Init(IMG_INIT_JPG);
+  IMG_Init(IMG_INIT_JPG);*/
 
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
@@ -86,12 +87,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
     if (fin == 1){
       quit = 0;
       printf("CRASH\n");
+      CrashMessage(window,renderer,score);
       break;
     }
 
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
+      CrashMessage(window,renderer,score);
       break;
     }
 
@@ -227,7 +230,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium
  * @return void
 */
-extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
+extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
 
@@ -284,6 +287,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
     if (fin == 1){
       quit = 0;
       printf("CRASH\n");
+
       break;
     }
 
@@ -423,7 +427,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard.
  * @return void
 */
-extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
+extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
 

@@ -19,9 +19,9 @@ extern int cpt_distance;
 
 #include <SDL2/SDL.h>
 /* Prototype des fonctions */
-extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
-extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
-extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil);
+extern void easyGame(SDL_Window* window, SDL_Renderer* renderer);
+extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer);
+extern void HardGame(SDL_Window* window, SDL_Renderer* renderer);
 
 
 
