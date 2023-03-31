@@ -60,7 +60,7 @@ extern int nb_obstacle(){
   int i;
 
   for (i=0;i< LARGEUR ;i++){
-    if (route[1][i] == 2){
+    if (route[1][i] > 1){
       nb++;
     }
   }
@@ -79,7 +79,7 @@ extern int position_libre(){
   int i;
 
   for (i=0;i< LARGEUR-1 ;i++){
-    if (route[1][i] != 2){
+    if (route[1][i] < 2){
       pos = i;
     }
   }
