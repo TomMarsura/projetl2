@@ -119,16 +119,18 @@ extern void obstacle_hard(){
   if ((apparition > 50) && (lignes_succesives < 2)){
 
     /* On a un seul obbstacle a ajouter*/
-    if(nb_obstacle_ligne>33){
+    if(nb_obstacle_ligne>3){
 
       if (nb_obstacle() < 2){
-        route[0][position1] = 2;
+        int tirage = rand()%4 + 2;
+        route[0][position1] = tirage;
         lignes_succesives++;
       }
 
       else if (nb_obstacle() == 2){
         if (position1 != position_libre()){
-          route[0][position1] = 2;
+          int tirage = rand()%4 + 2;
+          route[0][position1] = tirage;
           lignes_succesives++;
         }
       }
@@ -148,8 +150,9 @@ extern void obstacle_hard(){
 
         else if (nb_obstacle() == 1){
           if ((position1 == position_libre() || (position2 == position_libre()))){
-            route[0][position1] = 2;
-            route[0][position2] = 2;
+            int tirage = rand()%4 + 2;
+            route[0][position1] = tirage;
+            route[0][position2] = tirage;
             lignes_succesives++;
             double_obs_succ ++;
           }
@@ -157,8 +160,9 @@ extern void obstacle_hard(){
 
         else if (nb_obstacle() == 2){
           if ((position1 =! position_libre()) && (position2 =! position_libre())){
-            route[0][position1] = 2;
-            route[0][position2] = 2;
+            int tirage = rand()%4 + 2;
+            route[0][position1] = tirage;
+            route[0][position2] = tirage;
             lignes_succesives++;
             double_obs_succ ++;
           }
@@ -190,7 +194,8 @@ extern void obstacle_easy(){
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
   if ((apparition > 50) && (lignes_succesives < 2)){
-    route[0][position] = 2;
+    int tirage = rand()%4 + 2;
+    route[0][position] = tirage;
     lignes_succesives++;
   }
   else{
@@ -211,7 +216,7 @@ extern int crash(){
 
   for (i=0; i<LARGEUR ; i++){
     /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
-    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 2)){
+    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] > 1)){
       /* On retourne 1 pour signnfier le crash */
       return 1;
     }

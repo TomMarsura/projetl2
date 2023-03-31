@@ -43,6 +43,15 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
+  SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
+  SDL_Texture * texture_obstacle_dog = SDL_CreateTextureFromSurface(renderer,img_obstacle_dog);
+
+  SDL_Surface * img_obstacle_kid = IMG_Load("../img/kid.png");
+  SDL_Texture * texture_obstacle_kid = SDL_CreateTextureFromSurface(renderer,img_obstacle_kid);
+
+  SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
+  SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
+
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
@@ -78,7 +87,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
       break;
     }
 
-    if (fin == 2){
+    if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -103,7 +112,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture++;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -117,7 +126,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture--;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -143,10 +152,25 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
               }
-              if (route[i][j] == 2) {
+              if (route[i][j] == 2) {                  
                   rectangle.x = startX + j * 160; // Position horizontale de la case
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
+              }
+              if (route[i][j] == 3) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
+              }
+              if (route[i][j] == 4) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
+              }
+              if (route[i][j] == 5) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
@@ -212,6 +236,15 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
+  SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
+  SDL_Texture * texture_obstacle_dog = SDL_CreateTextureFromSurface(renderer,img_obstacle_dog);
+
+  SDL_Surface * img_obstacle_kid = IMG_Load("../img/kid.png");
+  SDL_Texture * texture_obstacle_kid = SDL_CreateTextureFromSurface(renderer,img_obstacle_kid);
+
+  SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
+  SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
+
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
@@ -247,7 +280,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
       break;
     }
 
-    if (fin == 2){
+    if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -272,7 +305,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture++;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -286,7 +319,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture--;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -312,10 +345,25 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
               }
-              if (route[i][j] == 2) {
+              if (route[i][j] == 2) {                  
                   rectangle.x = startX + j * 160; // Position horizontale de la case
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
+              }
+              if (route[i][j] == 3) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
+              }
+              if (route[i][j] == 4) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
+              }
+              if (route[i][j] == 5) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
@@ -381,6 +429,15 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
+  SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
+  SDL_Texture * texture_obstacle_dog = SDL_CreateTextureFromSurface(renderer,img_obstacle_dog);
+
+  SDL_Surface * img_obstacle_kid = IMG_Load("../img/kid.png");
+  SDL_Texture * texture_obstacle_kid = SDL_CreateTextureFromSurface(renderer,img_obstacle_kid);
+
+  SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
+  SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
+
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
@@ -416,7 +473,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
       break;
     }
 
-    if (fin == 2){
+    if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
       break;
@@ -441,7 +498,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture++;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -455,7 +512,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                 if (crash_cote == 0){
                   position_voiture--;
 
-                  if (route[HAUTEUR-1][position_voiture] == 2){
+                  if (route[HAUTEUR-1][position_voiture] > 1){
                     crash_cote = 1;
                   }
                   printf(" Crash cote = %d\n",crash_cote);
@@ -481,10 +538,25 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer, int profil){
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
               }
-              if (route[i][j] == 2) {
+              if (route[i][j] == 2) {                  
                   rectangle.x = startX + j * 160; // Position horizontale de la case
                   rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
+              }
+              if (route[i][j] == 3) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
+              }
+              if (route[i][j] == 4) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
+              }
+              if (route[i][j] == 5) {                  
+                  rectangle.x = startX + j * 160; // Position horizontale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
