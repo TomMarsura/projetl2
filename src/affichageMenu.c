@@ -749,7 +749,7 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
  * @author Ayoub Laaribi
  * @return void
 */
-void CrashMessage(SDL_Window* window, SDL_Renderer* renderer,int score){
+void CrashMessage(SDL_Window* window, SDL_Renderer* renderer, int score, int mode){
 SDL_Color TextColor;
     TextColor.r = 255;
     TextColor.g = 255;
@@ -946,7 +946,7 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         sprintf(point[0],"%d",score);
         
          SDL_Surface* points = TTF_RenderText_Blended(policeChoix, point[0], TextColor);
-         if (!point)
+         if (points == NULL)
             {
                 printf("Erreur de création de la surface : %s\n", SDL_GetError());
                 exit(EXIT_FAILURE);
@@ -972,7 +972,7 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         sprintf(partie[0],"%d",nbPartiesProfils[profilCourant]);
         
          SDL_Surface* parties = TTF_RenderText_Blended(policeChoix, partie[0], TextColor);
-         if (!point)
+         if (parties == NULL)
             {
                 printf("Erreur de création de la surface : %s\n", SDL_GetError());
                 exit(EXIT_FAILURE);
@@ -1016,7 +1016,18 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
                             case SDLK_RETURN:
                                 if(position == 0){
                                     /*quitter*/
-                                    choice_difficult(window,renderer);
+                                    if(mode == 0){
+                                        easyGame(window, renderer);
+                                        quit = 1;
+                                    }
+                                    else if(mode == 1){
+                                        MediumGame(window, renderer);
+                                        quit = 1;
+                                    }
+                                    else if(mode == 2){
+                                        HardGame(window, renderer);
+                                        quit = 1;
+                                    }
                                 }else if( position == 1){
                                     quit = 1;
                                 }

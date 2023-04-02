@@ -87,14 +87,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin == 1){
       quit = 0;
       printf("CRASH\n");
-      CrashMessage(window,renderer,score);
+      CrashMessage(window,renderer,score, 0);
       break;
     }
 
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
-      CrashMessage(window,renderer,score);
+      CrashMessage(window,renderer,score, 0);
       break;
     }
 
@@ -287,6 +287,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin == 1){
       quit = 0;
       printf("CRASH\n");
+      CrashMessage(window,renderer,score, 1);
 
       break;
     }
@@ -294,6 +295,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
+      CrashMessage(window,renderer,score, 1);
       break;
     }
 
@@ -484,12 +486,15 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin == 1){
       quit = 0;
       printf("CRASH\n");
+      CrashMessage(window,renderer,score, 2);
       break;
     }
 
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
+      
+      CrashMessage(window,renderer,score, 2);
       break;
     }
 
