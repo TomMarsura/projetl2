@@ -36,11 +36,6 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   initGame();
 
-  // Initialiser SDL
-  /*SDL_Init(SDL_INIT_VIDEO);
-
-  IMG_Init(IMG_INIT_JPG);*/
-
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
@@ -59,6 +54,20 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* fond = IMG_Load("../img/route.png");
   SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
+  SDL_Color TextColor;
+  TextColor.r = 255;
+  TextColor.g = 255;
+  TextColor.b = 255;
+
+  char scoreText[50];
+  sprintf(scoreText, "Score: %d", score);
+  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+
+
   SDL_Rect rectangle;
 
   rectangle.w = rectangle.h = 90; // Taille de chaque case de la matrice
@@ -70,12 +79,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
 
+
   SDL_Event event;
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
   int fin = 0;
   int score = 0;
+  float a = 0;
 
 
   int vitesse = VITESSE_DEPART;
@@ -101,8 +112,15 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
     else{
 
       int start_time = SDL_GetTicks();
+      float increment_a = 1.2; // Initialisation de l'incrément
+      int time_interval = vitesse / 90; // Temps entre chaque incrémentation
+      a = 0;
 
       while ((SDL_GetTicks() - start_time) < vitesse) {
+
+        if ((SDL_GetTicks() - start_time) % time_interval == 0) {
+          a += increment_a;
+        }
 
         while (SDL_PollEvent(&event)) {
 
@@ -159,26 +177,32 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
               }
               if (route[i][j] == 2) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
               if (route[i][j] == 3) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
               }
               if (route[i][j] == 4) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
               }
               if (route[i][j] == 5) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
+          // Convertir le score en une chaîne de caractères
+          sprintf(scoreText, "Score: %d", score);
+          surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+          scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+          SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
+
           SDL_RenderPresent(renderer);
         }
 
@@ -212,6 +236,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   fond = NULL;
   SDL_FreeSurface(img_obstacle);
   img_obstacle = NULL;
+  SDL_FreeSurface(surfaceMessage);
+  surfaceMessage = NULL;
+
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -219,6 +246,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_route = NULL;
   SDL_DestroyTexture(texture_obstacle);
   texture_obstacle = NULL;
+  SDL_DestroyTexture(scoreTexture);
+  scoreTexture = NULL;
 
   IMG_Quit();
 }
@@ -235,11 +264,6 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   srand(time(NULL));
 
   initGame();
-
-  // Initialiser SDL
-  SDL_Init(SDL_INIT_VIDEO);
-
-  IMG_Init(IMG_INIT_JPG);
 
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
@@ -259,6 +283,20 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* fond = IMG_Load("../img/route.png");
   SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
+  SDL_Color TextColor;
+  TextColor.r = 255;
+  TextColor.g = 255;
+  TextColor.b = 255;
+
+  char scoreText[50];
+  sprintf(scoreText, "Score: %d", score);
+  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+
+
   SDL_Rect rectangle;
 
   rectangle.w = rectangle.h = 90; // Taille de chaque case de la matrice
@@ -270,12 +308,14 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
 
+
   SDL_Event event;
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
   int fin = 0;
   int score = 0;
+  float a = 0;
 
 
   int vitesse = VITESSE_DEPART;
@@ -288,7 +328,6 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
       quit = 0;
       printf("CRASH\n");
       CrashMessage(window,renderer,score, 1);
-
       break;
     }
 
@@ -302,8 +341,15 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
     else{
 
       int start_time = SDL_GetTicks();
+      float increment_a = 1.2; // Initialisation de l'incrément
+      int time_interval = vitesse / 90; // Temps entre chaque incrémentation
+      a = 0;
 
       while ((SDL_GetTicks() - start_time) < vitesse) {
+
+        if ((SDL_GetTicks() - start_time) % time_interval == 0) {
+          a += increment_a;
+        }
 
         while (SDL_PollEvent(&event)) {
 
@@ -360,28 +406,35 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
               }
               if (route[i][j] == 2) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
               if (route[i][j] == 3) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
               }
               if (route[i][j] == 4) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
               }
               if (route[i][j] == 5) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
+          // Convertir le score en une chaîne de caractères
+          sprintf(scoreText, "Score: %d", score);
+          surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+          scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+          SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
+
           SDL_RenderPresent(renderer);
-      }
+        }
+
 
       if (crash() == 1){
         fin = 1;
@@ -401,6 +454,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
       score++;
 
 
+
     }
   }
 
@@ -411,6 +465,9 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   fond = NULL;
   SDL_FreeSurface(img_obstacle);
   img_obstacle = NULL;
+  SDL_FreeSurface(surfaceMessage);
+  surfaceMessage = NULL;
+
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -418,6 +475,8 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_route = NULL;
   SDL_DestroyTexture(texture_obstacle);
   texture_obstacle = NULL;
+  SDL_DestroyTexture(scoreTexture);
+  scoreTexture = NULL;
 
   IMG_Quit();
 }
@@ -434,11 +493,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   srand(time(NULL));
 
   initGame();
-
-  // Initialiser SDL
-  SDL_Init(SDL_INIT_VIDEO);
-
-  IMG_Init(IMG_INIT_JPG);
 
   SDL_Surface* car = IMG_Load("../img/car.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
@@ -458,6 +512,20 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* fond = IMG_Load("../img/route.png");
   SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
+  SDL_Color TextColor;
+  TextColor.r = 255;
+  TextColor.g = 255;
+  TextColor.b = 255;
+
+  char scoreText[50];
+  sprintf(scoreText, "Score: %d", score);
+  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+
+
   SDL_Rect rectangle;
 
   rectangle.w = rectangle.h = 90; // Taille de chaque case de la matrice
@@ -469,12 +537,14 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
 
+
   SDL_Event event;
   int quit = 1;
   int crash_cote = 0;
   int position_voiture = 1;
   int fin = 0;
   int score = 0;
+  float a = 0;
 
 
   int vitesse = VITESSE_DEPART;
@@ -493,7 +563,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
-      
       CrashMessage(window,renderer,score, 2);
       break;
     }
@@ -501,8 +570,15 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
     else{
 
       int start_time = SDL_GetTicks();
+      float increment_a = 1.2; // Initialisation de l'incrément
+      int time_interval = vitesse / 90; // Temps entre chaque incrémentation
+      a = 0;
 
       while ((SDL_GetTicks() - start_time) < vitesse) {
+
+        if ((SDL_GetTicks() - start_time) % time_interval == 0) {
+          a += increment_a;
+        }
 
         while (SDL_PollEvent(&event)) {
 
@@ -559,28 +635,35 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
               }
               if (route[i][j] == 2) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
               if (route[i][j] == 3) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
               }
               if (route[i][j] == 4) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
               }
               if (route[i][j] == 5) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100; // Position verticale de la case
+                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }
           }
+          // Convertir le score en une chaîne de caractères
+          sprintf(scoreText, "Score: %d", score);
+          surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+          scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+          SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
+
           SDL_RenderPresent(renderer);
-      }
+        }
+
 
       if (crash() == 1){
         fin = 1;
@@ -593,11 +676,13 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
       obstacle_hard();
 
       if (vitesse > VITESSE_MAX_HARD){
-        vitesse = vitesse - 15;
+        vitesse = vitesse - 10;
         printf("Vitesse = %d\n",vitesse);
       }
 
       score++;
+
+
 
     }
   }
@@ -609,6 +694,9 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   fond = NULL;
   SDL_FreeSurface(img_obstacle);
   img_obstacle = NULL;
+  SDL_FreeSurface(surfaceMessage);
+  surfaceMessage = NULL;
+
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -616,6 +704,8 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_route = NULL;
   SDL_DestroyTexture(texture_obstacle);
   texture_obstacle = NULL;
+  SDL_DestroyTexture(scoreTexture);
+  scoreTexture = NULL;
 
   IMG_Quit();
 }
