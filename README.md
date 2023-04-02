@@ -46,3 +46,13 @@ Lorsque le projet a été compiler avec succés, rendez-vous dans le repertoire 
 `./main`
 
 Enfin il ne vous reste plus qu'a vous amusez !
+
+## Partie tests
+
+Pour éxecuter les tests il vous suffit de vous rendre dans le repertoire projetl2 et de compiler le test seulement avec la commande :
+
+`make test_profils`
+
+Un exécutable sera placé dans le dossier tests et vous pourrez effectuer les tests disponibles.
+
+❗Le fichier de sauvegarde sera modifié si vous ajoutez un nouveau profil dans le programme de test.
