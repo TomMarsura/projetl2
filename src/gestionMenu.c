@@ -91,7 +91,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
     SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
 
-    SDL_Surface *TextPlay = TTF_RenderText_Solid(police, "Jouer", TextColor);
+    SDL_Surface *TextPlay = TTF_RenderText_Solid(police, "Play", TextColor);
     if (TextPlay == NULL)
     {
         TTF_CloseFont(police);
@@ -118,7 +118,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
-    SDL_Surface* ChooseProfile = TTF_RenderText_Solid(police, "Gestion profil", TextColor);
+    SDL_Surface* ChooseProfile = TTF_RenderText_Solid(police, "Profils", TextColor);
     if (ChooseProfile == NULL)
     {
         TTF_CloseFont(police);
@@ -172,7 +172,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-    SDL_Surface *Quit = TTF_RenderText_Solid(police, "Quitter", TextColor);
+    SDL_Surface *Quit = TTF_RenderText_Solid(police, "Quit", TextColor);
     if (Quit == NULL)
     {
         TTF_CloseFont(police);
