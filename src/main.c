@@ -8,11 +8,14 @@
 
 #include "../lib/gestionMenu.h"
 #include "../lib/sdl.h"
+#include "../lib/menu.h"
 
 /*FONCTION PRINCIPAL*/
 
 int main(int argc, char *argv[])
 {
+    initProfils();
+
     /*initialisation*/
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 

@@ -41,6 +41,10 @@ extern void initGame(){
     route[4][1] = 1;
     score = 0;
     cpt_distance = 0;
+}
+
+extern void initProfils(){
+    readProfiles();
     profilCourant = 0;
 }
 
