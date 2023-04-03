@@ -95,47 +95,47 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_RenderDrawRect(renderer, &text_back);
  
         //Affichage textes
-        SDL_Surface* createProfil = TTF_RenderText_Blended(font, "Choisissez votre profil", white);
+        SDL_Surface* choixProfil = TTF_RenderText_Blended(font, "Choisissez votre profil", white);
         SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", white);
         SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", white);
  
         // Créer une texture à partir de la surface
-        SDL_Texture* textureCreateProfil = SDL_CreateTextureFromSurface(renderer, createProfil);
+        SDL_Texture* texturechoixProfil = SDL_CreateTextureFromSurface(renderer, choixProfil);
         SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
         SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
  
         // Créer un rectangle pour la texture
-        SDL_Rect rectCreateProfil = {(SCREEN_WIDTH - createProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, createProfil->w, createProfil->h };
+        SDL_Rect rectchoixProfil = {(SCREEN_WIDTH - choixProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, choixProfil->w, choixProfil->h };
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
         SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
  
         // Afficher la texture
-        SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
+        SDL_RenderCopy(renderer, texturechoixProfil, NULL, &rectchoixProfil);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
         SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
         SDL_RenderCopy(renderer, text_texture, NULL, &text_rect);
  
         // Rafraîchissement de l'écran
         SDL_RenderPresent(renderer);
-        SDL_DestroyTexture(textureCreateProfil);
+        SDL_DestroyTexture(texturechoixProfil);
         SDL_DestroyTexture(textureCarGame);
         SDL_DestroyTexture(textureEscape);
         SDL_DestroyTexture(text_texture);
         SDL_FreeSurface(text_surface);
         SDL_FreeSurface(escape);
         SDL_FreeSurface(carGame);
-        SDL_FreeSurface(createProfil);
+        SDL_FreeSurface(choixProfil);
 
         // Réinitialisation des pointeurs
         text_surface = NULL;
         text_texture = NULL;
-        textureCreateProfil = NULL;
+        texturechoixProfil = NULL;
         textureCarGame = NULL;
         textureEscape = NULL;
         text_texture = NULL;
         escape = NULL;
         carGame = NULL;
-        createProfil = NULL;
+        choixProfil = NULL;
     }
  
     TTF_CloseFont(font);
@@ -213,17 +213,17 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_RenderDrawRect(renderer, &text_back);
  
         //Affichage textes
-        SDL_Surface* createProfil = TTF_RenderText_Blended(font, "Choisissez le profil à supprimer", white);
+        SDL_Surface* delProfil = TTF_RenderText_Blended(font, "Choisissez le profil à supprimer", white);
         SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", white);
         SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", white);
  
         // Créer une texture à partir de la surface
-        SDL_Texture* textureCreateProfil = SDL_CreateTextureFromSurface(renderer, createProfil);
+        SDL_Texture* texturedelProfil = SDL_CreateTextureFromSurface(renderer, delProfil);
         SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
         SDL_Texture* textureEscape = SDL_CreateTextureFromSurface(renderer, escape);
  
         // Créer un rectangle pour la texture
-        SDL_Rect rectCreateProfil = {(SCREEN_WIDTH - createProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, createProfil->w, createProfil->h };
+        SDL_Rect rectdelProfil = {(SCREEN_WIDTH - delProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, delProfil->w, delProfil->h };
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
         SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
  
@@ -258,32 +258,32 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         }
 
         // Afficher la texture
-        SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
+        SDL_RenderCopy(renderer, texturedelProfil, NULL, &rectdelProfil);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
         SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
         SDL_RenderCopy(renderer, text_texture, NULL, &text_rect);
  
         // Rafraîchissement de l'écran
         SDL_RenderPresent(renderer);
-        SDL_DestroyTexture(textureCreateProfil);
+        SDL_DestroyTexture(texturedelProfil);
         SDL_DestroyTexture(textureCarGame);
         SDL_DestroyTexture(textureEscape);
         SDL_DestroyTexture(text_texture);
         SDL_FreeSurface(text_surface);
         SDL_FreeSurface(escape);
         SDL_FreeSurface(carGame);
-        SDL_FreeSurface(createProfil);
+        SDL_FreeSurface(delProfil);
 
         // Réinitialisation des pointeurs
         text_surface = NULL;
         text_texture = NULL;
-        textureCreateProfil = NULL;
+        texturedelProfil = NULL;
         textureCarGame = NULL;
         textureEscape = NULL;
         text_texture = NULL;
         escape = NULL;
         carGame = NULL;
-        createProfil = NULL;
+        delProfil = NULL;
     }
  
     TTF_CloseFont(font);
