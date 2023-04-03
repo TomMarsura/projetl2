@@ -43,11 +43,6 @@ extern void initGame(){
     cpt_distance = 0;
 }
 
-extern void initProfils(){
-    readProfiles();
-    profilCourant = 0;
-}
-
 extern void cleanProfiles(){
     for(int i = 0; i < MAX_PROFILS; i++){
         pointsProfils[i] = 0;
