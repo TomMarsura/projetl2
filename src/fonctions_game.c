@@ -142,8 +142,9 @@ extern void obstacle_hard(){
       if (double_obs_succ == 0){
 
         if (nb_obstacle() == 0){
-            route[0][position1] = 2;
-            route[0][position2] = 2;
+            int tirage = rand()%4 + 2;
+            route[0][position1] = tirage;
+            route[0][position2] = tirage;
             lignes_succesives++;
             double_obs_succ ++;
         }
