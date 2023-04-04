@@ -19,12 +19,8 @@ extern int profilCourant;
 extern void cleanProfils();
 extern void initGame();
 extern void readProfiles();
-extern void createProfile();
+extern void createProfile(char nomProfil[SIZE_NAME]);
 extern void saveGame();
-extern void cleanupGame();
-extern void classement();
-extern void affichage_classement();
-extern void menu();
 extern void deleteProfil(int idProfil);
 
 #endif

@@ -18,6 +18,11 @@ SDL_bool program_launched = SDL_TRUE ;
 Cette fonction renvoie un message d'erreur et qui la SDL
 ********************************************************/
 
+/**
+ * @brief Fonction SDL_ExitWithMessage : Fonction qui renvoie un message d'erreur et qui quitte la SDL
+ * @param message : message d'erreur
+ * @return void
+*/
 extern void SDL_ExitWithMessage(const char *message)
 {
     SDL_Log("ERREUR : %s  \n", message);

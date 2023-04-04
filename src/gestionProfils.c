@@ -6,10 +6,20 @@
 #include "../lib/menu.h"
 #include "../lib/sdl.h"
 
+/**
+ * @brief Fonction choixProfil : Fonction qui permet l'affichage du choix de profil
+ * @param window : fenêtre SDL
+ * @param renderer : rendu SDL
+ * @return int : 0 si tout s'est bien passé, 1 s'il y a une erreur (chargement de SDL)
+*/
 extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
     //Effacer l'écran
     SDL_RenderClear(renderer);
  
+    /* -------------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation des variables ------------------------- */
+    /* -------------------------------------------------------------------------------- */
+
     int position = 0;
     TTF_Font *font = NULL;
     TTF_Font *fontLogo = NULL;
@@ -17,8 +27,12 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
     SDL_Event event;
     int quit = 0;
     int font_size = 30;
- 
-    // Initialisation de la SDL_ttf
+
+    /* ---------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation de la SDL ------------------------- */
+    /* ---------------------------------------------------------------------------- */
+
+    // Initialisation de la SDL_ttf 
     if (TTF_Init() != 0) {
         fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
         return 1;
@@ -47,13 +61,23 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
         return 1;
     }
  
+    /* ------------------------------------------------------------------------- */
+    /* ------------------------- Création des couleurs ------------------------- */
+    /* ------------------------------------------------------------------------- */
+
     // Création de la texture du texte
     SDL_Color white = {255, 255, 255, 255};
  
- 
+    /* ---------------------------------------------------------------------- */
+    /* ------------------------- Boucle d'affichage ------------------------- */
+    /* ---------------------------------------------------------------------- */
     // Boucle principale
     while (!quit && program_launched) {
-        // Gestion des événements
+        
+        /* -------------------------------------------------------------------------- */
+        /* ------------------------- Gestion des évènements ------------------------- */
+        /* -------------------------------------------------------------------------- */
+        
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 program_launched = SDL_FALSE;
@@ -80,6 +104,10 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
             }
         }
  
+        /* ----------------------------------------------------------------------- */
+        /* ------------------------- Création des rendus ------------------------- */
+        /* ----------------------------------------------------------------------- */
+
         // Dessine le fond gris
         SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
         SDL_Rect background = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -108,6 +136,11 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_Rect rectchoixProfil = {(SCREEN_WIDTH - choixProfil->w) / 2, SCREEN_HEIGHT / 2 - 100, choixProfil->w, choixProfil->h };
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
         SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
+
+        
+        /* ------------------------------------------------------------------------ */
+        /* ------------------------- Affichage des rendus ------------------------- */
+        /* ------------------------------------------------------------------------ */
  
         // Afficher la texture
         SDL_RenderCopy(renderer, texturechoixProfil, NULL, &rectchoixProfil);
@@ -117,6 +150,13 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
  
         // Rafraîchissement de l'écran
         SDL_RenderPresent(renderer);
+
+
+        /* ------------------------------------------------------------------------------------ */
+        /* ------------------------- Liberation des textures/surfaces ------------------------- */
+        /* ------------------------------------------------------------------------------------ */
+
+        // Libération des surfaces et textures
         SDL_DestroyTexture(texturechoixProfil);
         SDL_DestroyTexture(textureCarGame);
         SDL_DestroyTexture(textureEscape);
@@ -138,6 +178,9 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
         choixProfil = NULL;
     }
  
+    /* --------------------------------------------------------------- */
+    /* ------------------------- Destruction ------------------------- */
+    /* --------------------------------------------------------------- */
     TTF_CloseFont(font);
     TTF_CloseFont(fontLogo);
     TTF_CloseFont(fontFooter);
@@ -149,9 +192,20 @@ extern int choixProfil(SDL_Window* window, SDL_Renderer* renderer){
     return 0;
 }
 
+/**
+ * @brief Fonction qui permet l'affichage du menu de suppression de profil
+ * @param window : La fenêtre SDL
+ * @param renderer : Le rendu SDL
+ * @return 0 si tout s'est bien passé, 1 sinon
+*/
 extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
     //Effacer l'écran
     SDL_RenderClear(renderer);
+
+    
+    /* -------------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation des variables ------------------------- */
+    /* -------------------------------------------------------------------------------- */
  
     int position = 0;
     TTF_Font *font = NULL;
@@ -161,6 +215,11 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
     int quit = 0;
     int font_size = 30;
  
+ 
+    /* ---------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation de la SDL ------------------------- */
+    /* ---------------------------------------------------------------------------- */
+
     // Initialisation de la SDL_ttf
     if (TTF_Init() != 0) {
         fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
@@ -190,13 +249,24 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         return 1;
     }
  
+    /* ------------------------------------------------------------------------- */
+    /* ------------------------- Création des couleurs ------------------------- */
+    /* ------------------------------------------------------------------------- */
+
     // Création de la texture du texte
     SDL_Color white = {255, 255, 255, 255};
  
+    /* ---------------------------------------------------------------------- */
+    /* ------------------------- Boucle d'affichage ------------------------- */
+    /* ---------------------------------------------------------------------- */
  
     // Boucle principale
     while (!quit && program_launched) {
         
+        
+        /* ---------------------------------------------------------------------------------- */
+        /* ------------------------- Création des textures/surfaces ------------------------- */
+        /* ---------------------------------------------------------------------------------- */
  
         // Dessine le fond gris
         SDL_SetRenderDrawColor(renderer, 44, 44, 44, 255);
@@ -227,7 +297,10 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
         SDL_Rect rectEscape = {(SCREEN_WIDTH - escape->w) / 2, SCREEN_HEIGHT - 50, escape->w, escape->h};
  
-        // Gestion des événements
+        /* -------------------------------------------------------------------------- */
+        /* ------------------------- Gestion des évènements ------------------------- */
+        /* -------------------------------------------------------------------------- */
+        
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 program_launched = SDL_FALSE;
@@ -256,6 +329,10 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
                 }
             }
         }
+        
+        /* -------------------------------------------------------------------------- */
+        /* ------------------------- Affichage des textures ------------------------- */
+        /* -------------------------------------------------------------------------- */
 
         // Afficher la texture
         SDL_RenderCopy(renderer, texturedelProfil, NULL, &rectdelProfil);
@@ -265,6 +342,10 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
  
         // Rafraîchissement de l'écran
         SDL_RenderPresent(renderer);
+
+        /* ----------------------------------------------------------------------------------- */
+        /* ------------------------- Libération des textures/surfaces ------------------------ */
+        /* ----------------------------------------------------------------------------------- */
         SDL_DestroyTexture(texturedelProfil);
         SDL_DestroyTexture(textureCarGame);
         SDL_DestroyTexture(textureEscape);
@@ -285,6 +366,10 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         carGame = NULL;
         delProfil = NULL;
     }
+
+    /* --------------------------------------------------------------- */
+    /* ------------------------- Destruction ------------------------- */
+    /* --------------------------------------------------------------- */
  
     TTF_CloseFont(font);
     TTF_CloseFont(fontLogo);
@@ -300,14 +385,18 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
 
 /**
  * @author Tom Marsura
- * @brief Cette fonction permet a l'utilisateur de creer un profil
+ * @brief Fonction qui permet l'affichage du menu de création de profil
+ * @param window : la fenêtre SDL
+ * @param renderer : le rendu SDL
  * @return int
 */
-
-/*FONCTION CREATION DE PROFIL*/
 extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     //Effacer l'écran
     SDL_RenderClear(renderer);
+    
+    /* -------------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation des variables ------------------------- */
+    /* -------------------------------------------------------------------------------- */
 
     SDL_Surface *text_surface = NULL;
     SDL_Texture *text_texture = NULL;
@@ -323,7 +412,9 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     bool_t nomExist = FAUX;
     SDL_Texture* textureErreurActuelle = NULL; // Initialiser la texture d'erreur actuelle à NULL
 
-    // Initialisation de la SDL_ttf
+    /* ---------------------------------------------------------------------------- */
+    /* ------------------------- Initialisation de la SDL ------------------------- */
+    /* ---------------------------------------------------------------------------- */
     if (TTF_Init() != 0) {
         fprintf(stderr, "Erreur TTF_Init : %s", TTF_GetError());
         return 1;
@@ -352,8 +443,16 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
         return 1;
     }
 
+    /* ------------------------------------------------------------------------- */
+    /* ------------------------- Création des couleurs ------------------------- */
+    /* ------------------------------------------------------------------------- */
+
     // Création de la texture du texte
     SDL_Color white = {255, 255, 255, 255};
+
+    /* ------------------------------------------------------------------------ */
+    /* ------------------------- Création des erreurs ------------------------- */
+    /* ------------------------------------------------------------------------ */
 
     // Création des textes d'erreur
     SDL_Surface* erreurNomExist = TTF_RenderText_Blended(font, "Pseudo deja existant", white);
@@ -365,9 +464,16 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
     SDL_Texture* textureErreurNomVide = SDL_CreateTextureFromSurface(renderer, erreurNomVide);
     SDL_Texture* textureErreurNbProfils = SDL_CreateTextureFromSurface(renderer, erreurNbProfils);
 
-    // Boucle principale
+    /* ---------------------------------------------------------------------- */
+    /* ------------------------- Boucle d'affichage ------------------------- */
+    /* ---------------------------------------------------------------------- */
+
     while (!quit && program_launched) {
-        // Gestion des événements
+        
+        /* -------------------------------------------------------------------------- */
+        /* ------------------------- Gestion des évènements ------------------------- */
+        /* -------------------------------------------------------------------------- */
+
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 program_launched = SDL_FALSE;
@@ -432,6 +538,10 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
             }
         }
         
+        /* ---------------------------------------------------------------------- */
+        /* ------------------------- Affichage du rendu ------------------------- */
+        /* ---------------------------------------------------------------------- */
+        
         // Effacement de l'écran
         SDL_RenderClear(renderer);
 
@@ -464,6 +574,10 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_RenderCopy(renderer, textureCreateProfil, NULL, &rectCreateProfil);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
         SDL_RenderCopy(renderer, textureEscape, NULL, &rectEscape);
+        
+        /* -------------------------------------------------------------------------------------- */
+        /* ------------------------- Gestion de l'affichage des erreurs ------------------------- */
+        /* -------------------------------------------------------------------------------------- */
 
         // Si une erreur est en cours d'affichage, afficher la texture correspondante
         if (textureErreurActuelle != NULL) {
@@ -481,6 +595,11 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
 
         // Rafraîchissement de l'écran
         SDL_RenderPresent(renderer);
+        
+        /* ------------------------------------------------------------------------------------ */
+        /* ------------------------- Libération des textures/surfaces ------------------------- */
+        /* ------------------------------------------------------------------------------------ */
+
         SDL_DestroyTexture(textureCreateProfil);
         SDL_DestroyTexture(textureCarGame);
         SDL_DestroyTexture(textureEscape);
@@ -496,6 +615,10 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
         carGame = NULL;
         createProfil = NULL;
     }
+
+    /* --------------------------------------------------------------- */
+    /* ------------------------- Destruction ------------------------- */
+    /* --------------------------------------------------------------- */
 
     SDL_DestroyTexture(text_texture);
     SDL_FreeSurface(text_surface);

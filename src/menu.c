@@ -23,7 +23,7 @@ int cpt_distance;
 int profilCourant;
 
 /**
- * @brief Fonction initGame : fonction qui initialise la partie
+ * @brief Fonction initGame : fonction qui initialise la partie (matrice, score et compteur de distance)
  * @author Tom Marsura
  * @return void
 */
@@ -43,6 +43,11 @@ extern void initGame(){
     cpt_distance = 0;
 }
 
+/**
+ * @brief Fonction cleanProfiles : Nettoie les profils (remet à 0 les tableaux des profils) et met le nombre de profils à 0 (aucun profil) (utilisé pour le menu principal)
+ * @author Tom Marsura
+ * @return void
+*/
 extern void cleanProfiles(){
     for(int i = 0; i < MAX_PROFILS; i++){
         pointsProfils[i] = 0;
@@ -54,7 +59,7 @@ extern void cleanProfiles(){
 }
 
 /**
- * @brief Fonction readProfiles : Lecture des profiles
+ * @brief Fonction readProfiles : Lecture des profiles depuis le fichier de sauvegarde save.csv
  * @author Tom Marsura
  * @return void
 */
@@ -99,6 +104,7 @@ extern void saveGame(){
  * @brief Fonction createProfile : Créer un profil et l'ajoute dans le tableau des profils
  * @author Tom Marsura
  * @return void
+ * @param nomProfil : Nom du profil à créer
 */
 extern void createProfile(char nomProfil[SIZE_NAME]){
     numProfils[nbProfils] = nbProfils;
@@ -115,6 +121,7 @@ extern void createProfile(char nomProfil[SIZE_NAME]){
  * @brief deleteProfil : Supprime un profil du tableau des profils
  * @author Tom Marsura
  * @return void
+ * @param idProfil : Numéro du profil à supprimer
 */
 extern void deleteProfil(int idProfil){
 
@@ -135,25 +142,4 @@ extern void deleteProfil(int idProfil){
     printf("nbProfils : %d\n\n", nbProfils);
     saveGame(); // Sauvegarde les profils dans le fichier save.csv
     readProfiles(); // Met à jour les profils
-}
-
-/**
- * @brief Nettoie les données du jeu, sauvegarde le profil une fois que le jeu est terminé 
- * @author Ayoub Laaribi
- * @return void 
-*/
-void cleanupGame(){
-    int i,j;
-/*Sauvegarde des données*/
-    saveGame();
-
-    //Nettoyage de la route
-/*Parcours de la route et met toutes les valeurs a NULL*/
-    for(i = 0 ; i< HAUTEUR ;i++){
-        for(j = 0; j<LARGEUR;j++){
-            route[i][j] = 0;
-        }
-    }
-    score = 0;
-    cpt_distance = 0;
 }
