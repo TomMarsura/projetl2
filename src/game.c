@@ -86,8 +86,6 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
     int position_voiture = 1;
     int fin = 0;
     int score = 0;
-    float a = 0;
-
     int varpause = 0;
 
 
@@ -100,14 +98,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
       if (fin == 1){
         quit = 0;
         printf("CRASH\n");
-        CrashMessage(window,renderer,score, 2);
+        CrashMessage(window,renderer,score, 0);
         break;
       }
 
       if (fin > 1){
         quit = 0;
         printf("CRASH COTE\n");
-        CrashMessage(window,renderer,score, 2);
+        CrashMessage(window,renderer,score, 0);
         break;
       }
 
@@ -116,15 +114,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
       else{
 
         int start_time = SDL_GetTicks();
-        float increment_a = 1.8; // Initialisation de l'incrément
-        int time_interval = vitesse / 100; // Temps entre chaque incrémentation
-        a = 0;
 
         while ((SDL_GetTicks() - start_time) < vitesse) {
-
-          if ((SDL_GetTicks() - start_time) % time_interval == 0) {
-            a += increment_a;
-          }
 
           while (SDL_PollEvent(&event)) {
 
@@ -184,27 +175,27 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
               for (int j = 0; j < LARGEUR; j++) {
                 if (route[i][j] == 1) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 120; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
                 }
                 if (route[i][j] == 2) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
                 }
                 if (route[i][j] == 3) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
                 }
                 if (route[i][j] == 4) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
                 }
                 if (route[i][j] == 5) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
                 }
               }
@@ -327,7 +318,6 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int position_voiture = 1;
   int fin = 0;
   int score = 0;
-  float a = 0;
   int varpause = 0;
 
 
@@ -340,29 +330,22 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin == 1){
         quit = 0;
         printf("CRASH\n");
-        CrashMessage(window,renderer,score, 2);
+        CrashMessage(window,renderer,score, 1);
         break;
       }
 
       if (fin > 1){
         quit = 0;
         printf("CRASH COTE\n");
-        CrashMessage(window,renderer,score, 2);
+        CrashMessage(window,renderer,score, 1);
         break;
       }
 
       else{
 
         int start_time = SDL_GetTicks();
-        float increment_a = 1.8; // Initialisation de l'incrément
-        int time_interval = vitesse / 100; // Temps entre chaque incrémentation
-        a = 0;
 
         while ((SDL_GetTicks() - start_time) < vitesse) {
-
-          if ((SDL_GetTicks() - start_time) % time_interval == 0) {
-            a += increment_a;
-          }
 
           while (SDL_PollEvent(&event)) {
 
@@ -421,27 +404,27 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
               for (int j = 0; j < LARGEUR; j++) {
                 if (route[i][j] == 1) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 120; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
                 }
                 if (route[i][j] == 2) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
                 }
                 if (route[i][j] == 3) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
                 }
                 if (route[i][j] == 4) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
                 }
                 if (route[i][j] == 5) {
                     rectangle.x = startX + j * 160; // Position horizontale de la case
-                    rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                    rectangle.y = startY + i * 100; // Position verticale de la case
                     SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
                 }
               }
@@ -564,7 +547,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int position_voiture = 1;
   int fin = 0;
   int score = 0;
-  float a = 0;
   int varpause = 0;
 
 
@@ -591,15 +573,8 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
     else{
 
       int start_time = SDL_GetTicks();
-      float increment_a = 1.8; // Initialisation de l'incrément
-      int time_interval = vitesse / 100; // Temps entre chaque incrémentation
-      a = 0;
 
       while ((SDL_GetTicks() - start_time) < vitesse) {
-
-        if ((SDL_GetTicks() - start_time) % time_interval == 0) {
-          a += increment_a;
-        }
 
         while (SDL_PollEvent(&event)) {
 
@@ -657,27 +632,27 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
             for (int j = 0; j < LARGEUR; j++) {
               if (route[i][j] == 1) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 120; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_voiture, NULL, &rectangle);
               }
               if (route[i][j] == 2) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
               if (route[i][j] == 3) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_dog, NULL, &rectangle);
               }
               if (route[i][j] == 4) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_kid, NULL, &rectangle);
               }
               if (route[i][j] == 5) {
                   rectangle.x = startX + j * 160; // Position horizontale de la case
-                  rectangle.y = startY + i * 100 + a; // Position verticale de la case
+                  rectangle.y = startY + i * 100; // Position verticale de la case
                   SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
             }

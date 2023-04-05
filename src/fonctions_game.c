@@ -96,83 +96,80 @@ extern int position_libre(){
  * @author Ayoub Laaribi / Thibaut Gasnier
  * @return void
 */
+/**
+  affichae_mat();
+ * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
+ * @author Ayoub Laaribi / Thibaut Gasnier
+ * @return void
+*/
 extern void obstacle_hard(){
 
   affiche_mat();
 
   int position1;
-  position1 = rand() % LARGEUR; /*genenere aléatoirement la position du première obstacle*/
 
   int position2;
-  position2 = rand() % LARGEUR; /*genenere aléatoirement la position du deuxième obstacle*/
 
   int apparition;
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
-  int nb_obstacle_ligne;
-  nb_obstacle_ligne = rand() % 100; /*genere un pourcentage pour décider si on ajoute 1 ou 2 obsatcles à la ligne*/
-
-  /* Vérifier que la position1 et position2 ne sont pas sur la même colonne pour éviter les obstacles superposés */
-  while (position1 == position2) {
-    position2 = rand() % LARGEUR;
-  }
-
   if ((apparition > 50) && (lignes_succesives < 2)){
+      int nbObstacle = nb_obstacle();
 
-    /* On a un seul obbstacle a ajouter*/
-    if(nb_obstacle_ligne>3){
+      if (nbObstacle == 0){ /*La ligne précédente comporte 0 obstacle*/
+            int tirage1 = rand()%4 + 2;
+            int tirage2 = rand()%4 + 2;
+            position1 = rand() % LARGEUR;
+            position2 = rand() % LARGEUR;
 
-      if (nb_obstacle() < 2){
-        int tirage = rand()%4 + 2;
-        route[0][position1] = tirage;
-        lignes_succesives++;
+            while(position1 == position2){
+              position2 = rand() % LARGEUR;
+            }
+
+            route[0][position1] = tirage1;
+            route[0][position2] = tirage2;
+            lignes_succesives++;
+            double_obs_succ ++;
+      }
+
+      else if (nb_obstacle() == 1){ /* La ligne précédente comport 1 obstacle */
+        int tirageNbObstacle = rand()%2 + 1;
+
+        if(tirageNbObstacle == 1){
+          position1 = rand() % LARGEUR;
+          int tirage = rand()%4 + 2;
+          route[0][position1] = tirage;
+        }
+
+        else if (tirageNbObstacle == 2){
+          int positionObstacle;
+          for (int i = 0; i < LARGEUR; i++){ /*On récupère la position de l'obstacle à la ligne précédente*/
+            if (route[1][i] > 1){
+              positionObstacle = i;
+            }
+          }
+          position1 = rand() % LARGEUR;
+          while (position1 == positionObstacle){
+            position1 = rand() % LARGEUR;
+          }
+          int tirage1 = rand()%4 + 2;
+          int tirage2 = rand()%4 + 2;
+          route[0][position1] = tirage1;
+          route[0][positionObstacle] = tirage2;
+        }
       }
 
       else if (nb_obstacle() == 2){
-        if (position1 != position_libre()){
-          int tirage = rand()%4 + 2;
-          route[0][position1] = tirage;
+        if ((position1 =! position_libre()) && (position2 =! position_libre())){
+          int tirage1 = rand()%4 + 2;
+          int tirage2 = rand()%4 + 2;
+          route[0][position1] = tirage1;
+          route[0][position2] = tirage2;
           lignes_succesives++;
-        }
-      }
-      double_obs_succ = 0;
-    }
-
-    else{
-
-      if (double_obs_succ == 0){
-
-        if (nb_obstacle() == 0){
-            int tirage = rand()%4 + 2;
-            route[0][position1] = tirage;
-            route[0][position2] = tirage;
-            lignes_succesives++;
-            double_obs_succ ++;
-        }
-
-        else if (nb_obstacle() == 1){
-          if ((position1 == position_libre() || (position2 == position_libre()))){
-            int tirage = rand()%4 + 2;
-            route[0][position1] = tirage;
-            route[0][position2] = tirage;
-            lignes_succesives++;
-            double_obs_succ ++;
-          }
-        }
-
-        else if (nb_obstacle() == 2){
-          if ((position1 =! position_libre()) && (position2 =! position_libre())){
-            int tirage = rand()%4 + 2;
-            route[0][position1] = tirage;
-            route[0][position2] = tirage;
-            lignes_succesives++;
-            double_obs_succ ++;
-          }
+          double_obs_succ ++;
         }
       }
     }
-    printf("Lignes sucessive:%d\n",lignes_succesives);
-  }
   else{
     lignes_succesives = 0;
     double_obs_succ = 0;
@@ -195,7 +192,7 @@ extern void obstacle_easy(){
   int apparition;
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
-  if ((apparition > 50) && (lignes_succesives < 2)){
+  if ((apparition > 40) && (lignes_succesives < 2)){
     int tirage = rand()%4 + 2;
     route[0][position] = tirage;
     lignes_succesives++;
@@ -438,14 +435,13 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
     int VisibleContinue = 1;
     int VisibleQuitter = 1;
     int position = 0;
+
+
     int quit = 0;
-   
     while(!quit){
         SDL_Event event;
 
         while(SDL_PollEvent(&event)){
-
-
             switch(event.type){
                 
                 case SDL_QUIT:
@@ -462,12 +458,12 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
     
                             case SDLK_RETURN:
                                 if (position == 0) {
+
                                   SDL_DestroyTexture(texture);
                                   SDL_DestroyTexture(textTextureContinue);
                                   SDL_DestroyTexture(textTextureQuitter);  
                                   SDL_DestroyTexture(textureCarGame);  
                                   TTF_CloseFont(police);
-
 
                                   SDL_FreeSurface(carGame);
                                   SDL_FreeSurface(TextContinue);
@@ -481,8 +477,6 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                   TextContinue = NULL;
                                   TextQuitter = NULL;
                                   textureCarGame = NULL;
-
-
                                    return 0;
                                     
                                 } else if (position == 1) {
@@ -505,9 +499,13 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                     TextContinue = NULL;
                                     TextQuitter = NULL;
                                     textureCarGame = NULL;
+                                    
                                     return 1;
+                                   
                                 }
+                               
                             break;
+
 
                         case SDLK_RIGHT:
                             position++;
@@ -578,7 +576,3 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
     return 0;
 }
-
-
-
-
