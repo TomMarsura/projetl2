@@ -118,17 +118,25 @@ extern void obstacle_hard(){
       if (nbObstacle == 0){ /*La ligne précédente comporte 0 obstacle*/
             int tirage1 = rand()%4 + 2;
             int tirage2 = rand()%4 + 2;
-            position1 = rand() % LARGEUR;
-            position2 = rand() % LARGEUR;
-
-            while(position1 == position2){
-              position2 = rand() % LARGEUR;
+            int tirageNbObstacle = rand()%2 + 1;
+            if(tirageNbObstacle == 1){
+              position1 = rand() % LARGEUR;
+              route[0][position1] = tirage1;
             }
 
-            route[0][position1] = tirage1;
-            route[0][position2] = tirage2;
-            lignes_succesives++;
-            double_obs_succ ++;
+            else{
+              position1 = rand() % LARGEUR;
+              position2 = rand() % LARGEUR;
+
+              while(position1 == position2){
+                position2 = rand() % LARGEUR;
+              }
+
+              route[0][position1] = tirage1;
+              route[0][position2] = tirage2;
+              lignes_succesives++;
+              double_obs_succ ++;
+            }
       }
 
       else if (nb_obstacle() == 1){ /* La ligne précédente comport 1 obstacle */
