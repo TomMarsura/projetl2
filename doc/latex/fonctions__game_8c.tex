@@ -1,0 +1,189 @@
+\hypertarget{fonctions__game_8c}{}\doxysection{Référence du fichier src/fonctions\+\_\+game.c}
+\label{fonctions__game_8c}\index{src/fonctions\_game.c@{src/fonctions\_game.c}}
+
+
+Fonctions utilisée dans \mbox{\hyperlink{game_8c}{game.\+c}}.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/fonctions\+\_\+game.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+video.\+h$>$}\newline
+Graphe des dépendances par inclusion de fonctions\+\_\+game.\+c\+:
+% FIG 0
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fonctions__game_8c_a0444c76dc61f13e85c74a4501098e56b}{affiche\+\_\+mat}} ()
+\begin{DoxyCompactList}\small\item\em Affiche le contenu d\textquotesingle{}une matrice. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonctions__game_8c_a803fcc1ebbb25765f72b26e4326a163a}{nb\+\_\+obstacle}} ()
+\begin{DoxyCompactList}\small\item\em Retoune le nombre d\textquotesingle{}obsatcle sur de l\textquotesingle{}avant dernière ligne. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonctions__game_8c_af7ca11224895f2752e26be9d5e609c9e}{position\+\_\+libre}} ()
+\begin{DoxyCompactList}\small\item\em Retoune la postion la case qui ne contient pas d\textquotesingle{}obstacle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonctions__game_8c_af2d5f66f7be353f97b897c100bcfbab3}{obstacle\+\_\+hard}} ()
+\begin{DoxyCompactList}\small\item\em Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour Hard\+Game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonctions__game_8c_aa7a072b14e7f0f346cc42a08cf32424c}{obstacle\+\_\+easy}} ()
+\begin{DoxyCompactList}\small\item\em Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour easy\+Game. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonctions__game_8c_a6de45ca501fead02103d8384b9841e6c}{crash}} ()
+\begin{DoxyCompactList}\small\item\em Fonction crash \+: Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonctions__game_8c_abce7585cc9e36e28386ae6c0367f0747}{deplacement}} (int touche)
+\begin{DoxyCompactList}\small\item\em Fonction deplacement \+: Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonctions__game_8c_a7e85a6ed3484565522699feb3b7b9d43}{decalage}} ()
+\begin{DoxyCompactList}\small\item\em Fonction decalage \+: Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{fonctions__game_8c_a3176856fb8c7e12d5b5e4841eb6d28fb}\label{fonctions__game_8c_a3176856fb8c7e12d5b5e4841eb6d28fb}} 
+int {\bfseries lignes\+\_\+succesives} = 0
+\item 
+\mbox{\Hypertarget{fonctions__game_8c_a95459e1be6978667d789ee54a9461454}\label{fonctions__game_8c_a95459e1be6978667d789ee54a9461454}} 
+int {\bfseries double\+\_\+obs\+\_\+succ} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fonctions utilisée dans \mbox{\hyperlink{game_8c}{game.\+c}}. 
+
+\begin{DoxyAuthor}{Auteurs}
+Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{fonctions__game_8c_a0444c76dc61f13e85c74a4501098e56b}\label{fonctions__game_8c_a0444c76dc61f13e85c74a4501098e56b}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!affiche\_mat@{affiche\_mat}}
+\index{affiche\_mat@{affiche\_mat}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{affiche\_mat()}{affiche\_mat()}}
+{\footnotesize\ttfamily void affiche\+\_\+mat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Affiche le contenu d\textquotesingle{}une matrice. 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub Laaribi 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_a6de45ca501fead02103d8384b9841e6c}\label{fonctions__game_8c_a6de45ca501fead02103d8384b9841e6c}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!crash@{crash}}
+\index{crash@{crash}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{crash()}{crash()}}
+{\footnotesize\ttfamily int crash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction crash \+: Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1. 
+
+\begin{DoxyAuthor}{Auteur}
+Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_a7e85a6ed3484565522699feb3b7b9d43}\label{fonctions__game_8c_a7e85a6ed3484565522699feb3b7b9d43}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!decalage@{decalage}}
+\index{decalage@{decalage}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{decalage()}{decalage()}}
+{\footnotesize\ttfamily void decalage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction decalage \+: Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas. 
+
+\begin{DoxyAuthor}{Auteur}
+Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_abce7585cc9e36e28386ae6c0367f0747}\label{fonctions__game_8c_abce7585cc9e36e28386ae6c0367f0747}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!deplacement@{deplacement}}
+\index{deplacement@{deplacement}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{deplacement()}{deplacement()}}
+{\footnotesize\ttfamily void deplacement (\begin{DoxyParamCaption}\item[{int}]{touche }\end{DoxyParamCaption})}
+
+
+
+Fonction deplacement \+: Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier. 
+
+\begin{DoxyAuthor}{Auteur}
+Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_a803fcc1ebbb25765f72b26e4326a163a}\label{fonctions__game_8c_a803fcc1ebbb25765f72b26e4326a163a}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!nb\_obstacle@{nb\_obstacle}}
+\index{nb\_obstacle@{nb\_obstacle}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{nb\_obstacle()}{nb\_obstacle()}}
+{\footnotesize\ttfamily int nb\+\_\+obstacle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retoune le nombre d\textquotesingle{}obsatcle sur de l\textquotesingle{}avant dernière ligne. 
+
+\begin{DoxyAuthor}{Auteur}
+Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_aa7a072b14e7f0f346cc42a08cf32424c}\label{fonctions__game_8c_aa7a072b14e7f0f346cc42a08cf32424c}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!obstacle\_easy@{obstacle\_easy}}
+\index{obstacle\_easy@{obstacle\_easy}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{obstacle\_easy()}{obstacle\_easy()}}
+{\footnotesize\ttfamily void obstacle\+\_\+easy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour easy\+Game. 
+
+affichae\+\_\+mat(); \begin{DoxyAuthor}{Auteur}
+Ayoub Laaribi / Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_af2d5f66f7be353f97b897c100bcfbab3}\label{fonctions__game_8c_af2d5f66f7be353f97b897c100bcfbab3}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!obstacle\_hard@{obstacle\_hard}}
+\index{obstacle\_hard@{obstacle\_hard}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{obstacle\_hard()}{obstacle\_hard()}}
+{\footnotesize\ttfamily void obstacle\+\_\+hard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour Hard\+Game. 
+
+affichae\+\_\+mat(); \begin{DoxyAuthor}{Auteur}
+Ayoub Laaribi / Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_af7ca11224895f2752e26be9d5e609c9e}\label{fonctions__game_8c_af7ca11224895f2752e26be9d5e609c9e}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!position\_libre@{position\_libre}}
+\index{position\_libre@{position\_libre}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{position\_libre()}{position\_libre()}}
+{\footnotesize\ttfamily int position\+\_\+libre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retoune la postion la case qui ne contient pas d\textquotesingle{}obstacle. 
+
+\begin{DoxyAuthor}{Auteur}
+Thibaut Gasnier 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+int 
+\end{DoxyReturn}

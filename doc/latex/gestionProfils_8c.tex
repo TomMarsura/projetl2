@@ -1,0 +1,101 @@
+\hypertarget{gestionProfils_8c}{}\doxysection{Référence du fichier src/gestion\+Profils.c}
+\label{gestionProfils_8c}\index{src/gestionProfils.c@{src/gestionProfils.c}}
+
+
+Affichage des menu de gestion de profils.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de gestion\+Profils.\+c\+:
+% FIG 0
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gestionProfils_8c_a130e55722808af56183c8d64bb51a8c5}{choix\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction choix\+Profil \+: Fonction qui permet l\textquotesingle{}affichage du choix de profil. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gestionProfils_8c_a03263ee211b396d3f1167add3668ba8b}{supprime\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de suppression de profil. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gestionProfils_8c_a8165aca01e180ad63a670856d96f1811}{creation\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de création de profil. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Affichage des menu de gestion de profils. 
+
+\begin{DoxyAuthor}{Auteurs}
+Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{gestionProfils_8c_a130e55722808af56183c8d64bb51a8c5}\label{gestionProfils_8c_a130e55722808af56183c8d64bb51a8c5}} 
+\index{gestionProfils.c@{gestionProfils.c}!choixProfil@{choixProfil}}
+\index{choixProfil@{choixProfil}!gestionProfils.c@{gestionProfils.c}}
+\doxysubsubsection{\texorpdfstring{choixProfil()}{choixProfil()}}
+{\footnotesize\ttfamily int choix\+Profil (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction choix\+Profil \+: Fonction qui permet l\textquotesingle{}affichage du choix de profil. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em window} & \+: fenêtre SDL \\
+\hline
+{\em renderer} & \+: rendu SDL \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int \+: 0 si tout s\textquotesingle{}est bien passé, 1 s\textquotesingle{}il y a une erreur (chargement de SDL) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{gestionProfils_8c_a8165aca01e180ad63a670856d96f1811}\label{gestionProfils_8c_a8165aca01e180ad63a670856d96f1811}} 
+\index{gestionProfils.c@{gestionProfils.c}!creationProfil@{creationProfil}}
+\index{creationProfil@{creationProfil}!gestionProfils.c@{gestionProfils.c}}
+\doxysubsubsection{\texorpdfstring{creationProfil()}{creationProfil()}}
+{\footnotesize\ttfamily int creation\+Profil (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet l\textquotesingle{}affichage du menu de création de profil. 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Paramètres}
+{\em window} & \+: la fenêtre SDL \\
+\hline
+{\em renderer} & \+: le rendu SDL \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{gestionProfils_8c_a03263ee211b396d3f1167add3668ba8b}\label{gestionProfils_8c_a03263ee211b396d3f1167add3668ba8b}} 
+\index{gestionProfils.c@{gestionProfils.c}!supprimeProfil@{supprimeProfil}}
+\index{supprimeProfil@{supprimeProfil}!gestionProfils.c@{gestionProfils.c}}
+\doxysubsubsection{\texorpdfstring{supprimeProfil()}{supprimeProfil()}}
+{\footnotesize\ttfamily int supprime\+Profil (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet l\textquotesingle{}affichage du menu de suppression de profil. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em window} & \+: La fenêtre SDL \\
+\hline
+{\em renderer} & \+: Le rendu SDL \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien passé, 1 sinon 
+\end{DoxyReturn}

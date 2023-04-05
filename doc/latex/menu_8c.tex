@@ -1,0 +1,180 @@
+\hypertarget{menu_8c}{}\doxysection{Référence du fichier src/menu.c}
+\label{menu_8c}\index{src/menu.c@{src/menu.c}}
+
+
+Bibliotheque Menu.\+c.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de menu.\+c\+:
+% FIG 0
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{menu_8c_a486f7b71aa892de0f05c6187647613b9}{init\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Fonction init\+Game \+: fonction qui initialise la partie (matrice, score et compteur de distance) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8c_a05b41d8ba4fcd18e3296161436489b00}{clean\+Profiles}} ()
+\begin{DoxyCompactList}\small\item\em Fonction clean\+Profiles \+: Nettoie les profils (remet à 0 les tableaux des profils) et met le nombre de profils à 0 (aucun profil) (utilisé pour le menu principal) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8c_a0788d89f134e68169fa087c3d4bf4ca4}{read\+Profiles}} ()
+\begin{DoxyCompactList}\small\item\em Fonction read\+Profiles \+: Lecture des profiles depuis le fichier de sauvegarde save.\+csv. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8c_ac42f6d85eb40dfdfadbf9933d885b4c1}{save\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Fonction save\+Game \+: Sauvegarde les profils dans un fichier save.\+csv. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8c_a2bbefdcce887fd43acf1ca85bf9b8105}{create\+Profile}} (char nom\+Profil\mbox{[}SIZE\+\_\+\+NAME\mbox{]})
+\begin{DoxyCompactList}\small\item\em Fonction create\+Profile \+: Créer un profil et l\textquotesingle{}ajoute dans le tableau des profils. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{menu_8c_a64da853c49b4bb50954de3a0257fe037}{delete\+Profil}} (int id\+Profil)
+\begin{DoxyCompactList}\small\item\em delete\+Profil \+: Supprime un profil du tableau des profils \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menu_8c_aa6b8d1fe1f66fb29397a6f153248fca5}\label{menu_8c_aa6b8d1fe1f66fb29397a6f153248fca5}} 
+int {\bfseries points\+Profils} \mbox{[}MAX\+\_\+\+PROFILS\mbox{]} = \{\}
+\item 
+\mbox{\Hypertarget{menu_8c_ab5ad4d6c9e2cab2fd86287459e5dd54b}\label{menu_8c_ab5ad4d6c9e2cab2fd86287459e5dd54b}} 
+char {\bfseries nom\+Profils} \mbox{[}MAX\+\_\+\+PROFILS\mbox{]}\mbox{[}SIZE\+\_\+\+NAME\mbox{]} = \{\}
+\item 
+\mbox{\Hypertarget{menu_8c_a8b0f09ecc2fce327f2e5b57ca0597af5}\label{menu_8c_a8b0f09ecc2fce327f2e5b57ca0597af5}} 
+int {\bfseries num\+Profils} \mbox{[}MAX\+\_\+\+PROFILS\mbox{]} = \{\}
+\item 
+\mbox{\Hypertarget{menu_8c_a623febc6d961e42e50215926ca93d941}\label{menu_8c_a623febc6d961e42e50215926ca93d941}} 
+int {\bfseries nb\+Profils} = 0
+\item 
+\mbox{\Hypertarget{menu_8c_a480317a4966678a712a41db22ff549c8}\label{menu_8c_a480317a4966678a712a41db22ff549c8}} 
+int {\bfseries nb\+Parties\+Profils} \mbox{[}MAX\+\_\+\+PROFILS\mbox{]} = \{\}
+\item 
+\mbox{\Hypertarget{menu_8c_a720a4c5a68f9c2317133a79948ee22c0}\label{menu_8c_a720a4c5a68f9c2317133a79948ee22c0}} 
+int {\bfseries route} \mbox{[}HAUTEUR\mbox{]}\mbox{[}LARGEUR\mbox{]}
+\item 
+\mbox{\Hypertarget{menu_8c_aef160b7437d94056f1dc59646cd5b87d}\label{menu_8c_aef160b7437d94056f1dc59646cd5b87d}} 
+int {\bfseries score}
+\item 
+\mbox{\Hypertarget{menu_8c_acde9bed08f731f0d8fe161ed56499439}\label{menu_8c_acde9bed08f731f0d8fe161ed56499439}} 
+int {\bfseries cpt\+\_\+distance}
+\item 
+\mbox{\Hypertarget{menu_8c_a201d3f1311384aeabc8239f4490a477b}\label{menu_8c_a201d3f1311384aeabc8239f4490a477b}} 
+int {\bfseries profil\+Courant}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Bibliotheque Menu.\+c. 
+
+\begin{DoxyAuthor}{Auteurs}
+Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{menu_8c_a05b41d8ba4fcd18e3296161436489b00}\label{menu_8c_a05b41d8ba4fcd18e3296161436489b00}} 
+\index{menu.c@{menu.c}!cleanProfiles@{cleanProfiles}}
+\index{cleanProfiles@{cleanProfiles}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{cleanProfiles()}{cleanProfiles()}}
+{\footnotesize\ttfamily void clean\+Profiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction clean\+Profiles \+: Nettoie les profils (remet à 0 les tableaux des profils) et met le nombre de profils à 0 (aucun profil) (utilisé pour le menu principal) 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menu_8c_a2bbefdcce887fd43acf1ca85bf9b8105}\label{menu_8c_a2bbefdcce887fd43acf1ca85bf9b8105}} 
+\index{menu.c@{menu.c}!createProfile@{createProfile}}
+\index{createProfile@{createProfile}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{createProfile()}{createProfile()}}
+{\footnotesize\ttfamily void create\+Profile (\begin{DoxyParamCaption}\item[{char}]{nom\+Profil\mbox{[}\+SIZE\+\_\+\+NAME\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Fonction create\+Profile \+: Créer un profil et l\textquotesingle{}ajoute dans le tableau des profils. 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+Profil} & \+: Nom du profil à créer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menu_8c_a64da853c49b4bb50954de3a0257fe037}\label{menu_8c_a64da853c49b4bb50954de3a0257fe037}} 
+\index{menu.c@{menu.c}!deleteProfil@{deleteProfil}}
+\index{deleteProfil@{deleteProfil}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{deleteProfil()}{deleteProfil()}}
+{\footnotesize\ttfamily void delete\+Profil (\begin{DoxyParamCaption}\item[{int}]{id\+Profil }\end{DoxyParamCaption})}
+
+
+
+delete\+Profil \+: Supprime un profil du tableau des profils 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Paramètres}
+{\em id\+Profil} & \+: Numéro du profil à supprimer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menu_8c_a486f7b71aa892de0f05c6187647613b9}\label{menu_8c_a486f7b71aa892de0f05c6187647613b9}} 
+\index{menu.c@{menu.c}!initGame@{initGame}}
+\index{initGame@{initGame}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{initGame()}{initGame()}}
+{\footnotesize\ttfamily void init\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction init\+Game \+: fonction qui initialise la partie (matrice, score et compteur de distance) 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menu_8c_a0788d89f134e68169fa087c3d4bf4ca4}\label{menu_8c_a0788d89f134e68169fa087c3d4bf4ca4}} 
+\index{menu.c@{menu.c}!readProfiles@{readProfiles}}
+\index{readProfiles@{readProfiles}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{readProfiles()}{readProfiles()}}
+{\footnotesize\ttfamily void read\+Profiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction read\+Profiles \+: Lecture des profiles depuis le fichier de sauvegarde save.\+csv. 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menu_8c_ac42f6d85eb40dfdfadbf9933d885b4c1}\label{menu_8c_ac42f6d85eb40dfdfadbf9933d885b4c1}} 
+\index{menu.c@{menu.c}!saveGame@{saveGame}}
+\index{saveGame@{saveGame}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{saveGame()}{saveGame()}}
+{\footnotesize\ttfamily void save\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction save\+Game \+: Sauvegarde les profils dans un fichier save.\+csv. 
+
+\begin{DoxyAuthor}{Auteur}
+Tom Marsura 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}

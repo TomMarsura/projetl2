@@ -1,0 +1,73 @@
+\hypertarget{affichageMenu_8c}{}\doxysection{Référence du fichier src/affichage\+Menu.c}
+\label{affichageMenu_8c}\index{src/affichageMenu.c@{src/affichageMenu.c}}
+
+
+Fonctions d\textquotesingle{}affichage du menu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/game.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/gestion\+Profils.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de affichage\+Menu.\+c\+:
+% FIG 0
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}\label{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}} 
+void {\bfseries choice\+\_\+difficult} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\item 
+void \mbox{\hyperlink{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}{choice\+\_\+profile}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Cette Fonction permet de creer,choisir ou supprimer un profil. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichageMenu_8c_a29f81c68af10fdf4c950e7169f5d74b4}{Crash\+Message}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, int score, int mode)
+\begin{DoxyCompactList}\small\item\em Cette fonction permet de afficher un message lorsque le joueur perd. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fonctions d\textquotesingle{}affichage du menu. 
+
+\begin{DoxyAuthor}{Auteurs}
+Ayoub LAARIBI,Tom MARSURA, Thibaut GASNIER 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}\label{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}} 
+\index{affichageMenu.c@{affichageMenu.c}!choice\_profile@{choice\_profile}}
+\index{choice\_profile@{choice\_profile}!affichageMenu.c@{affichageMenu.c}}
+\doxysubsubsection{\texorpdfstring{choice\_profile()}{choice\_profile()}}
+{\footnotesize\ttfamily void choice\+\_\+profile (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Cette Fonction permet de creer,choisir ou supprimer un profil. 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub LAARIBI 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{affichageMenu_8c_a29f81c68af10fdf4c950e7169f5d74b4}\label{affichageMenu_8c_a29f81c68af10fdf4c950e7169f5d74b4}} 
+\index{affichageMenu.c@{affichageMenu.c}!CrashMessage@{CrashMessage}}
+\index{CrashMessage@{CrashMessage}!affichageMenu.c@{affichageMenu.c}}
+\doxysubsubsection{\texorpdfstring{CrashMessage()}{CrashMessage()}}
+{\footnotesize\ttfamily void Crash\+Message (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{score,  }\item[{int}]{mode }\end{DoxyParamCaption})}
+
+
+
+Cette fonction permet de afficher un message lorsque le joueur perd. 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub Laaribi 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}

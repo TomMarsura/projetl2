@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CAR GAME: Référence du fichier src/fonctions_game.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CAR GAME
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier fonctions_game.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions utilisée dans <a class="el" href="game_8c.html" title="Bibliotheque Game.c.">game.c</a>.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;../lib/game.h&quot;</code><br />
+<code>#include &quot;../lib/menu.h&quot;</code><br />
+<code>#include &quot;../lib/fonctions_game.h&quot;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_video.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de fonctions_game.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="fonctions__game_8c__incl.png" border="0" usemap="#asrc_2fonctions__game_8c" alt=""/></div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a0444c76dc61f13e85c74a4501098e56b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#a0444c76dc61f13e85c74a4501098e56b">affiche_mat</a> ()</td></tr>
+<tr class="memdesc:a0444c76dc61f13e85c74a4501098e56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le contenu d'une matrice.  <a href="fonctions__game_8c.html#a0444c76dc61f13e85c74a4501098e56b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0444c76dc61f13e85c74a4501098e56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803fcc1ebbb25765f72b26e4326a163a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#a803fcc1ebbb25765f72b26e4326a163a">nb_obstacle</a> ()</td></tr>
+<tr class="memdesc:a803fcc1ebbb25765f72b26e4326a163a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retoune le nombre d'obsatcle sur de l'avant dernière ligne.  <a href="fonctions__game_8c.html#a803fcc1ebbb25765f72b26e4326a163a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a803fcc1ebbb25765f72b26e4326a163a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7ca11224895f2752e26be9d5e609c9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#af7ca11224895f2752e26be9d5e609c9e">position_libre</a> ()</td></tr>
+<tr class="memdesc:af7ca11224895f2752e26be9d5e609c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retoune la postion la case qui ne contient pas d'obstacle.  <a href="fonctions__game_8c.html#af7ca11224895f2752e26be9d5e609c9e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af7ca11224895f2752e26be9d5e609c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2d5f66f7be353f97b897c100bcfbab3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#af2d5f66f7be353f97b897c100bcfbab3">obstacle_hard</a> ()</td></tr>
+<tr class="memdesc:af2d5f66f7be353f97b897c100bcfbab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.  <a href="fonctions__game_8c.html#af2d5f66f7be353f97b897c100bcfbab3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af2d5f66f7be353f97b897c100bcfbab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7a072b14e7f0f346cc42a08cf32424c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#aa7a072b14e7f0f346cc42a08cf32424c">obstacle_easy</a> ()</td></tr>
+<tr class="memdesc:aa7a072b14e7f0f346cc42a08cf32424c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour easyGame.  <a href="fonctions__game_8c.html#aa7a072b14e7f0f346cc42a08cf32424c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa7a072b14e7f0f346cc42a08cf32424c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de45ca501fead02103d8384b9841e6c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#a6de45ca501fead02103d8384b9841e6c">crash</a> ()</td></tr>
+<tr class="memdesc:a6de45ca501fead02103d8384b9841e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1.  <a href="fonctions__game_8c.html#a6de45ca501fead02103d8384b9841e6c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6de45ca501fead02103d8384b9841e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce7585cc9e36e28386ae6c0367f0747"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#abce7585cc9e36e28386ae6c0367f0747">deplacement</a> (int touche)</td></tr>
+<tr class="memdesc:abce7585cc9e36e28386ae6c0367f0747"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier.  <a href="fonctions__game_8c.html#abce7585cc9e36e28386ae6c0367f0747">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abce7585cc9e36e28386ae6c0367f0747"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e85a6ed3484565522699feb3b7b9d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#a7e85a6ed3484565522699feb3b7b9d43">decalage</a> ()</td></tr>
+<tr class="memdesc:a7e85a6ed3484565522699feb3b7b9d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction decalage : Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas.  <a href="fonctions__game_8c.html#a7e85a6ed3484565522699feb3b7b9d43">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7e85a6ed3484565522699feb3b7b9d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3176856fb8c7e12d5b5e4841eb6d28fb"><td class="memItemLeft" align="right" valign="top"><a id="a3176856fb8c7e12d5b5e4841eb6d28fb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>lignes_succesives</b> = 0</td></tr>
+<tr class="separator:a3176856fb8c7e12d5b5e4841eb6d28fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95459e1be6978667d789ee54a9461454"><td class="memItemLeft" align="right" valign="top"><a id="a95459e1be6978667d789ee54a9461454"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>double_obs_succ</b> = 0</td></tr>
+<tr class="separator:a95459e1be6978667d789ee54a9461454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fonctions utilisée dans <a class="el" href="game_8c.html" title="Bibliotheque Game.c.">game.c</a>. </p>
+<dl class="section author"><dt>Auteurs</dt><dd>Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a0444c76dc61f13e85c74a4501098e56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0444c76dc61f13e85c74a4501098e56b">&#9670;&nbsp;</a></span>affiche_mat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void affiche_mat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le contenu d'une matrice. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a6de45ca501fead02103d8384b9841e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6de45ca501fead02103d8384b9841e6c">&#9670;&nbsp;</a></span>crash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int crash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a7e85a6ed3484565522699feb3b7b9d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e85a6ed3484565522699feb3b7b9d43">&#9670;&nbsp;</a></span>decalage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void decalage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction decalage : Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="abce7585cc9e36e28386ae6c0367f0747"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce7585cc9e36e28386ae6c0367f0747">&#9670;&nbsp;</a></span>deplacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void deplacement </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>touche</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a803fcc1ebbb25765f72b26e4326a163a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803fcc1ebbb25765f72b26e4326a163a">&#9670;&nbsp;</a></span>nb_obstacle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nb_obstacle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retoune le nombre d'obsatcle sur de l'avant dernière ligne. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="aa7a072b14e7f0f346cc42a08cf32424c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7a072b14e7f0f346cc42a08cf32424c">&#9670;&nbsp;</a></span>obstacle_easy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void obstacle_easy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour easyGame. </p>
+<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi / Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="af2d5f66f7be353f97b897c100bcfbab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2d5f66f7be353f97b897c100bcfbab3">&#9670;&nbsp;</a></span>obstacle_hard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void obstacle_hard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame. </p>
+<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi / Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="af7ca11224895f2752e26be9d5e609c9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ca11224895f2752e26be9d5e609c9e">&#9670;&nbsp;</a></span>position_libre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int position_libre </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retoune la postion la case qui ne contient pas d'obstacle. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
