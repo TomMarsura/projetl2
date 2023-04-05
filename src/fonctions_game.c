@@ -438,17 +438,14 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
     int VisibleContinue = 1;
     int VisibleQuitter = 1;
     int position = 0;
-
-
     int quit = 0;
-   printf("je suis la\n");
+   
     while(!quit){
         SDL_Event event;
 
-        printf("je suis toujours la\n");
         while(SDL_PollEvent(&event)){
 
-          printf("je suis la 1\n");
+
             switch(event.type){
                 
                 case SDL_QUIT:
@@ -465,15 +462,12 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
     
                             case SDLK_RETURN:
                                 if (position == 0) {
-
-                                  printf("Ca fonctionne 0\n");
                                   SDL_DestroyTexture(texture);
                                   SDL_DestroyTexture(textTextureContinue);
                                   SDL_DestroyTexture(textTextureQuitter);  
                                   SDL_DestroyTexture(textureCarGame);  
                                   TTF_CloseFont(police);
 
-                                  printf("jtm tom\n");
 
                                   SDL_FreeSurface(carGame);
                                   SDL_FreeSurface(TextContinue);
@@ -488,7 +482,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                   TextQuitter = NULL;
                                   textureCarGame = NULL;
 
-                                   printf("Ca fonctionne 1");
+
                                    return 0;
                                     
                                 } else if (position == 1) {
@@ -511,16 +505,9 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                     TextContinue = NULL;
                                     TextQuitter = NULL;
                                     textureCarGame = NULL;
-                                    
-                                    
-                                    
-                                    printf("Ca fonctionne 2");
                                     return 1;
-                                   
                                 }
-                               
                             break;
-
 
                         case SDLK_RIGHT:
                             position++;

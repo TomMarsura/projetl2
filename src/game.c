@@ -88,6 +88,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
     int score = 0;
     float a = 0;
 
+    int varpause = 0;
+
 
     int vitesse = VITESSE_DEPART;
 
@@ -108,6 +110,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
         CrashMessage(window,renderer,score, 2);
         break;
       }
+
+      
 
       else{
 
@@ -130,6 +134,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
             if (event.type == SDL_KEYDOWN) {
               switch (event.key.keysym.sym) {
+
+                case SDLK_ESCAPE:
+                  varpause = pause(window,renderer);
+                  printf("varpause = %d\n", varpause);
+                  if(varpause == 1){
+                    quit = 0;
+                  }
+                  break;
 
                 case SDLK_RIGHT:
                   if (crash_cote == 0){
@@ -316,6 +328,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int fin = 0;
   int score = 0;
   float a = 0;
+  int varpause = 0;
 
 
   int vitesse = VITESSE_DEPART;
@@ -359,6 +372,13 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
             if (event.type == SDL_KEYDOWN) {
               switch (event.key.keysym.sym) {
+                case SDLK_ESCAPE:
+                    varpause = pause(window,renderer);
+                    printf("varpause = %d\n", varpause);
+                    if(varpause == 1){
+                      quit = 0;
+                    }
+                  break;
 
                 case SDLK_RIGHT:
                   if (crash_cote == 0){
@@ -545,6 +565,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int fin = 0;
   int score = 0;
   float a = 0;
+  int varpause = 0;
 
 
   int vitesse = VITESSE_DEPART;
@@ -588,7 +609,13 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
           if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
-
+              case SDLK_ESCAPE:
+                  varpause = pause(window,renderer);
+                  printf("varpause = %d\n", varpause);
+                  if(varpause == 1){
+                    quit = 0;
+                  }
+                  break;
               case SDLK_RIGHT:
                 if (crash_cote == 0){
                   position_voiture++;
