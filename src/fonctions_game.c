@@ -112,7 +112,7 @@ extern void obstacle_hard(){
   int apparition;
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
-  if ((apparition > 50) && (lignes_succesives < 2)){
+  if ((apparition > 40) && (lignes_succesives < 2)){
       int nbObstacle = nb_obstacle();
 
       if (nbObstacle == 0){ /*La ligne précédente comporte 0 obstacle*/
@@ -122,6 +122,7 @@ extern void obstacle_hard(){
             if(tirageNbObstacle == 1){
               position1 = rand() % LARGEUR;
               route[0][position1] = tirage1;
+              lignes_succesives++;
             }
 
             else{
@@ -146,6 +147,7 @@ extern void obstacle_hard(){
           position1 = rand() % LARGEUR;
           int tirage = rand()%4 + 2;
           route[0][position1] = tirage;
+          lignes_succesives++;
         }
 
         else if (tirageNbObstacle == 2){
@@ -163,17 +165,7 @@ extern void obstacle_hard(){
           int tirage2 = rand()%4 + 2;
           route[0][position1] = tirage1;
           route[0][positionObstacle] = tirage2;
-        }
-      }
-
-      else if (nb_obstacle() == 2){
-        if ((position1 =! position_libre()) && (position2 =! position_libre())){
-          int tirage1 = rand()%4 + 2;
-          int tirage2 = rand()%4 + 2;
-          route[0][position1] = tirage1;
-          route[0][position2] = tirage2;
           lignes_succesives++;
-          double_obs_succ ++;
         }
       }
     }
