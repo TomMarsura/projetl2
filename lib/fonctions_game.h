@@ -26,6 +26,7 @@ extern int calcul_score();
 extern int crash();
 extern void deplacement(int touche);
 extern void decalage();
+extern int pause(SDL_Window* window, SDL_Renderer* renderer);
 
 
 

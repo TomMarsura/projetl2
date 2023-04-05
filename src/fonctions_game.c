@@ -13,6 +13,7 @@
 /* Include pour la fonction deplacement */
 #include "../lib/game.h"
 #include "../lib/menu.h"
+#include "../lib/sdl.h"
 #include "../lib/fonctions_game.h"
 
 /* Include pour gérer le temps */
@@ -312,3 +313,285 @@ extern void decalage(){
   route[x][y] = 1;
   affiche_mat();
 }
+
+
+/**
+ * @author Ayoub LAARIBI
+ * @brief Cette fonction permet a l'utilisateur de mettre pause 
+ * @return int
+*/
+extern int pause(SDL_Window* window, SDL_Renderer* renderer){
+  
+  int time;
+  SDL_Color TextColor;
+  TextColor.r = 255;
+  TextColor.g = 255;
+  TextColor.b = 255;
+
+  SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
+  if (ImageStart == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger l'image");
+    }
+
+
+  SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
+  SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+
+  if (texture == NULL)
+    {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Impossible de charger la texture");
+    }
+
+    /*Verification TTF_init*/
+  if (TTF_Init() == -1)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Initialisation de TTF_Init a echoue");
+    }
+
+    /*Importation de la police*/
+  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 35);
+  if (police == NULL)
+    {
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+
+  TTF_Font *fontLogo = TTF_OpenFont("../fonts/police.TTF", 50);
+  if (fontLogo == NULL)
+    {
+        TTF_CloseFont(police);
+        SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Importation de la police a echouee");
+    }
+
+
+  SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
+  SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
+  SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
+
+
+
+  SDL_Surface *TextContinue = TTF_RenderText_Solid(police, "Continuer", TextColor);
+  if (TextContinue == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+  SDL_Rect DistContinue = {70, 470, TextContinue->w, TextContinue->h};
+  SDL_Texture *textTextureContinue = SDL_CreateTextureFromSurface(renderer, TextContinue);
+
+
+  if (textTextureContinue == NULL)
+    {
+      TTF_CloseFont(police);
+      SDL_DestroyTexture(texture);
+      SDL_DestroyRenderer(renderer);
+      SDL_DestroyWindow(window);
+      SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
+
+/*.....................................................................................................................................*/
+
+  SDL_Surface *TextQuitter = TTF_RenderText_Solid(police, "Quitter", TextColor);
+    if (TextQuitter == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+    SDL_Rect DistQuitter = {510, 470, TextQuitter->w, TextQuitter->h};
+
+    SDL_Texture *textTextureQuitter = SDL_CreateTextureFromSurface(renderer, TextQuitter);
+
+       
+
+    if (textTextureQuitter == NULL)
+    {
+      TTF_CloseFont(police);
+      SDL_DestroyTexture(texture);
+      SDL_DestroyRenderer(renderer);
+      SDL_DestroyWindow(window);
+      SDL_ExitWithMessage("Impossible de charger la texture du texte");
+    }
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+    time = SDL_GetTicks();
+    int VisibleContinue = 1;
+    int VisibleQuitter = 1;
+    int position = 0;
+
+
+    int quit = 0;
+   printf("je suis la\n");
+    while(!quit){
+        SDL_Event event;
+
+        printf("je suis toujours la\n");
+        while(SDL_PollEvent(&event)){
+
+          printf("je suis la 1\n");
+            switch(event.type){
+                
+                case SDL_QUIT:
+                    program_launched = SDL_FALSE;
+                break;
+
+                case SDL_KEYDOWN:
+                    switch(event.key.keysym.sym){
+
+                        case SDLK_ESCAPE:
+                            quit = 1;
+                        break;
+
+    
+                            case SDLK_RETURN:
+                                if (position == 0) {
+
+                                  printf("Ca fonctionne 0\n");
+                                  SDL_DestroyTexture(texture);
+                                  SDL_DestroyTexture(textTextureContinue);
+                                  SDL_DestroyTexture(textTextureQuitter);  
+                                  SDL_DestroyTexture(textureCarGame);  
+                                  TTF_CloseFont(police);
+
+                                  printf("jtm tom\n");
+
+                                  SDL_FreeSurface(carGame);
+                                  SDL_FreeSurface(TextContinue);
+                                  SDL_FreeSurface(TextQuitter);
+
+                                  texture = NULL;
+                                  textTextureContinue = NULL;
+                                  textTextureQuitter = NULL;
+                                  police = NULL;
+                                  carGame = NULL;
+                                  TextContinue = NULL;
+                                  TextQuitter = NULL;
+                                  textureCarGame = NULL;
+
+                                   printf("Ca fonctionne 1");
+                                   return 0;
+                                    
+                                } else if (position == 1) {
+                                    SDL_DestroyTexture(texture);
+                                    SDL_DestroyTexture(textTextureContinue);
+                                    SDL_DestroyTexture(textTextureQuitter);  
+                                    SDL_DestroyTexture(textureCarGame);  
+                                    TTF_CloseFont(police);
+
+                                    
+                                    SDL_FreeSurface(carGame);
+                                    SDL_FreeSurface(TextContinue);
+                                    SDL_FreeSurface(TextQuitter);
+
+                                    texture = NULL;
+                                    textTextureContinue = NULL;
+                                    textTextureQuitter = NULL;
+                                    police = NULL;
+                                    carGame = NULL;
+                                    TextContinue = NULL;
+                                    TextQuitter = NULL;
+                                    textureCarGame = NULL;
+                                    
+                                    
+                                    
+                                    printf("Ca fonctionne 2");
+                                    return 1;
+                                   
+                                }
+                               
+                            break;
+
+
+                        case SDLK_RIGHT:
+                            position++;
+
+                            if (position > 1){
+                                position = 0;
+                            }
+                        break;
+
+                        case SDLK_LEFT:
+                            position--;
+
+                            if (position < 0){
+                                position = 1;
+                            }
+
+                        break;
+                    }
+            }
+        }
+        if ( position == 0)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleContinue = !VisibleContinue;
+                int alpha = VisibleContinue ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureContinue, alpha);
+            }
+        }
+        else
+        {
+            VisibleContinue = 1;
+            int alpha = VisibleContinue ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureContinue, alpha);
+        }
+
+
+        if ( position == 1)
+        {
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
+                VisibleQuitter = !VisibleQuitter;
+                int alpha = VisibleQuitter ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTextureQuitter, alpha);
+            }
+        }
+        else
+        {
+
+            VisibleQuitter = 1;
+            int alpha = VisibleQuitter ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTextureQuitter, alpha);
+        }
+      /*Rendu*/
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
+        SDL_RenderCopy(renderer, textTextureQuitter, NULL, &DistQuitter);
+        SDL_RenderCopy(renderer, textTextureContinue, NULL, &DistContinue);
+        SDL_RenderPresent(renderer);
+    }
+
+    return 0;
+}
+
+
+
+
