@@ -19,10 +19,9 @@
 /* Include pour gérer le temps */
 #include <time.h>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_video.h>
+#include "../include/SDL2/SDL.h"
+#include "../include/SDL2/SDL_image.h"
+#include "../include/SDL2/SDL_ttf.h"
 
 
 

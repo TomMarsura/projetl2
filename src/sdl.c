@@ -7,10 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_video.h>
+#include "../include/SDL2/SDL.h"
+#include "../include/SDL2/SDL_image.h"
+#include "../include/SDL2/SDL_ttf.h"
 
 #include "../lib/sdl.h"
 #include "../lib/menu.h"
