@@ -1,3 +1,10 @@
+/**
+ * @file classement.c
+ * @brief Génération et affichage du classement par points des joueurs
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
+ * @version 1.0
+*/
+
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

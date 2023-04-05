@@ -1,3 +1,10 @@
+/**
+ * @file game.c
+ * @brief Bibliotheque sdl.c
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
+ * @version 1.0
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>

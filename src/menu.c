@@ -1,3 +1,10 @@
+/**
+ * @file menu.c
+ * @brief Bibliotheque Menu.c
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
+ * @version 1.0
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

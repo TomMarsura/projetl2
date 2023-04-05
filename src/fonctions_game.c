@@ -1,7 +1,7 @@
 /**
- * @file game.c
- * @brief Bibliotheque Game.c
- * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut
+ * @file fonctions_game.c
+ * @brief Fonctions utilisée dans game.c
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
  * @version 1.0
 */
 

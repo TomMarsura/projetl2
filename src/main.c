@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @brief Boucle principale du jeu
+ * @authors Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
+ * @version 1.0
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
