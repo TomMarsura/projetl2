@@ -36,7 +36,7 @@ int profilCourant;
 */
 extern void initGame(){
     int i, j;
-    
+
     /* Initialisation de la matrice à 0 */
     for(i = 0; i < HAUTEUR; i++){
         for(j = 0; j < LARGEUR; j++){
@@ -45,7 +45,7 @@ extern void initGame(){
     }
 
     /* Placement de la voiture au milieu de la dernière ligne */
-    route[4][1] = 1;
+    route[HAUTEUR-1][1] = 1;
     score = 0;
     cpt_distance = 0;
 }
@@ -82,7 +82,7 @@ extern void readProfiles(){
     if (fichier == NULL){
         printf("Erreur lors de l'ouverture du fichier\n");
     }
-    else{   
+    else{
         /*Lecture dans le fichier et assignation des valeurs dans les tableaux*/
         while(fscanf(fichier, "%d %d %s %d ", &numProfils[i], &pointsProfils[i], nomProfils[i], &nbPartiesProfils[i]) != EOF){
             i++;

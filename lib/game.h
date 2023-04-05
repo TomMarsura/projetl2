@@ -1,7 +1,7 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#define HAUTEUR 5
+#define HAUTEUR 7
 #define LARGEUR 3
 
 #define VITESSE_DEPART 90

@@ -2,7 +2,7 @@
 #ifndef _FONCTIONS_GAME_H_
 #define _FONCTIONS_GAME_H_
 
-#define HAUTEUR 5
+#define HAUTEUR 7
 #define LARGEUR 3
 
 

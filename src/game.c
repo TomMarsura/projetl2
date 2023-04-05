@@ -72,7 +72,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   /* Calculer la position de départ du rectangle pour centrer la matrice */
   int startX = (800 - LARGEUR * 135) / 2;
-  int startY = (800 - HAUTEUR * 100) / 2;
+  int startY = (800 - HAUTEUR * 120) / 2;
 
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
@@ -310,7 +310,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
   /* Calculer la position de départ du rectangle pour centrer la matrice */
   int startX = (800 - LARGEUR * 135) / 2;
-  int startY = (800 - HAUTEUR * 100) / 2;
+  int startY = (800 - HAUTEUR * 120) / 2;
 
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
@@ -548,7 +548,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   /* Calculer la position de départ du rectangle pour centrer la matrice */
   int startX = (800 - LARGEUR * 135) / 2;
-  int startY = (800 - HAUTEUR * 100) / 2;
+  int startY = (800 - HAUTEUR * 120) / 2;
 
   SDL_RenderCopy(renderer, texture_route, NULL, NULL); // Dessiner l'image de fond
 
