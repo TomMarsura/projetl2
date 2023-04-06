@@ -91,7 +91,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   int varpause = 0;
   int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART;
+  int vitesse = VITESSE_DEPART_EASY;
 
 
   while (quit) {
@@ -343,7 +343,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int varpause = 0;
   int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART;
+  int vitesse = VITESSE_DEPART_MEDIUM;
 
 
   while (quit) {
@@ -595,7 +595,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int varpause = 0;
   int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART;
+  int vitesse = VITESSE_DEPART_HARD;
 
 
   while (quit) {
