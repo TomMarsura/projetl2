@@ -35,7 +35,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   initGame();
 
-  SDL_Surface* car = IMG_Load("../img/car.png");
+  SDL_Surface* car = IMG_Load("../img/moto.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
   SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
