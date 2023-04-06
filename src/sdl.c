@@ -27,6 +27,7 @@ Cette fonction renvoie un message d'erreur et qui la SDL
 /**
  * @brief Fonction SDL_ExitWithMessage : Fonction qui renvoie un message d'erreur et qui quitte la SDL
  * @param message : message d'erreur
+ * @author Ayoub LAARIBI
  * @return void
 */
 extern void SDL_ExitWithMessage(const char *message)

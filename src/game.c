@@ -27,6 +27,7 @@
 
 /**
  * @brief Fonction easyGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Easy.
+ * @author Thibaut GASNIER
  * @return void
 */
 extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
@@ -279,6 +280,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
 /**
  * @brief Fonction MediumGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium
+ * @author Thibaut GASNIER
  * @return void
 */
 extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
@@ -531,6 +533,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
 /**
  * @brief Fonction HardGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard
+ * @author Thibaut GASNIER
  * @return void
 */
 extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){

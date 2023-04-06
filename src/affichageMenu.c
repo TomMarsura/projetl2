@@ -15,6 +15,11 @@
 #include "../lib/game.h"
 #include "../lib/gestionProfils.h"
 
+/**
+ * @brief Choix de difficulté
+ * @author Ayoub LAARIBI
+ * @return void
+*/
 extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
     int time;
     SDL_Color TextColor;

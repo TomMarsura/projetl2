@@ -17,7 +17,11 @@
 #include "../lib/menu.h"
 
 /*FONCTION PRINCIPAL*/
-
+/**
+ * @brief Boucle main
+ * @author Ayoub LAARIBI
+ * @return int
+*/
 int main(int argc, char *argv[])
 {
     profilCourant = 0;

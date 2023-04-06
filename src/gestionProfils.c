@@ -15,6 +15,7 @@
 
 /**
  * @brief Fonction choixProfil : Fonction qui permet l'affichage du choix de profil
+ * @author Tom MARSURA
  * @param window : fenêtre SDL
  * @param renderer : rendu SDL
  * @return int : 0 si tout s'est bien passé, 1 s'il y a une erreur (chargement de SDL)
@@ -467,6 +468,7 @@ extern int creationProfil(SDL_Window* window, SDL_Renderer* renderer){
 
 /**
  * @brief Fonction qui permet l'affichage du menu de suppression de profil
+ * @author Tom MARSURA
  * @param window : La fenêtre SDL
  * @param renderer : Le rendu SDL
  * @return 0 si tout s'est bien passé, 1 sinon

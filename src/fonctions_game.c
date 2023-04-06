@@ -29,7 +29,7 @@ int double_obs_succ = 0;
 
 /**
 *@brief Affiche le contenu d'une matrice
-*@author Ayoub Laaribi
+*@author Thibaut GASNIER
 *@return void
 */
 extern void affiche_mat(){
@@ -51,7 +51,7 @@ extern void affiche_mat(){
 
 /**
 *@brief Retoune le nombre d'obsatcle sur de l'avant dernière ligne
-*@author Thibaut Gasnier
+*@author Thibaut GASNIER
 *@return int
 */
 extern int nb_obstacle(){
@@ -92,13 +92,7 @@ extern int position_libre(){
 /**
   affichae_mat();
  * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
- * @author Ayoub Laaribi / Thibaut Gasnier
- * @return void
-*/
-/**
-  affichae_mat();
- * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
- * @author Ayoub Laaribi / Thibaut Gasnier
+ * @author Tom MARSURA / Thibaut Gasnier
  * @return void
 */
 extern void obstacle_hard(){
@@ -178,7 +172,7 @@ extern void obstacle_hard(){
 /**
   affichae_mat();
  * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour easyGame.
- * @author Ayoub Laaribi / Thibaut Gasnier
+ * @author Thibaut Gasnier
  * @return void
 */
 extern void obstacle_easy(){

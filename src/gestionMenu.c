@@ -30,6 +30,13 @@ Cette fonction lance le menu et permet:
                                     - CLASSEMENT
                                     - QUIT
 *************************************************************************/
+/**
+ * @author Ayoub LAARIBI
+ * @brief Affichage menu principal
+ * @param window : la fenêtre SDL
+ * @param renderer : le rendu SDL
+ * @return void
+*/
 extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 {
     SDL_Color TextColor;
