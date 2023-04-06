@@ -287,7 +287,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
   initGame();
 
-  SDL_Surface* car = IMG_Load("../img/car.png");
+  SDL_Surface* car = IMG_Load("../img/car2.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
   SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
@@ -539,7 +539,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   initGame();
 
-  SDL_Surface* car = IMG_Load("../img/car.png");
+  SDL_Surface* car = IMG_Load("../img/car3.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
 
   SDL_Surface * img_obstacle_dog = IMG_Load("../img/dog.png");
