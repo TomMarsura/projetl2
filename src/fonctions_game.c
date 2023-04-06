@@ -359,6 +359,9 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Importation de la police a echouee");
     }
 
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Creation des surface ------------------------- */
+/* -------------------------------------------------------------------------- */
 
   SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
   SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
@@ -425,6 +428,10 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
     int quit = 0;
     while(!quit){
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Gestion des évènements ------------------------- */
+/* -------------------------------------------------------------------------- */
         SDL_Event event;
 
         while(SDL_PollEvent(&event)){
@@ -444,7 +451,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
                             case SDLK_RETURN:
                                 if (position == 0) {
-
+                                  /*Destruction de la fenetre pour revenirau jeu*/
                                   SDL_DestroyTexture(texture);
                                   SDL_DestroyTexture(textTextureContinue);
                                   SDL_DestroyTexture(textTextureQuitter);
@@ -466,6 +473,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                    return 0;
 
                                 } else if (position == 1) {
+                                  /*Destruction de la fenetre pour revenirau jeu*/
                                     SDL_DestroyTexture(texture);
                                     SDL_DestroyTexture(textTextureContinue);
                                     SDL_DestroyTexture(textTextureQuitter);
@@ -492,6 +500,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
                             break;
 
+                  /*Incrementation des positions*/
 
                         case SDLK_RIGHT:
                             position++;
@@ -512,6 +521,10 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                     }
             }
         }
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Gestion des clignotement ------------------------- */
+/* -------------------------------------------------------------------------- */
         if ( position == 0)
         {
 
@@ -552,6 +565,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
             int alpha = VisibleQuitter ? 255 : 0;
             SDL_SetTextureAlphaMod(textTextureQuitter, alpha);
         }
+        
       /*Rendu*/
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
