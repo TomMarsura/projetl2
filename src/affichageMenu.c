@@ -571,6 +571,11 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
     int quit = 0;
 
     while(!quit && program_launched){
+
+/* ---------------------------------------------------------------- */
+/* ------------------------- Gestion des evenements ---------------- */
+/* -----------------------------------------------------------------*/
+
         SDL_Event event;
         while(SDL_PollEvent(&event)){
             switch(event.type){
@@ -711,7 +716,10 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
         SDL_RenderPresent(renderer);
     }
-    /*Destruction*/
+    
+/* ---------------------------------------------------------------- */
+/* ------------------------- Destructions ------------------------- */
+/* -----------------------------------------------------------------*/
     SDL_DestroyTexture(textTextureRetour);
     SDL_DestroyTexture(textTextureSupr);
     SDL_DestroyTexture(textTextureChoisir);
@@ -971,6 +979,10 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         int quit = 0;
 
         while(!quit){
+
+/* ---------------------------------------------------------------- */
+/* ------------------------- Gestion des evenements ---------------- */
+/* -----------------------------------------------------------------*/
             SDL_Event event;
 
             while(SDL_PollEvent(&event)){
@@ -1025,7 +1037,9 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
 
                 }
             }
-
+/* ----------------------------------------------------------- */
+/* ------------------Gestion des clignotement de texte ----- */
+/* -----------------------------------------------------------*/
             if ( position == 0)
         {
 
@@ -1086,7 +1100,9 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         }
 
 
-
+/* ---------------------------------------------------------------- */
+/* ------------------------- Destructions ------------------------- */
+/* -----------------------------------------------------------------*/
 
     /*Liberation des texture*/
         SDL_FreeSurface(nbPartie);
