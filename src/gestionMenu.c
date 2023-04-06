@@ -101,6 +101,10 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
 
     /*Creation du texte*/
 
+/* ---------------------------------------------------------------- */
+/* ------------------------- Creation des textes ------------------- */
+/* -----------------------------------------------------------------*/
+
     SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
     SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
     SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
@@ -215,15 +219,20 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     // affichage des texte PLAY, CHOOSE PROFILE QUIT
 
     time = SDL_GetTicks();
+
+    /*VARIABLE PERMETTANT DE DONNER UN STATUT VISIBLE OU NON VISIBLE*/
     int VisiblePlay = 1;
     int VisibleChoose = 1;
     int VisibleClassement = 1;
     int VisibleQuit = 1;
-    //choix = 0;
     int position = 0;
 
     while (program_launched)
     {
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Gestion des évènements ------------------------- */
+/* -------------------------------------------------------------------------- */
         SDL_Event event;
         
 
@@ -398,6 +407,9 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
             SDL_SetTextureAlphaMod(textTextureQuit, alpha);
         }
 
+/* ----------------------------------------------------------- */
+/* ------------------------- RENDU ------------------------- */
+/* -----------------------------------------------------------*/
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderCopy(renderer, textTextureQuit, NULL, &DistQuit);
         SDL_RenderCopy(renderer, textTextureClassement, NULL, &DistClassement);
@@ -408,6 +420,10 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
         SDL_RenderCopy(renderer, textureProfilCourantName, NULL, &rectProfilCourantName);
         SDL_RenderPresent(renderer);
         
+
+/* ---------------------------------------------------------------- */
+/* ------------------------- Destructions ------------------------- */
+/* -----------------------------------------------------------------*/
         SDL_DestroyTexture(textureProfilCourant);
         SDL_DestroyTexture(textureProfilCourantName);
         SDL_FreeSurface(textProfilCourant);
