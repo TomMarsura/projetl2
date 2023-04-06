@@ -290,7 +290,7 @@ extern int supprimeProfil(SDL_Window* window, SDL_Renderer* renderer){
         SDL_RenderDrawRect(renderer, &text_back);
  
         //Affichage textes
-        SDL_Surface* delProfil = TTF_RenderText_Blended(font, "Choisissez le profil à supprimer", white);
+        SDL_Surface* delProfil = TTF_RenderText_Blended(font, "Choisissez le profil a supprimer", white);
         SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", white);
         SDL_Surface* escape = TTF_RenderText_Blended(fontFooter, "Touche echap pour revenir au menu principal", white);
  
