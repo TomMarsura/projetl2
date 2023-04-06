@@ -451,7 +451,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
                             case SDLK_RETURN:
                                 if (position == 0) {
-                                  /*Destruction de la fenetre pour revenirau jeu*/
+                                  /*Destruction de la fenetre pour revenir au jeu*/
                                   SDL_DestroyTexture(texture);
                                   SDL_DestroyTexture(textTextureContinue);
                                   SDL_DestroyTexture(textTextureQuitter);
@@ -565,8 +565,10 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
             int alpha = VisibleQuitter ? 255 : 0;
             SDL_SetTextureAlphaMod(textTextureQuitter, alpha);
         }
-        
-      /*Rendu*/
+
+/* ---------------------------------------------------------------- */
+/* ------------------------- RENDU ------------------------- */
+/* -----------------------------------------------------------------*/
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderCopy(renderer, textureCarGame, NULL, &rectCarGame);
         SDL_RenderCopy(renderer, textTextureQuitter, NULL, &DistQuitter);
