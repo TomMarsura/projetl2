@@ -12,10 +12,9 @@ Bibliotheque Game.\+c.
 {\ttfamily \#include \char`\"{}../lib/fonctions\+\_\+game.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/affichage\+Menu.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$time.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+video.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+ttf.\+h\char`\"{}}\newline
 Graphe des dépendances par inclusion de game.\+c\+:
 % FIG 0
 \doxysubsection*{Fonctions}
@@ -24,9 +23,9 @@ Graphe des dépendances par inclusion de game.\+c\+:
 void \mbox{\hyperlink{game_8c_a30f364abdd7c59c1c117fc60ccef086e}{easy\+Game}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
 \begin{DoxyCompactList}\small\item\em Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Easy. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{game_8c_a2a4d8d9cb4382f40fea8946983154b0f}{Medium\+Game}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\begin{DoxyCompactList}\small\item\em Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction Medium\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{game_8c_a1eaade09613f693985bb28248c1b7e44}{Hard\+Game}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\begin{DoxyCompactList}\small\item\em Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction Hard\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
@@ -53,6 +52,9 @@ Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
 
 Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Easy. 
 
+\begin{DoxyAuthor}{Auteur}
+Thibaut GASNIER 
+\end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
 \end{DoxyReturn}
@@ -64,8 +66,11 @@ void
 
 
 
-Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard. 
+Fonction Hard\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard. 
 
+\begin{DoxyAuthor}{Auteur}
+Thibaut GASNIER 
+\end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
 \end{DoxyReturn}
@@ -77,8 +82,11 @@ void
 
 
 
-Fonction easy\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium. 
+Fonction Medium\+Game \+: Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Medium. 
 
+\begin{DoxyAuthor}{Auteur}
+Thibaut GASNIER 
+\end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
 \end{DoxyReturn}

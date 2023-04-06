@@ -6,9 +6,9 @@ Fonctions d\textquotesingle{}affichage du menu.
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+ttf.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/game.\+h\char`\"{}}\newline
@@ -18,9 +18,8 @@ Graphe des dépendances par inclusion de affichage\+Menu.\+c\+:
 \doxysubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}\label{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}} 
-void {\bfseries choice\+\_\+difficult} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\item 
+void \mbox{\hyperlink{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}{choice\+\_\+difficult}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Choix de difficulté \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}{choice\+\_\+profile}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
 \begin{DoxyCompactList}\small\item\em Cette Fonction permet de creer,choisir ou supprimer un profil. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{affichageMenu_8c_a29f81c68af10fdf4c950e7169f5d74b4}{Crash\+Message}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, int score, int mode)
@@ -39,6 +38,22 @@ Ayoub LAARIBI,Tom MARSURA, Thibaut GASNIER
 
 
 \doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}\label{affichageMenu_8c_a4fa6d1ed6de23d4e711b729f93ea8f8c}} 
+\index{affichageMenu.c@{affichageMenu.c}!choice\_difficult@{choice\_difficult}}
+\index{choice\_difficult@{choice\_difficult}!affichageMenu.c@{affichageMenu.c}}
+\doxysubsubsection{\texorpdfstring{choice\_difficult()}{choice\_difficult()}}
+{\footnotesize\ttfamily void choice\+\_\+difficult (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Choix de difficulté 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub LAARIBI 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
 \mbox{\Hypertarget{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}\label{affichageMenu_8c_ab362fdb31af9e79d0ad565e4bbdb2af9}} 
 \index{affichageMenu.c@{affichageMenu.c}!choice\_profile@{choice\_profile}}
 \index{choice\_profile@{choice\_profile}!affichageMenu.c@{affichageMenu.c}}

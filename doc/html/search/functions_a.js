@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['readprofiles_63',['readProfiles',['../menu_8c.html#a0788d89f134e68169fa087c3d4bf4ca4',1,'menu.c']]]
+  ['pause_69',['pause',['../fonctions__game_8c.html#aa31bfd751d84ff9901f9f5e24d1702c0',1,'fonctions_game.c']]],
+  ['position_5flibre_70',['position_libre',['../fonctions__game_8c.html#af7ca11224895f2752e26be9d5e609c9e',1,'fonctions_game.c']]]
 ];

@@ -9,12 +9,12 @@ Fonctions utilisée dans \mbox{\hyperlink{game_8c}{game.\+c}}.
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../lib/game.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/fonctions\+\_\+game.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$time.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+video.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+ttf.\+h\char`\"{}}\newline
 Graphe des dépendances par inclusion de fonctions\+\_\+game.\+c\+:
 % FIG 0
 \doxysubsection*{Fonctions}
@@ -35,7 +35,9 @@ int \mbox{\hyperlink{fonctions__game_8c_a6de45ca501fead02103d8384b9841e6c}{crash
 void \mbox{\hyperlink{fonctions__game_8c_abce7585cc9e36e28386ae6c0367f0747}{deplacement}} (int touche)
 \begin{DoxyCompactList}\small\item\em Fonction deplacement \+: Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fonctions__game_8c_a7e85a6ed3484565522699feb3b7b9d43}{decalage}} ()
-\begin{DoxyCompactList}\small\item\em Fonction decalage \+: Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction decalage \+: Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonctions__game_8c_aa31bfd751d84ff9901f9f5e24d1702c0}{pause}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Cette fonction permet a l\textquotesingle{}utilisateur de mettre pause. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -70,7 +72,7 @@ Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
 Affiche le contenu d\textquotesingle{}une matrice. 
 
 \begin{DoxyAuthor}{Auteur}
-Ayoub Laaribi 
+Thibaut GASNIER 
 \end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
@@ -134,7 +136,7 @@ void
 Retoune le nombre d\textquotesingle{}obsatcle sur de l\textquotesingle{}avant dernière ligne. 
 
 \begin{DoxyAuthor}{Auteur}
-Thibaut Gasnier 
+Thibaut GASNIER 
 \end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 int 
@@ -150,7 +152,7 @@ int
 Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour easy\+Game. 
 
 affichae\+\_\+mat(); \begin{DoxyAuthor}{Auteur}
-Ayoub Laaribi / Thibaut Gasnier 
+Thibaut Gasnier 
 \end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
@@ -166,10 +168,26 @@ void
 Fonction obstacle \+: Cette fonction a pour but de generer aleatoirement des obstacles pour Hard\+Game. 
 
 affichae\+\_\+mat(); \begin{DoxyAuthor}{Auteur}
-Ayoub Laaribi / Thibaut Gasnier 
+Tom MARSURA / Thibaut Gasnier 
 \end{DoxyAuthor}
 \begin{DoxyReturn}{Renvoie}
 void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonctions__game_8c_aa31bfd751d84ff9901f9f5e24d1702c0}\label{fonctions__game_8c_aa31bfd751d84ff9901f9f5e24d1702c0}} 
+\index{fonctions\_game.c@{fonctions\_game.c}!pause@{pause}}
+\index{pause@{pause}!fonctions\_game.c@{fonctions\_game.c}}
+\doxysubsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily int pause (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Cette fonction permet a l\textquotesingle{}utilisateur de mettre pause. 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub LAARIBI 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Renvoie}
+int 
 \end{DoxyReturn}
 \mbox{\Hypertarget{fonctions__game_8c_af7ca11224895f2752e26be9d5e609c9e}\label{fonctions__game_8c_af7ca11224895f2752e26be9d5e609c9e}} 
 \index{fonctions\_game.c@{fonctions\_game.c}!position\_libre@{position\_libre}}

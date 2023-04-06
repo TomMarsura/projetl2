@@ -79,12 +79,12 @@ $(function() {
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;../lib/game.h&quot;</code><br />
 <code>#include &quot;../lib/menu.h&quot;</code><br />
+<code>#include &quot;../lib/sdl.h&quot;</code><br />
 <code>#include &quot;../lib/fonctions_game.h&quot;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_video.h&gt;</code><br />
+<code>#include &quot;../include/SDL2/SDL.h&quot;</code><br />
+<code>#include &quot;../include/SDL2/SDL_image.h&quot;</code><br />
+<code>#include &quot;../include/SDL2/SDL_ttf.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Graphe des dépendances par inclusion de fonctions_game.c:</div>
 <div class="dyncontent">
@@ -117,6 +117,9 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a7e85a6ed3484565522699feb3b7b9d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#a7e85a6ed3484565522699feb3b7b9d43">decalage</a> ()</td></tr>
 <tr class="memdesc:a7e85a6ed3484565522699feb3b7b9d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction decalage : Cette fonction permet de décaler tout le contenu de la matrice une ligne plus bas.  <a href="fonctions__game_8c.html#a7e85a6ed3484565522699feb3b7b9d43">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a7e85a6ed3484565522699feb3b7b9d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa31bfd751d84ff9901f9f5e24d1702c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonctions__game_8c.html#aa31bfd751d84ff9901f9f5e24d1702c0">pause</a> (SDL_Window *window, SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:aa31bfd751d84ff9901f9f5e24d1702c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cette fonction permet a l'utilisateur de mettre pause.  <a href="fonctions__game_8c.html#aa31bfd751d84ff9901f9f5e24d1702c0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa31bfd751d84ff9901f9f5e24d1702c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -148,7 +151,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>double_obs_succ</b> = 
 </div><div class="memdoc">
 
 <p>Affiche le contenu d'une matrice. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi </dd></dl>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut GASNIER </dd></dl>
 <dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
 
 </div>
@@ -233,7 +236,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>double_obs_succ</b> = 
 </div><div class="memdoc">
 
 <p>Retoune le nombre d'obsatcle sur de l'avant dernière ligne. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
+<dl class="section author"><dt>Auteur</dt><dd>Thibaut GASNIER </dd></dl>
 <dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
 
 </div>
@@ -254,7 +257,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>double_obs_succ</b> = 
 </div><div class="memdoc">
 
 <p>Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour easyGame. </p>
-<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi / Thibaut Gasnier </dd></dl>
+<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Thibaut Gasnier </dd></dl>
 <dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
 
 </div>
@@ -275,8 +278,40 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>double_obs_succ</b> = 
 </div><div class="memdoc">
 
 <p>Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame. </p>
-<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Ayoub Laaribi / Thibaut Gasnier </dd></dl>
+<p>affichae_mat(); </p><dl class="section author"><dt>Auteur</dt><dd>Tom MARSURA / Thibaut Gasnier </dd></dl>
 <dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="aa31bfd751d84ff9901f9f5e24d1702c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa31bfd751d84ff9901f9f5e24d1702c0">&#9670;&nbsp;</a></span>pause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pause </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cette fonction permet a l'utilisateur de mettre pause. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Ayoub LAARIBI </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
 
 </div>
 </div>

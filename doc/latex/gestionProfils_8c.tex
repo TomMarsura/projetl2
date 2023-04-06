@@ -6,9 +6,9 @@ Affichage des menu de gestion de profils.
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+ttf.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
 Graphe des dépendances par inclusion de gestion\+Profils.\+c\+:
@@ -18,10 +18,10 @@ Graphe des dépendances par inclusion de gestion\+Profils.\+c\+:
 \item 
 int \mbox{\hyperlink{gestionProfils_8c_a130e55722808af56183c8d64bb51a8c5}{choix\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
 \begin{DoxyCompactList}\small\item\em Fonction choix\+Profil \+: Fonction qui permet l\textquotesingle{}affichage du choix de profil. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{gestionProfils_8c_a03263ee211b396d3f1167add3668ba8b}{supprime\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de suppression de profil. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{gestionProfils_8c_a8165aca01e180ad63a670856d96f1811}{creation\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de création de profil. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de création de profil. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gestionProfils_8c_a03263ee211b396d3f1167add3668ba8b}{supprime\+Profil}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet l\textquotesingle{}affichage du menu de suppression de profil. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
@@ -46,6 +46,9 @@ Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
 
 Fonction choix\+Profil \+: Fonction qui permet l\textquotesingle{}affichage du choix de profil. 
 
+\begin{DoxyAuthor}{Auteur}
+Tom MARSURA 
+\end{DoxyAuthor}
 
 \begin{DoxyParams}{Paramètres}
 {\em window} & \+: fenêtre SDL \\
@@ -89,6 +92,9 @@ int
 
 Fonction qui permet l\textquotesingle{}affichage du menu de suppression de profil. 
 
+\begin{DoxyAuthor}{Auteur}
+Tom MARSURA 
+\end{DoxyAuthor}
 
 \begin{DoxyParams}{Paramètres}
 {\em window} & \+: La fenêtre SDL \\

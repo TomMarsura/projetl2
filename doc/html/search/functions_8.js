@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['obstacle_5feasy_60',['obstacle_easy',['../fonctions__game_8c.html#aa7a072b14e7f0f346cc42a08cf32424c',1,'fonctions_game.c']]],
-  ['obstacle_5fhard_61',['obstacle_hard',['../fonctions__game_8c.html#af2d5f66f7be353f97b897c100bcfbab3',1,'fonctions_game.c']]]
+  ['nb_5fobstacle_66',['nb_obstacle',['../fonctions__game_8c.html#a803fcc1ebbb25765f72b26e4326a163a',1,'fonctions_game.c']]]
 ];

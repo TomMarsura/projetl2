@@ -6,9 +6,9 @@ Gestion du menu principal.
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+SDL2/\+SDL\+\_\+ttf.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/affichage\+Menu.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/sdl.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/menu.\+h\char`\"{}}\newline
@@ -19,9 +19,8 @@ Graphe des dépendances par inclusion de gestion\+Menu.\+c\+:
 \doxysubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{gestionMenu_8c_a93bc6d74994117979475f18741353d06}\label{gestionMenu_8c_a93bc6d74994117979475f18741353d06}} 
-void {\bfseries Lancement\+\_\+menu} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{gestionMenu_8c_a93bc6d74994117979475f18741353d06}{Lancement\+\_\+menu}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Affichage menu principal. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
@@ -33,3 +32,29 @@ Ayoub LAARIBI,Tom MARSURA,Thibaut GASNIER
 \begin{DoxyVersion}{Version}
 1.\+0 
 \end{DoxyVersion}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{gestionMenu_8c_a93bc6d74994117979475f18741353d06}\label{gestionMenu_8c_a93bc6d74994117979475f18741353d06}} 
+\index{gestionMenu.c@{gestionMenu.c}!Lancement\_menu@{Lancement\_menu}}
+\index{Lancement\_menu@{Lancement\_menu}!gestionMenu.c@{gestionMenu.c}}
+\doxysubsubsection{\texorpdfstring{Lancement\_menu()}{Lancement\_menu()}}
+{\footnotesize\ttfamily void Lancement\+\_\+menu (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Affichage menu principal. 
+
+\begin{DoxyAuthor}{Auteur}
+Ayoub LAARIBI 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Paramètres}
+{\em window} & \+: la fenêtre SDL \\
+\hline
+{\em renderer} & \+: le rendu SDL \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
