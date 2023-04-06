@@ -252,15 +252,11 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                 case SDL_SCANCODE_RETURN:
                     if (position == 0) {
                         choice_difficult(window,renderer);
-                        //CrashMessage(window,renderer);
-                        // appeler la fonction de lancement de jeu
                     } else if (position == 1) {
                         choice_profile(window,renderer);
-                        // imprimer un message à l'écran
-                        //creationProfil(window, renderer);
+
                     }
                     else if (position == 2){
-                        // imprimer un message à l'écran
                         afficherTableau(window, renderer);
                     }
                     else if (position == 3){
@@ -276,16 +272,14 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                     if (position > 3){
                         position = 0;
                     }
-                    printf("Vous avez appuye sur la touche BAS\n");
+                break;
 
-                    break;
                 case SDL_SCANCODE_S:
                     position = position + 1;
                     if (position > 3){
                         position = 0;
                     }
-                    printf("Vous avez appuye sur la touche BAS\n");
-                    break;
+                break;
 
                 // HAUT
                 case SDL_SCANCODE_Z:
@@ -293,17 +287,14 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
                     if (position < 0){
                         position = 3;
                     }
-                    printf("Vous avez appuye sur la touche HAUT\n%d\n", position);
-                    break;
+                break;
 
                 case SDL_SCANCODE_UP:
                     position = position - 1;
                     if (position < 0){
                         position = 3;
                     }
-                    printf("Vous avez appuye sur la touche HAUT\n%d\n", position);
-
-                    break;
+                break;
 
                 default:
                     break;
