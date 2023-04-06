@@ -65,6 +65,7 @@ extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Importation de la police a echouee");
     }
 
+/*importation de la police du logo*/
     TTF_Font *fontLogo = TTF_OpenFont("../fonts/police.TTF", 50);
     if (fontLogo == NULL)
     {
@@ -76,6 +77,11 @@ extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
     }
     
     /*Creation du texte*/
+
+
+/* ------------------------------------------------------------------------- */
+/* ------------------------- Création des Surfaces ------------------------- */
+/* ------------------------------------------------------------------------- */
 
     SDL_Surface* carGame = TTF_RenderText_Blended(fontLogo, "CAR GAME", TextColor);
     SDL_Texture* textureCarGame = SDL_CreateTextureFromSurface(renderer, carGame);
@@ -199,7 +205,8 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
-    time = SDL_GetTicks();
+    time = SDL_GetTicks(); /*temps actuel*/
+    
     int VisibleEasy = 1;
     int VisibleMedium = 1;
     int VisibleHard = 1;
@@ -209,6 +216,13 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     int quit = 0;
 
     while(!quit && program_launched){
+
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Gestion des évènements ------------------------- */
+/* -------------------------------------------------------------------------- */
+
+
         SDL_Event event;
 
         while(SDL_PollEvent(&event)){
@@ -219,19 +233,19 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym){
 
-                        case SDLK_ESCAPE:
+                        case SDLK_ESCAPE: /*quitte la fenetre*/
                             quit = 1;
                         break;
 
                             case SDLK_RETURN:
-                                if (position == 0) {
+                                if (position == 0) { /*Si la position est egale 0 => easygame()*/
                                     easyGame(window, renderer);
                                     quit = 1;
-                                } else if (position == 1) {
+                                } else if (position == 1) {/*Si la position est egale 1 => mediumgame()*/
                                     MediumGame(window, renderer);
                                     quit = 1;
                                 }
-                                else if (position == 2){
+                                else if (position == 2){/*Si la position est egale 2 => hardgame()*/
                                     HardGame(window, renderer);
                                     quit = 1;
                                 }
@@ -264,6 +278,10 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
             }
         }
 
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Clignotement du texte ------------------------- */
+/* -------------------------------------------------------------------------- */
         if (position == 0)
         {
 
@@ -347,6 +365,8 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
             int alpha = VisibleRetour ? 255 : 0;
             SDL_SetTextureAlphaMod(textTextureRetour, alpha);
         }
+
+
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
     SDL_RenderCopy(renderer, textTextureHard, NULL, &DistHard);
@@ -357,6 +377,10 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     SDL_RenderPresent(renderer);
     }
 
+
+/* -------------------------------------------------------------------------- */
+/* ------------------------- Destruction des textures  ------------------------- */
+/* -------------------------------------------------------------------------- */
 
     SDL_DestroyTexture(texture);
     SDL_DestroyTexture(textTextureEasy);
