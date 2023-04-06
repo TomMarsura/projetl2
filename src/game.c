@@ -50,8 +50,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
-  SDL_Surface* fond = IMG_Load("../img/route.png");
-  SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
+  SDL_Surface * fond = IMG_Load("../img/route.png");
+  SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
   SDL_Color TextColor;
   TextColor.r = 255;
@@ -60,10 +60,15 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   char scoreText[50];
   sprintf(scoreText, "Score: %d", score);
-  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
-  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  TTF_Font * police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface * surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture * scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
   SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+  TTF_Font * police_diff = TTF_OpenFont("../fonts/police.TTF", 13);
+  SDL_Surface * surface_diff = TTF_RenderText_Solid(police_diff, "NIVEAU: EASY", TextColor);
+  SDL_Texture * texture_diff = SDL_CreateTextureFromSurface(renderer, surface_diff);
+
 
 
   SDL_Rect rectangle;
@@ -88,13 +93,12 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   int ajout;
   int vitesse = VITESSE_DEPART;
 
-  affiche_mat();
 
   while (quit) {
 
     if (fin == 1){
       quit = 0;
-      printf("CRASH\n");
+      printf("CRASH FRONTALE\n");
       CrashMessage(window,renderer,score, 0);
       break;
     }
@@ -127,7 +131,6 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_ESCAPE:
                   varpause = pause(window,renderer);
-                  printf("varpause = %d\n", varpause);
                   if(varpause == 1){
                     quit = 0;
                   }
@@ -135,12 +138,14 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_RIGHT:
                   if (crash_cote == 0){
-                    position_voiture++;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 2){
+
+                      position_voiture++;
+                      if (route[HAUTEUR-1][position_voiture] > 1){
+                        crash_cote = 1;
+                      }
                     }
-
                     if (crash_cote == 0){
                       deplacement(1);
                     }
@@ -149,10 +154,13 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_LEFT:
                   if (crash_cote == 0){
-                    position_voiture--;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 0){
+
+                      position_voiture--;
+                      if (route[HAUTEUR-1][position_voiture] > 1){
+                        crash_cote = 1;
+                      }
                     }
                     if (crash_cote == 0){
                       deplacement(2);
@@ -212,6 +220,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
           scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
           SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
 
+          SDL_Rect diff = {6, 12, surface_diff->w, surface_diff->h};
+          SDL_RenderCopy(renderer, texture_diff, NULL, &diff);
+
           SDL_RenderPresent(renderer);
         }
         c++;
@@ -230,7 +241,6 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (vitesse > VITESSE_MAX_EASY){
         vitesse = vitesse - 1;
-        printf("Vitesse = %d\n",vitesse);
       }
 
       score++;
@@ -247,6 +257,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   img_obstacle = NULL;
   SDL_FreeSurface(surfaceMessage);
   surfaceMessage = NULL;
+  SDL_FreeSurface(surface_diff);
+  surface_diff = NULL;
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -256,6 +268,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_obstacle = NULL;
   SDL_DestroyTexture(scoreTexture);
   scoreTexture = NULL;
+  SDL_DestroyTexture(texture_diff);
+  texture_diff = NULL;
 
   IMG_Quit();
 }
@@ -288,8 +302,8 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
-  SDL_Surface* fond = IMG_Load("../img/route.png");
-  SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
+  SDL_Surface * fond = IMG_Load("../img/route.png");
+  SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
   SDL_Color TextColor;
   TextColor.r = 255;
@@ -298,10 +312,15 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
   char scoreText[50];
   sprintf(scoreText, "Score: %d", score);
-  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
-  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  TTF_Font * police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface * surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture * scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
   SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+  TTF_Font * police_diff = TTF_OpenFont("../fonts/police.TTF", 12);
+  SDL_Surface * surface_diff = TTF_RenderText_Solid(police_diff, "NIVEAU: MEDIUM", TextColor);
+  SDL_Texture * texture_diff = SDL_CreateTextureFromSurface(renderer, surface_diff);
+
 
 
   SDL_Rect rectangle;
@@ -326,13 +345,12 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int ajout;
   int vitesse = VITESSE_DEPART;
 
-  affiche_mat();
 
   while (quit) {
 
     if (fin == 1){
       quit = 0;
-      printf("CRASH\n");
+      printf("CRASH FRONTALE\n");
       CrashMessage(window,renderer,score, 1);
       break;
     }
@@ -365,7 +383,6 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_ESCAPE:
                   varpause = pause(window,renderer);
-                  printf("varpause = %d\n", varpause);
                   if(varpause == 1){
                     quit = 0;
                   }
@@ -373,12 +390,14 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_RIGHT:
                   if (crash_cote == 0){
-                    position_voiture++;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 2){
+
+                      position_voiture++;
+                      if (route[HAUTEUR-1][position_voiture] > 1){
+                        crash_cote = 1;
+                      }
                     }
-
                     if (crash_cote == 0){
                       deplacement(1);
                     }
@@ -387,10 +406,13 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_LEFT:
                   if (crash_cote == 0){
-                    position_voiture--;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 0){
+
+                      position_voiture--;
+                      if (route[HAUTEUR-1][position_voiture] > 1){
+                        crash_cote = 1;
+                      }
                     }
                     if (crash_cote == 0){
                       deplacement(2);
@@ -450,6 +472,9 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
           scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
           SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
 
+          SDL_Rect diff = {5, 12, surface_diff->w, surface_diff->h};
+          SDL_RenderCopy(renderer, texture_diff, NULL, &diff);
+
           SDL_RenderPresent(renderer);
         }
         c++;
@@ -468,7 +493,6 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (vitesse > VITESSE_MAX_EASY){
         vitesse = vitesse - 1;
-        printf("Vitesse = %d\n",vitesse);
       }
 
       score++;
@@ -485,6 +509,8 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   img_obstacle = NULL;
   SDL_FreeSurface(surfaceMessage);
   surfaceMessage = NULL;
+  SDL_FreeSurface(surface_diff);
+  surface_diff = NULL;
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -494,6 +520,8 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_obstacle = NULL;
   SDL_DestroyTexture(scoreTexture);
   scoreTexture = NULL;
+  SDL_DestroyTexture(texture_diff);
+  texture_diff = NULL;
 
   IMG_Quit();
 }
@@ -526,8 +554,8 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
-  SDL_Surface* fond = IMG_Load("../img/route.png");
-  SDL_Texture* texture_route = SDL_CreateTextureFromSurface(renderer,fond);
+  SDL_Surface * fond = IMG_Load("../img/route.png");
+  SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
   SDL_Color TextColor;
   TextColor.r = 255;
@@ -536,10 +564,15 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   char scoreText[50];
   sprintf(scoreText, "Score: %d", score);
-  TTF_Font *police = TTF_OpenFont("../fonts/police.TTF", 20);
-  SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
-  SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+  TTF_Font * police = TTF_OpenFont("../fonts/police.TTF", 20);
+  SDL_Surface * surfaceMessage = TTF_RenderText_Solid(police, scoreText, TextColor);
+  SDL_Texture * scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
   SDL_Rect scoreRect = { 10, 40, surfaceMessage->w, surfaceMessage->h };
+
+  TTF_Font * police_diff = TTF_OpenFont("../fonts/police.TTF", 13);
+  SDL_Surface * surface_diff = TTF_RenderText_Solid(police_diff, "NIVEAU: HARD", TextColor);
+  SDL_Texture * texture_diff = SDL_CreateTextureFromSurface(renderer, surface_diff);
+
 
 
   SDL_Rect rectangle;
@@ -564,13 +597,12 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int ajout;
   int vitesse = VITESSE_DEPART;
 
-  affiche_mat();
 
   while (quit) {
 
     if (fin == 1){
       quit = 0;
-      printf("CRASH\n");
+      printf("CRASH FRONTALE\n");
       CrashMessage(window,renderer,score, 2);
       break;
     }
@@ -603,7 +635,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_ESCAPE:
                   varpause = pause(window,renderer);
-                  printf("varpause = %d\n", varpause);
                   if(varpause == 1){
                     quit = 0;
                   }
@@ -611,30 +642,39 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
                 case SDLK_RIGHT:
                   if (crash_cote == 0){
-                    position_voiture++;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 2){
+
+                      position_voiture++;
+                      if (route[HAUTEUR-1][position_voiture] > 1){
+                        crash_cote = 1;
+                      }
                     }
-
                     if (crash_cote == 0){
                       deplacement(1);
                     }
                     break;
+
+
                   }
 
                 case SDLK_LEFT:
                   if (crash_cote == 0){
-                    position_voiture--;
 
-                    if (route[HAUTEUR-1][position_voiture] > 1){
-                      crash_cote = 1;
+                    if((position_voiture) != 0){
+
+                      position_voiture--;
+                      if((position_voiture) != 0){
+                        if (route[HAUTEUR-1][position_voiture] > 1){
+                          crash_cote = 1;
+                        }
+                      }
+                      if (crash_cote == 0){
+                        deplacement(2);
+                      }
+                      break;
+                      }
                     }
-                    if (crash_cote == 0){
-                      deplacement(2);
-                    }
-                    break;
-                  }
 
                 default:
                   break;
@@ -688,6 +728,9 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
           scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
           SDL_RenderCopy(renderer, scoreTexture, NULL, &scoreRect);
 
+          SDL_Rect diff = {6, 12, surface_diff->w, surface_diff->h};
+          SDL_RenderCopy(renderer, texture_diff, NULL, &diff);
+
           SDL_RenderPresent(renderer);
         }
         c++;
@@ -706,7 +749,6 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (vitesse > VITESSE_MAX_HARD){
         vitesse = vitesse - 1;
-        printf("Vitesse = %d\n",vitesse);
       }
 
       score++;
@@ -723,6 +765,8 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   img_obstacle = NULL;
   SDL_FreeSurface(surfaceMessage);
   surfaceMessage = NULL;
+  SDL_FreeSurface(surface_diff);
+  surface_diff = NULL;
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
@@ -732,6 +776,8 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   texture_obstacle = NULL;
   SDL_DestroyTexture(scoreTexture);
   scoreTexture = NULL;
+  SDL_DestroyTexture(texture_diff);
+  texture_diff = NULL;
 
   IMG_Quit();
 }

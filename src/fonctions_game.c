@@ -103,8 +103,6 @@ extern int position_libre(){
 */
 extern void obstacle_hard(){
 
-  affiche_mat();
-
   int position1;
 
   int position2;
@@ -255,7 +253,6 @@ extern void deplacement(int touche){
     /* On modifie la position de la voiture dans la matrice */
     route[x][y] = 0;
     route[x][y+1] = 1;
-    affiche_mat();
   }
 
   /* Si le joueur appuie sur la flèche de gauche et verifier si la limite de la route sur la gauche est dépassée */
@@ -263,8 +260,6 @@ extern void deplacement(int touche){
   /* On modifie la position de la voiture dans la matrice */
     route[x][y] = 0;
     route[x][y-1] = 1;
-    affiche_mat();
-
   }
 }
 
@@ -277,7 +272,6 @@ extern void deplacement(int touche){
 */
 extern void decalage(){
 
-  printf("DECALAGE \n");
 
   int i;
   int j;
@@ -307,17 +301,16 @@ extern void decalage(){
 
   /* On met la voiture a lligne du dessus */
   route[x][y] = 1;
-  affiche_mat();
 }
 
 
 /**
  * @author Ayoub LAARIBI
- * @brief Cette fonction permet a l'utilisateur de mettre pause 
+ * @brief Cette fonction permet a l'utilisateur de mettre pause
  * @return int
 */
 extern int pause(SDL_Window* window, SDL_Renderer* renderer){
-  
+
   int time;
   SDL_Color TextColor;
   TextColor.r = 255;
@@ -418,7 +411,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
     SDL_Texture *textTextureQuitter = SDL_CreateTextureFromSurface(renderer, TextQuitter);
 
-       
+
 
     if (textTextureQuitter == NULL)
     {
@@ -442,7 +435,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
         while(SDL_PollEvent(&event)){
             switch(event.type){
-                
+
                 case SDL_QUIT:
                     program_launched = SDL_FALSE;
                 break;
@@ -454,14 +447,14 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                             quit = 1;
                         break;
 
-    
+
                             case SDLK_RETURN:
                                 if (position == 0) {
 
                                   SDL_DestroyTexture(texture);
                                   SDL_DestroyTexture(textTextureContinue);
-                                  SDL_DestroyTexture(textTextureQuitter);  
-                                  SDL_DestroyTexture(textureCarGame);  
+                                  SDL_DestroyTexture(textTextureQuitter);
+                                  SDL_DestroyTexture(textureCarGame);
                                   TTF_CloseFont(police);
 
                                   SDL_FreeSurface(carGame);
@@ -477,15 +470,15 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                   TextQuitter = NULL;
                                   textureCarGame = NULL;
                                    return 0;
-                                    
+
                                 } else if (position == 1) {
                                     SDL_DestroyTexture(texture);
                                     SDL_DestroyTexture(textTextureContinue);
-                                    SDL_DestroyTexture(textTextureQuitter);  
-                                    SDL_DestroyTexture(textureCarGame);  
+                                    SDL_DestroyTexture(textTextureQuitter);
+                                    SDL_DestroyTexture(textureCarGame);
                                     TTF_CloseFont(police);
 
-                                    
+
                                     SDL_FreeSurface(carGame);
                                     SDL_FreeSurface(TextContinue);
                                     SDL_FreeSurface(TextQuitter);
@@ -498,11 +491,11 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                     TextContinue = NULL;
                                     TextQuitter = NULL;
                                     textureCarGame = NULL;
-                                    
+
                                     return 1;
-                                   
+
                                 }
-                               
+
                             break;
 
 
