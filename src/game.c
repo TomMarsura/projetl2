@@ -90,7 +90,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   int fin = 0;
   int score = 0;
   int varpause = 0;
-  int c = 0;
+  int c = -1;
   int ajout;
   int vitesse = VITESSE_DEPART_EASY;
 
@@ -114,9 +114,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
       else{
 
-      c = 0;
+      c = -1;
 
-      while (c<9){
+      while (c<18){
 
         int start_time = SDL_GetTicks();
         while((SDL_GetTicks() - start_time) < vitesse) {
@@ -181,7 +181,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
           for (int i = 0; i < HAUTEUR; i++) {
             for (int j = 0; j < LARGEUR; j++) {
 
-              ajout = c*10;
+              ajout = c*5;
 
               if (route[i][j] == 1) {
                 rectangle.x = startX + j * 160; /* Position horizontale de la case */
