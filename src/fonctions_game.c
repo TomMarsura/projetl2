@@ -85,6 +85,9 @@ extern void obstacle_hard(){
   int apparition;
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
+  int apparition_piece;
+  apparition_piece = rand() % 100;
+
   if ((apparition > 40) && (lignes_succesives < 2)){
       int nbObstacle = nb_obstacle();
 
@@ -141,6 +144,10 @@ extern void obstacle_hard(){
           lignes_succesives++;
         }
       }
+    }
+    else if (apparition_piece < 10){
+      position1 = rand() % LARGEUR;
+      route[0][position1] = 9;
     }
   else{
     lignes_succesives = 0;
@@ -215,7 +222,6 @@ extern int crash(){
   return 0;
 }
 
-
 extern int bonus_pris(){
 
   int i;
@@ -230,7 +236,6 @@ extern int bonus_pris(){
   /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 }
-
 
 /**
  * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier

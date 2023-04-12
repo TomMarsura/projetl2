@@ -96,6 +96,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   int c = 0;
   int ajout;
   float vitesse = VITESSE_DEPART_EASY;
+  int tirage_score;
 
 
   while (quit) {
@@ -146,7 +147,11 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
                     if((position_voiture) != 2){
 
                       position_voiture++;
-                      if (route[HAUTEUR-1][position_voiture] > 1){
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 3;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
                         crash_cote = 1;
                       }
                     }
@@ -162,7 +167,12 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
                     if((position_voiture) != 0){
 
                       position_voiture--;
-                      if (route[HAUTEUR-1][position_voiture] > 1){
+                      
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 3;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
                         crash_cote = 1;
                       }
                     }
@@ -243,7 +253,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
       }
 
       if (bonus_pris() == 1){
-        score += 10;
+          tirage_score = rand() % 10 + 1;
+          score += tirage_score;
       }
 
       if (crash_cote == 1){
@@ -317,6 +328,9 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* img_obstacle = IMG_Load("../img/plot.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
+  SDL_Surface * bonus = IMG_Load("../img/piece.png");
+  SDL_Texture * texture_bonus = SDL_CreateTextureFromSurface(renderer,bonus);
+
   SDL_Surface * fond = IMG_Load("../img/route.png");
   SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
@@ -359,6 +373,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int c = 0;
   int ajout;
   float vitesse = VITESSE_DEPART_MEDIUM;
+  int tirage_score;
 
 
   while (quit) {
@@ -409,7 +424,12 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
                     if((position_voiture) != 2){
 
                       position_voiture++;
-                      if (route[HAUTEUR-1][position_voiture] > 1){
+                      
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 1;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
                         crash_cote = 1;
                       }
                     }
@@ -425,7 +445,12 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
                     if((position_voiture) != 0){
 
                       position_voiture--;
-                      if (route[HAUTEUR-1][position_voiture] > 1){
+                      
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 1;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
                         crash_cote = 1;
                       }
                     }
@@ -478,6 +503,12 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
                 rectangle.y = startY + i * 100 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
+
+              if (route[i][j] == 9) {
+                rectangle.x = startX + j * 160;
+                rectangle.y = startY + i * 100 + ajout ;
+                SDL_RenderCopy(renderer, texture_bonus, NULL, &rectangle);
+              }
             }
           }
 
@@ -497,6 +528,11 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash() == 1){
         fin = 1;
+      }
+
+      if (bonus_pris() == 1){
+          tirage_score = rand() % 10 + 1;
+          score += tirage_score;
       }
 
       if (crash_cote == 1){
@@ -570,6 +606,9 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface* img_obstacle = IMG_Load("../img/plot.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
+  SDL_Surface * bonus = IMG_Load("../img/piece.png");
+  SDL_Texture * texture_bonus = SDL_CreateTextureFromSurface(renderer,bonus);
+
   SDL_Surface * fond = IMG_Load("../img/route.png");
   SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
@@ -612,6 +651,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int c = 0;
   int ajout;
   float vitesse = VITESSE_DEPART_HARD;
+  int tirage_score;
 
 
   while (quit) {
@@ -662,7 +702,12 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
                     if((position_voiture) != 2){
 
                       position_voiture++;
-                      if (route[HAUTEUR-1][position_voiture] > 1){
+                      
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 1;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
                         crash_cote = 1;
                       }
                     }
@@ -681,9 +726,14 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
                       position_voiture--;
                       if((position_voiture) != 0){
-                        if (route[HAUTEUR-1][position_voiture] > 1){
-                          crash_cote = 1;
-                        }
+                        
+                      if (route[HAUTEUR-1][position_voiture] == 9){//score += 10;
+                        tirage_score = rand() % 10 + 1;
+                        score += tirage_score;
+                      }
+                      else if (route[HAUTEUR-1][position_voiture] > 1 && route[HAUTEUR-1][position_voiture] != 9){
+                        crash_cote = 1;
+                      }
                       }
                       if (crash_cote == 0){
                         deplacement(2);
@@ -735,6 +785,12 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
                 rectangle.y = startY + i * 100 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
+
+              if (route[i][j] == 9) {
+                rectangle.x = startX + j * 160;
+                rectangle.y = startY + i * 100 + ajout ;
+                SDL_RenderCopy(renderer, texture_bonus, NULL, &rectangle);
+              }
             }
           }
 
@@ -754,6 +810,11 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash() == 1){
         fin = 1;
+      }
+
+      if (bonus_pris() == 1){
+        tirage_score = rand() % 10 + 1;
+        score += tirage_score;
       }
 
       if (crash_cote == 1){
