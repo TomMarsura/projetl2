@@ -24,6 +24,7 @@ extern void obstacle_easy();
 extern void obstacle_hard();
 extern int calcul_score();
 extern int crash();
+extern int bonus_pris();
 extern void deplacement(int touche);
 extern void decalage();
 extern int pause(SDL_Window* window, SDL_Renderer* renderer);

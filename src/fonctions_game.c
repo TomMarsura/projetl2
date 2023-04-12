@@ -68,25 +68,6 @@ extern int nb_obstacle(){
   return nb;
 }
 
-/**
-*@brief Retoune la postion la case qui ne contient pas d'obstacle
-*@author Thibaut Gasnier
-*@return int
-*/
-extern int position_libre(){
-
-  int pos;
-  int i;
-
-  for (i=0;i< LARGEUR-1 ;i++){
-    if (route[1][i] < 2){
-      pos = i;
-    }
-  }
-
-  return pos;
-}
-
 
 
 /**
@@ -188,6 +169,9 @@ extern void obstacle_easy(){
     route[0][position] = tirage;
     lignes_succesives++;
   }
+  else if (apparition < 20){
+    route[0][position] = 9;
+    }
   else{
     lignes_succesives = 0;
   }
@@ -206,18 +190,30 @@ extern int crash(){
 
   for (i=0; i<LARGEUR ; i++){
     /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
-    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] > 1)){
+    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] > 1) && (route[HAUTEUR-2][i] != 9)){
       /* On retourne 1 pour signnfier le crash */
       return 1;
     }
   }
-
-  /*modification du score*/
-  /*addScore(profil);*/
   /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 }
 
+
+extern int bonus_pris(){
+
+  int i;
+
+  for (i=0; i<LARGEUR ; i++){
+    /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
+    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 9)){
+      /* On retourne 1 pour signnfier le crash */
+      return 1;
+    }
+  }
+  /* On retourne 0 quand il n'y a pas de crash */
+  return 0;
+}
 
 
 /**

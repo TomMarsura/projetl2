@@ -54,6 +54,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface * fond = IMG_Load("../img/route.png");
   SDL_Texture * texture_route = SDL_CreateTextureFromSurface(renderer,fond);
 
+  SDL_Surface * bonus = IMG_Load("../img/piece.png");
+  SDL_Texture * texture_bonus = SDL_CreateTextureFromSurface(renderer,bonus);
+
   SDL_Color TextColor;
   TextColor.r = 255;
   TextColor.g = 255;
@@ -212,6 +215,12 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
                 rectangle.y = startY + i * 100 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle_mamie, NULL, &rectangle);
               }
+
+              if (route[i][j] == 9) {
+                rectangle.x = startX + j * 160;
+                rectangle.y = startY + i * 100 + ajout ;
+                SDL_RenderCopy(renderer, texture_bonus, NULL, &rectangle);
+              }
             }
           }
 
@@ -231,6 +240,10 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash() == 1){
         fin = 1;
+      }
+
+      if (bonus_pris() == 1){
+        score += 10;
       }
 
       if (crash_cote == 1){
