@@ -37,7 +37,7 @@ extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
 
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+   
 
     if (texture == NULL)
     {
@@ -101,8 +101,7 @@ extern void choice_difficult(SDL_Window* window, SDL_Renderer* renderer){
         SDL_Rect DistEasy = {90, 300, TextEasy->w, TextEasy->h};
 
         SDL_Texture *textTextureEasy = SDL_CreateTextureFromSurface(renderer, TextEasy);
-
-        SDL_FreeSurface(TextEasy);
+        
 
         if (textTextureEasy == NULL)
         {
@@ -131,8 +130,6 @@ SDL_Surface *TextMedium = TTF_RenderText_Solid(police, "Medium", TextColor);
 
         SDL_Texture *textTextureMedium = SDL_CreateTextureFromSurface(renderer, TextMedium);
 
-        SDL_FreeSurface(TextMedium);
-
         if (textTextureMedium == NULL)
         {
             TTF_CloseFont(police);
@@ -159,8 +156,6 @@ SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
 
         SDL_Texture *textTextureHard = SDL_CreateTextureFromSurface(renderer, TextHard);
 
-        SDL_FreeSurface(TextHard);
-
         if (textTextureHard == NULL)
         {
             TTF_CloseFont(police);
@@ -174,6 +169,29 @@ SDL_Surface *TextHard = TTF_RenderText_Solid(police, "Hard", TextColor);
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
+    SDL_Surface *TextPiece = TTF_RenderText_Solid(police, "Capture de pieces", TextColor);
+    if (TextPiece == NULL)
+    {
+        TTF_CloseFont(police);
+        // SDL_DestroyTexture(texture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_ExitWithMessage("Le texte sur la surface a echouee");
+    }
+
+        SDL_Rect DistPiece = {90, 450, TextPiece->w, TextPiece->h};
+
+        SDL_Texture *textTexturePiece = SDL_CreateTextureFromSurface(renderer, TextPiece);
+        
+
+        if (textTexturePiece == NULL)
+        {
+            TTF_CloseFont(police);
+            SDL_DestroyTexture(texture);
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            SDL_ExitWithMessage("Impossible de charger la texture du texte");
+        }
 
 
 SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
@@ -186,11 +204,9 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
         SDL_ExitWithMessage("Le texte sur la surface a echouee");
     }
 
-        SDL_Rect DistRetour = {90, 450, TextRetour->w, TextRetour->h};
+        SDL_Rect DistRetour = {90, 500, TextRetour->w, TextRetour->h};
 
         SDL_Texture *textTextureRetour = SDL_CreateTextureFromSurface(renderer, TextRetour);
-
-        SDL_FreeSurface(TextRetour);
 
         if (textTextureRetour == NULL)
         {
@@ -211,6 +227,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     int VisibleMedium = 1;
     int VisibleHard = 1;
     int VisibleRetour = 1;
+    int VisiblePiece = 1;
     int position = 0;
 
     int quit = 0;
@@ -249,7 +266,12 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                     HardGame(window, renderer);
                                     quit = 1;
                                 }
+
                                 else if (position == 3){
+                                    //BonusGame(window,renderer);
+                                    quit = 1;
+                                }
+                                else if (position == 4){
                                     quit = 1;
                                 }
                             break;
@@ -259,7 +281,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                         case SDLK_DOWN:
                             position++;
 
-                            if (position > 3){
+                            if (position > 4){
                                 position = 0;
                             }
                         break;
@@ -353,6 +375,29 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
             if (ActualTime > time + 500)
             {
                 time = ActualTime;
+                VisiblePiece = !VisiblePiece;
+                int alpha = VisiblePiece ? 255 : 0;
+                SDL_SetTextureAlphaMod(textTexturePiece, alpha);
+            }
+        }
+        else
+        {
+
+            VisiblePiece = 1;
+            int alpha = VisiblePiece ? 255 : 0;
+            SDL_SetTextureAlphaMod(textTexturePiece, alpha);
+        }
+
+
+
+        if (position == 4)
+        {
+
+            unsigned ActualTime = SDL_GetTicks();
+
+            if (ActualTime > time + 500)
+            {
+                time = ActualTime;
                 VisibleRetour = !VisibleRetour;
                 int alpha = VisibleRetour ? 255 : 0;
                 SDL_SetTextureAlphaMod(textTextureRetour, alpha);
@@ -369,6 +414,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
 
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderCopy(renderer, textTextureRetour, NULL, &DistRetour);
+    SDL_RenderCopy(renderer, textTexturePiece, NULL, &DistPiece);
     SDL_RenderCopy(renderer, textTextureHard, NULL, &DistHard);
     SDL_RenderCopy(renderer, textTextureMedium, NULL, &DistMedium);
     SDL_RenderCopy(renderer, textTextureEasy, NULL, &DistEasy);
@@ -386,25 +432,37 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     SDL_DestroyTexture(textTextureEasy);
     SDL_DestroyTexture(textTextureMedium);
     SDL_DestroyTexture(textTextureHard);
+    SDL_DestroyTexture(textTexturePiece);
     SDL_DestroyTexture(textTextureRetour);
     SDL_DestroyTexture(textureCarGame);
     
     SDL_FreeSurface(carGame);
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+    SDL_FreeSurface(TextEasy);
+    SDL_FreeSurface(TextMedium);
+    SDL_FreeSurface(TextHard);
+    SDL_FreeSurface(TextRetour);
+    SDL_FreeSurface(TextPiece);
+    SDL_FreeSurface(ImageStart);
+
 
     TTF_CloseFont(police);
     TTF_CloseFont(fontLogo);
 
     //Réinitialisation des pointeurs
     texture = NULL;
+    ImageStart = NULL;
     textTextureEasy = NULL;
     textTextureMedium = NULL;
     textTextureHard = NULL;
     textTextureRetour = NULL;
+    textTexturePiece =NULL;
     textureCarGame = NULL;
     TextEasy = NULL;
     TextMedium = NULL;
     TextHard = NULL;
     TextRetour = NULL;
+    TextPiece =NULL;
     carGame = NULL;
     police = NULL;
     fontLogo = NULL;
@@ -430,8 +488,7 @@ extern void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
         SDL_ExitWithMessage("Impossible de charger l'image");
     }
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, ImageStart);
-    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
-    if (texture == NULL)
+        if (texture == NULL)
     {
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
@@ -480,7 +537,7 @@ extern void choice_profile(SDL_Window* window, SDL_Renderer* renderer){
     SDL_Rect rectCarGame = {(SCREEN_WIDTH - carGame->w) / 2, 100, carGame->w, carGame->h };
     SDL_Rect DistCree = {90, 300, TextCree->w, TextCree->h};
     SDL_Texture *textTextureCree = SDL_CreateTextureFromSurface(renderer, TextCree);
-    SDL_FreeSurface(TextCree);
+    
 
     if (textTextureCree == NULL)
     {
@@ -503,7 +560,6 @@ SDL_Surface *TextChoisir = TTF_RenderText_Solid(police, "Choisir", TextColor);
 
         SDL_Rect DistChoisir = {90, 350, TextChoisir->w, TextChoisir->h};
         SDL_Texture *textTextureChoisir = SDL_CreateTextureFromSurface(renderer, TextChoisir);
-        SDL_FreeSurface(TextChoisir);
 
         if (textTextureChoisir == NULL)
         {
@@ -526,7 +582,7 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
         SDL_Rect DistSupr = {90, 400, TextSupr->w, TextSupr->h};
         SDL_Texture *textTextureSupr = SDL_CreateTextureFromSurface(renderer, TextSupr);
-        SDL_FreeSurface(TextSupr);
+        
 
         if (textTextureSupr == NULL)
         {
@@ -550,7 +606,7 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
 
         SDL_Rect DistRetour = {90, 450, TextRetour->w, TextRetour->h};
         SDL_Texture *textTextureRetour = SDL_CreateTextureFromSurface(renderer, TextRetour);
-        SDL_FreeSurface(TextRetour);
+        
 
         if (textTextureRetour == NULL)
         {
@@ -729,6 +785,13 @@ SDL_Surface *TextSupr = TTF_RenderText_Solid(police, "Supprimer", TextColor);
     SDL_FreeSurface(carGame);
     TTF_CloseFont(police);
     TTF_CloseFont(fontLogo);
+
+
+    SDL_FreeSurface(ImageStart); /*liberation de la memoire*/
+    SDL_FreeSurface(TextCree);
+    SDL_FreeSurface(TextChoisir);
+    SDL_FreeSurface(TextSupr);
+    SDL_FreeSurface(TextRetour);
 
     //Réinitialisation des pointeurs
     textTextureRetour = NULL;
@@ -1143,5 +1206,6 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         Score=NULL;
         points=NULL;
         parties=NULL;
+        Message_crash = NULL;
 
 }
