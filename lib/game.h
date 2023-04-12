@@ -4,13 +4,13 @@
 #define HAUTEUR 7
 #define LARGEUR 3
 
-#define VITESSE_DEPART_EASY 90
+#define VITESSE_DEPART_EASY 45
 #define VITESSE_DEPART_MEDIUM 80
 #define VITESSE_DEPART_HARD 70
 
 
 #define VITESSE_MAX_HARD 20
-#define VITESSE_MAX_EASY 40
+#define VITESSE_MAX_EASY 20
 
 /* Variables globales */
 /* Variables globales */
