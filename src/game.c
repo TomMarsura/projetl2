@@ -48,7 +48,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
   SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
 
-  SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
+  SDL_Surface* img_obstacle = IMG_Load("../img/plot.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
   SDL_Surface * fond = IMG_Load("../img/route.png");
@@ -191,7 +191,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
               if (route[i][j] == 2) {
                 rectangle.x = startX + j * 160;
-                rectangle.y = startY + i * 100 + ajout ;
+                rectangle.y = startY + i * 105 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
 
@@ -301,7 +301,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
   SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
 
-  SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
+  SDL_Surface* img_obstacle = IMG_Load("../img/plot.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
   SDL_Surface * fond = IMG_Load("../img/route.png");
@@ -444,7 +444,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
               if (route[i][j] == 2) {
                 rectangle.x = startX + j * 160;
-                rectangle.y = startY + i * 100 + ajout ;
+                rectangle.y = startY + i * 105 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
 
@@ -554,7 +554,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   SDL_Surface * img_obstacle_mamie = IMG_Load("../img/mamie.png");
   SDL_Texture * texture_obstacle_mamie = SDL_CreateTextureFromSurface(renderer,img_obstacle_mamie);
 
-  SDL_Surface* img_obstacle = IMG_Load("../img/obstacle.png");
+  SDL_Surface* img_obstacle = IMG_Load("../img/plot.png");
   SDL_Texture * texture_obstacle = SDL_CreateTextureFromSurface(renderer,img_obstacle);
 
   SDL_Surface * fond = IMG_Load("../img/route.png");
@@ -701,7 +701,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
               if (route[i][j] == 2) {
                 rectangle.x = startX + j * 160;
-                rectangle.y = startY + i * 100 + ajout ;
+                rectangle.y = startY + i * 105 + ajout ;
                 SDL_RenderCopy(renderer, texture_obstacle, NULL, &rectangle);
               }
 
