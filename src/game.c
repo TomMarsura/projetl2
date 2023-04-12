@@ -90,9 +90,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   int fin = 0;
   int score = 0;
   int varpause = 0;
-  int c = -1;
+  int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART_EASY;
+  float vitesse = VITESSE_DEPART_EASY;
 
 
   while (quit) {
@@ -114,9 +114,9 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
       else{
 
-      c = -1;
+      c = 0;
 
-      while (c<18){
+      while (c<19){
 
         int start_time = SDL_GetTicks();
         while((SDL_GetTicks() - start_time) < vitesse) {
@@ -241,7 +241,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
       obstacle_easy();
 
       if (vitesse > VITESSE_MAX_EASY){
-        vitesse = vitesse - 1;
+        vitesse = vitesse - 0.75;
       }
 
       score++;
@@ -345,7 +345,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   int varpause = 0;
   int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART_MEDIUM;
+  float vitesse = VITESSE_DEPART_MEDIUM;
 
 
   while (quit) {
@@ -369,7 +369,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
       c = 0;
 
-      while (c<9){
+      while (c<19){
 
         int start_time = SDL_GetTicks();
         while((SDL_GetTicks() - start_time) < vitesse) {
@@ -434,7 +434,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
           for (int i = 0; i < HAUTEUR; i++) {
             for (int j = 0; j < LARGEUR; j++) {
 
-              ajout = c*10;
+              ajout = c*5;
 
               if (route[i][j] == 1) {
                 rectangle.x = startX + j * 160; /* Position horizontale de la case */
@@ -494,7 +494,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
       obstacle_hard();
 
       if (vitesse > VITESSE_MAX_EASY){
-        vitesse = vitesse - 1;
+        vitesse = vitesse - 0.75;
       }
 
       score++;
@@ -598,7 +598,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   int varpause = 0;
   int c = 0;
   int ajout;
-  int vitesse = VITESSE_DEPART_HARD;
+  float vitesse = VITESSE_DEPART_HARD;
 
 
   while (quit) {
@@ -622,7 +622,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
       c = 0;
 
-      while (c<9){
+      while (c<19){
 
         int start_time = SDL_GetTicks();
         while((SDL_GetTicks() - start_time) < vitesse) {
@@ -691,7 +691,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
           for (int i = 0; i < HAUTEUR; i++) {
             for (int j = 0; j < LARGEUR; j++) {
 
-              ajout = c*10;
+              ajout = c*5;
 
               if (route[i][j] == 1) {
                 rectangle.x = startX + j * 160; /* Position horizontale de la case */
@@ -751,7 +751,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
       obstacle_hard();
 
       if (vitesse > VITESSE_MAX_HARD){
-        vitesse = vitesse - 1;
+        vitesse = vitesse - 0.5;
       }
 
       score++;
