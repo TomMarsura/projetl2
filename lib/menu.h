@@ -9,8 +9,8 @@
 extern int pointsProfils[MAX_PROFILS] ;
 extern char nomProfils[MAX_PROFILS][SIZE_NAME];
 extern int numProfils[MAX_PROFILS] ;
-extern int nbProfils ;
 extern int nbPartiesProfils[MAX_PROFILS] ;
+extern int nbProfils ;
 
 extern int profilCourant;
 
