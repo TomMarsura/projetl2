@@ -177,7 +177,23 @@ extern void obstacle_easy(){
   }
 }
 
+/**
+ * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
+ * @author Tom MARSURA / Thibaut Gasnier
+ * @return void
+*/
+extern void obstacle_piece(){
 
+  int position1;
+
+  int apparition;
+  apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
+
+  if ((apparition > 60)){
+      position1 = rand() % LARGEUR;
+      route[0][position1] = 6;
+  }
+}
 
 /**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
