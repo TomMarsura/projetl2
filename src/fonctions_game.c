@@ -228,7 +228,7 @@ extern int bonus_pris(){
 
   for (i=0; i<LARGEUR ; i++){
     /*Verifie si la ligne actuelle contient la voiture et si la la ligne supérieur est un obstacle*/
-    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 9)){
+    if ((route[HAUTEUR-1][i] == 1) && (route[HAUTEUR-2][i] == 2)){
       /* On retourne 1 pour signnfier le crash */
       return 1;
     }

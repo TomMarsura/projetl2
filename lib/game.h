@@ -12,10 +12,15 @@
 #define VITESSE_MAX_HARD 10
 #define VITESSE_MAX_EASY 20
 
+#define CHRONO 60000
+
+
 /* Variables globales */
 /* Variables globales */
 extern int route[HAUTEUR][LARGEUR];
 extern int score;
+extern int crono;
+extern int chrono;
 extern int cpt_distance;
 
 
@@ -24,6 +29,8 @@ extern int cpt_distance;
 extern void easyGame(SDL_Window* window, SDL_Renderer* renderer);
 extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer);
 extern void HardGame(SDL_Window* window, SDL_Renderer* renderer);
+extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer);
+
 
 
 
