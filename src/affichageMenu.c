@@ -268,7 +268,7 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
                                 }
 
                                 else if (position == 3){
-                                    //BonusGame(window,renderer);
+                                    BonusGame(window,renderer);
                                     quit = 1;
                                 }
                                 else if (position == 4){

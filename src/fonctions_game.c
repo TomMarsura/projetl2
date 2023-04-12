@@ -191,14 +191,14 @@ extern void obstacle_easy(){
 */
 extern void obstacle_piece(){
 
-  int position1;
+  int position;
+  position = rand() % LARGEUR; /*genenere aléatoirement la position de l'obstacle*/
 
   int apparition;
   apparition = rand() % 100; /*genere un pourcentage pour décider si on ajoute un obsatcle*/
 
-  if ((apparition > 60)){
-      position1 = rand() % LARGEUR;
-      route[0][position1] = 6;
+  if ((apparition > 20)){
+      route[0][position] = 2;
   }
 }
 
