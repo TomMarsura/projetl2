@@ -443,7 +443,6 @@ SDL_Surface *TextRetour = TTF_RenderText_Solid(police, "Retour", TextColor);
     SDL_FreeSurface(TextHard);
     SDL_FreeSurface(TextRetour);
     SDL_FreeSurface(TextPiece);
-    SDL_FreeSurface(ImageStart);
 
 
     TTF_CloseFont(police);
