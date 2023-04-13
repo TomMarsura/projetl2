@@ -80,7 +80,17 @@ extern void readProfiles(){
     cleanProfiles();
 
     if (fichier == NULL){
-        printf("Erreur lors de l'ouverture du fichier\n");
+        printf("Le fichier n'existe pas, création en cours...\n");
+        fichier = fopen("../save/save.csv", "w");
+        if (fichier == NULL){
+            printf("Erreur lors de la création du fichier save.csv");
+            exit(1);
+        }
+        else {
+            printf("Fichier save.csv créé avec succès !\n");
+        }
+        fclose(fichier);
+        fichier = fopen("../save/save.csv", "r");
     }
     else{
         /*Lecture dans le fichier et assignation des valeurs dans les tableaux*/
