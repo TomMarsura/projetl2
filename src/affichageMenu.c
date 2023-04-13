@@ -13,6 +13,7 @@
 #include "../lib/menu.h"
 #include "../lib/sdl.h"
 #include "../lib/game.h"
+#include "../lib/audio.h"
 #include "../lib/gestionProfils.h"
 
 /**
@@ -1041,7 +1042,6 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
         int quit = 0;
 
         while(!quit){
-
 /* ---------------------------------------------------------------- */
 /* ------------------------- Gestion des evenements ---------------- */
 /* -----------------------------------------------------------------*/
@@ -1078,6 +1078,7 @@ SDL_Surface *nbPartie = TTF_RenderText_Solid(policeChoix, "Parties joue :", Text
                                     }
                                 }else if( position == 1){
                                     quit = 1;
+
                                 }
                             break;
 

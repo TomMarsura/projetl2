@@ -15,6 +15,8 @@
 #include "../lib/menu.h"
 #include "../lib/fonctions_game.h"
 #include "../lib/affichageMenu.h"
+#include "../lib/audio.h"
+
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -33,7 +35,7 @@
 extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
-
+  initAudio();
   initGame();
 
   SDL_Surface* car = IMG_Load("../img/moto.png");
@@ -98,12 +100,13 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   float vitesse = VITESSE_DEPART_EASY;
   int tirage_score;
 
-
+jouerMusique("../audio/music1.mp3");
   while (quit) {
-
+   
     if (fin == 1){
       quit = 0;
       printf("CRASH FRONTALE\n");
+       detruireAudio();
       CrashMessage(window,renderer,score, 0);
       break;
     }
@@ -111,6 +114,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
     if (fin > 1){
       quit = 0;
       printf("CRASH COTE\n");
+       detruireAudio();
       CrashMessage(window,renderer,score, 0);
       break;
     }
@@ -121,7 +125,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
       c = 0;
 
       while (c<19){
-
+        
         int start_time = SDL_GetTicks();
         while((SDL_GetTicks() - start_time) < vitesse) {
 
@@ -295,8 +299,8 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
   scoreTexture = NULL;
   SDL_DestroyTexture(texture_diff);
   texture_diff = NULL;
-
   IMG_Quit();
+ 
 }
 
 
@@ -312,6 +316,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   srand(time(NULL));
 
   initGame();
+  initAudio();
 
   SDL_Surface* car = IMG_Load("../img/car2.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
@@ -375,7 +380,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   float vitesse = VITESSE_DEPART_MEDIUM;
   int tirage_score;
 
-
+  jouerMusique("../audio/Fastest.mp3");
   while (quit) {
 
     if (fin == 1){
@@ -528,6 +533,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash() == 1){
         fin = 1;
+        detruireAudio();
       }
 
       if (bonus_pris() == 1){
@@ -537,6 +543,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash_cote == 1){
         fin = 2;
+        detruireAudio();
       }
 
       decalage();
@@ -588,7 +595,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
 extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
-
+  initAudio();
   initGame();
 
   SDL_Surface* car = IMG_Load("../img/car3.png");
@@ -653,7 +660,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
   float vitesse = VITESSE_DEPART_HARD;
   int tirage_score;
 
-
+ jouerMusique("../audio/NoWhere.mp3");
   while (quit) {
 
     if (fin == 1){
@@ -810,6 +817,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash() == 1){
         fin = 1;
+        detruireAudio();
       }
 
       if (bonus_pris() == 1){
@@ -819,6 +827,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
       if (crash_cote == 1){
         fin = 2;
+        detruireAudio();
       }
 
       decalage();
@@ -871,8 +880,9 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
-
+  initAudio();
   initGame();
+
 
   SDL_Surface* car = IMG_Load("../img/car2.png");
   SDL_Texture * texture_voiture = SDL_CreateTextureFromSurface(renderer,car);
@@ -927,7 +937,7 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
   int chrono = SDL_GetTicks();
 
 
-
+  jouerMusique("../audio/NoWhere.mp3");
   while ((quit) &&  ((SDL_GetTicks() - chrono) < CHRONO)){
 
     c = 0;
@@ -1073,6 +1083,7 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
   scoreTexture = NULL;
   SDL_DestroyTexture(cronoTexture);
   cronoTexture = NULL;
+  detruireAudio();
 
   IMG_Quit();
 }

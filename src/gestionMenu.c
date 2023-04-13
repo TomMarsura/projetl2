@@ -16,6 +16,7 @@
 #include "../lib/classement.h"
 #include "../lib/gestionProfils.h"
 
+
 /*FONCTION LANCEMENT MENU*/
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -45,7 +46,7 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     TextColor.b = 255;
     //int choix = 0;
     int time;
-
+    
     readProfiles();
 
     if(nbProfils == 0){
@@ -444,6 +445,8 @@ extern void Lancement_menu(SDL_Window *window, SDL_Renderer *renderer)
     SDL_DestroyTexture(textureCarGame);
 
     SDL_FreeSurface(carGame);
+
+   
 
     //Réinitialisation des pointeurs
     texture = NULL;

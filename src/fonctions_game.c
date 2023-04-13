@@ -15,6 +15,7 @@
 #include "../lib/menu.h"
 #include "../lib/sdl.h"
 #include "../lib/fonctions_game.h"
+#include "../include/SDL2/SDL_mixer.h"
 
 /* Include pour gérer le temps */
 #include <time.h>
@@ -342,6 +343,8 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
   TextColor.g = 255;
   TextColor.b = 255;
 
+  Mix_PauseMusic();
+
   SDL_Surface *ImageStart = IMG_Load("../img/background.jpg");
   if (ImageStart == NULL)
     {
@@ -477,6 +480,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
 
                         case SDLK_ESCAPE:
                             quit = 1;
+                            Mix_ResumeMusic();
                         break;
 
 
@@ -501,6 +505,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
                                   TextContinue = NULL;
                                   TextQuitter = NULL;
                                   textureCarGame = NULL;
+                                   Mix_ResumeMusic();
                                    return 0;
 
                                 } else if (position == 1) {
@@ -606,6 +611,7 @@ extern int pause(SDL_Window* window, SDL_Renderer* renderer){
         SDL_RenderCopy(renderer, textTextureContinue, NULL, &DistContinue);
         SDL_RenderPresent(renderer);
     }
+   
 
     return 0;
 }

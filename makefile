@@ -69,7 +69,7 @@ CFLAGS   = -std=c99 -Wall -I.
 
 LINKER   = gcc
 # linking flags here
-LFLAGS   = -Wall -I. -lm -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+LFLAGS   = -Wall -I. -lm -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 
 # change these to proper directories where each file should be
 SRCDIR   = src
