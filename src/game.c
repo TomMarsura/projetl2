@@ -24,6 +24,7 @@
 #include "../include/SDL2/SDL.h"
 #include "../include/SDL2/SDL_image.h"
 #include "../include/SDL2/SDL_ttf.h"
+#include "../include/SDL2/SDL_mixer.h"
 
 
 
@@ -36,6 +37,7 @@ extern void easyGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
   initAudio();
+  Mix_VolumeMusic(10);
   initGame();
 
   SDL_Surface* car = IMG_Load("../img/moto.png");
@@ -316,6 +318,7 @@ extern void MediumGame(SDL_Window* window, SDL_Renderer* renderer){
   srand(time(NULL));
 
   initGame();
+  Mix_VolumeMusic(10);
   initAudio();
 
   SDL_Surface* car = IMG_Load("../img/car2.png");
@@ -596,6 +599,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
   initAudio();
+  Mix_VolumeMusic(10);
   initGame();
 
   SDL_Surface* car = IMG_Load("../img/car3.png");
@@ -881,6 +885,7 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
 
   srand(time(NULL));
   initAudio();
+  Mix_VolumeMusic(10);
   initGame();
 
 
