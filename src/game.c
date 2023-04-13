@@ -1047,6 +1047,9 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
 
 
   }
+  if (varpause != 1){
+    BonusMessage(window, renderer, score);
+  }
 
   /* Libérer la mémoire allouée pour l'image et la fenêtre SDL */
   SDL_FreeSurface(car);
