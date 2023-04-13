@@ -49,6 +49,7 @@ extern void affiche_mat(){
 }
 
 
+
 /**
 *@brief Retoune le nombre d'obsatcle sur de l'avant dernière ligne
 *@author Thibaut GASNIER
@@ -184,8 +185,10 @@ extern void obstacle_easy(){
   }
 }
 
+
+
 /**
- * @brief Fonction obstacle : Cette fonction a pour but de generer aleatoirement des obstacles pour HardGame.
+ * @brief Fonction obstacle_piece : Cette fonction a pour but de generer aleatoirement des pièces pour le mode capture de pièce.
  * @author Tom MARSURA / Thibaut Gasnier
  * @return void
 */
@@ -201,6 +204,8 @@ extern void obstacle_piece(){
       route[0][position] = 2;
   }
 }
+
+
 
 /**
  * @brief Fonction crash : Cette fonction permet de savoir si la joueur a touché un obstacle, si oui cela renvoie 1
@@ -222,6 +227,13 @@ extern int crash(){
   return 0;
 }
 
+
+
+/**
+ * @brief Fonction bonus_pris : Cette fonction permet de savoir si la joueur a touché une pièce bonus, si oui cela renvoie 1
+ * @author Thibaut Gasnier
+ * @return int
+*/
 extern int bonus_pris(){
 
   int i;
@@ -236,6 +248,8 @@ extern int bonus_pris(){
   /* On retourne 0 quand il n'y a pas de crash */
   return 0;
 }
+
+
 
 /**
  * @brief Fonction deplacement : Cette fonction permet de deplacer la voiture si le joueur appuie sur la flèche de gauche ou sur la flèche de droite de son clavier

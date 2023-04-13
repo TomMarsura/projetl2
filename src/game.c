@@ -864,7 +864,7 @@ extern void HardGame(SDL_Window* window, SDL_Renderer* renderer){
 
 
 /**
- * @brief Fonction HardGame : Cette fonction est la fonction principale qui permet de gerer le jeu au niveau Hard
+ * @brief Fonction BonusGame : Cette fonction est la fonction principale qui permet de gerer le jeu en mode capture de pièce
  * @author Thibaut GASNIER
  * @return void
 */
@@ -898,7 +898,7 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
   int crono = 0;
   char cronoText[50];
   sprintf(cronoText, "Chrono: %d", crono);
-    TTF_Font * police_crono = TTF_OpenFont("../fonts/police.TTF", 18);
+  TTF_Font * police_crono = TTF_OpenFont("../fonts/police.TTF", 18);
   SDL_Surface * surfaceCrono = TTF_RenderText_Solid(police_crono, cronoText, TextColor);
   SDL_Texture * cronoTexture = SDL_CreateTextureFromSurface(renderer, surfaceCrono);
   SDL_Rect cronoRect = { 6, 12, surfaceCrono->w, surfaceCrono->h };
@@ -930,57 +930,57 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
 
   while ((quit) &&  ((SDL_GetTicks() - chrono) < CHRONO)){
 
-      c = 0;
+    c = 0;
 
-      while (c<19){
+    while (c<19){
 
-        int start_time = SDL_GetTicks();
+      int start_time = SDL_GetTicks();
 
-        while((SDL_GetTicks() - start_time) < vitesse) {
+      while((SDL_GetTicks() - start_time) < vitesse) {
 
-          while (SDL_PollEvent(&event)) {
+        while (SDL_PollEvent(&event)) {
 
-            if (event.type == SDL_QUIT) {
-              quit = 0;
-            }
+          if (event.type == SDL_QUIT) {
+            quit = 0;
+          }
 
-            if (event.type == SDL_KEYDOWN) {
-              switch (event.key.keysym.sym) {
+          if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
 
-                case SDLK_ESCAPE:
-                  varpause = pause(window,renderer);
-                  if(varpause == 1){
-                    quit = 0;
+              case SDLK_ESCAPE:
+
+                varpause = pause(window,renderer);
+                if(varpause == 1){
+                  quit = 0;
+                }
+                break;
+
+
+              case SDLK_RIGHT:
+
+                if((position_voiture) != 2){
+                  position_voiture++;
+
+                  if (route[HAUTEUR-1][position_voiture] == 2){
+                    score += 1;
                   }
-                  break;
-
-                case SDLK_RIGHT:
-
-                    if((position_voiture) != 2){
-
-                      position_voiture++;
-
-                      if (route[HAUTEUR-1][position_voiture] == 2){
-                        score += 1;
-                      }
-                    }
-                      deplacement(1);
-                      break;
+                }
+                deplacement(1);
+                break;
 
 
                 case SDLK_LEFT:
 
-                    if((position_voiture) != 0){
+                  if((position_voiture) != 0){
 
-                      position_voiture--;
+                    position_voiture--;
 
-                      if (route[HAUTEUR-1][position_voiture] == 2){
-                        score += 1;
-                      }
+                    if (route[HAUTEUR-1][position_voiture] == 2){
+                      score += 1;
                     }
-                      deplacement(2);
-                      break;
-
+                  }
+                  deplacement(2);
+                  break;
 
 
                 default:
@@ -1025,8 +1025,6 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
           cronoTexture = SDL_CreateTextureFromSurface(renderer, surfaceCrono);
           SDL_RenderCopy(renderer, cronoTexture, NULL, &cronoRect);
 
-
-
           SDL_RenderPresent(renderer);
         }
         c++;
@@ -1043,13 +1041,11 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
       if (vitesse > VITESSE_MAX_HARD){
         vitesse = vitesse - 1;
       }
+    }
 
-
-
-  }
-  if (varpause != 1){
-    BonusMessage(window, renderer, score);
-  }
+    if (varpause != 1){
+      BonusMessage(window, renderer, score);
+    }
 
   /* Libérer la mémoire allouée pour l'image et la fenêtre SDL */
   SDL_FreeSurface(car);
@@ -1062,17 +1058,21 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
   surfaceMessage = NULL;
   SDL_FreeSurface(surfaceCrono);
   surfaceCrono = NULL;
-
+  SDL_FreeSurface(surfaceMessage);
+  surfaceMessage = NULL;
+  SDL_FreeSurface(surfaceCrono);
+  surfaceCrono = NULL;
 
   SDL_DestroyTexture(texture_voiture);
   texture_voiture = NULL;
   SDL_DestroyTexture(texture_route);
   texture_route = NULL;
+  SDL_DestroyTexture(texture_bonus);
+  texture_bonus = NULL;
   SDL_DestroyTexture(scoreTexture);
   scoreTexture = NULL;
   SDL_DestroyTexture(cronoTexture);
   cronoTexture = NULL;
-
 
   IMG_Quit();
 }
