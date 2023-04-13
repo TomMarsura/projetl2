@@ -963,12 +963,10 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
                       if (route[HAUTEUR-1][position_voiture] == 2){
                         score += 1;
                       }
-
+                    }
                       deplacement(1);
-                    break;
+                      break;
 
-
-                  }
 
                 case SDLK_LEFT:
 
@@ -979,10 +977,10 @@ extern void BonusGame(SDL_Window* window, SDL_Renderer* renderer){
                       if (route[HAUTEUR-1][position_voiture] == 2){
                         score += 1;
                       }
-
+                    }
                       deplacement(2);
                       break;
-                      }
+
 
 
                 default:
